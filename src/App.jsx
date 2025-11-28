@@ -2038,6 +2038,60 @@ const Q109_48 = ({ onBack }) => {
                       ? "高粘度（シロップ状）"
                       : "中程度の粘度"}
                   </div>
+
+                  {/* 粘度と拡散の関係：粒がゆっくり・速く動くアニメーション */}
+                  <div className="mt-4">
+                    <div className="text-xs md:text-sm text-gray-600 mb-1 text-center">
+                      粘度が高いほど、拡散がゆっくりになるイメージ
+                    </div>
+                    <div className="relative h-28 md:h-32 bg-gray-50 border border-gray-200 rounded-xl overflow-hidden px-3">
+                      {/* 左側：薬物投与部位 */}
+                      <div className="absolute inset-y-2 left-2 flex flex-col items-center justify-center text-[10px] text-gray-500">
+                        <div className="w-2 h-16 bg-orange-400 rounded-full mb-1" />
+                        <span>薬物が入った場所</span>
+                      </div>
+
+                      {/* 右側：十分に拡散した領域 */}
+                      <div className="absolute inset-y-2 right-2 flex flex-col items-center justify-center text-[10px] text-gray-500">
+                        <div className="w-2 h-16 bg-blue-400 rounded-full mb-1" />
+                        <span>広がった先</span>
+                      </div>
+
+                      {/* 粒子が左右へ行き来するレーン */}
+                      <div className="absolute inset-y-4 left-10 right-10 flex flex-col justify-around">
+                        {Array.from({ length: 6 }).map((_, idx) => {
+                          // 粘度が高いほど（5に近いほど）ゆっくり動くように duration を長くする
+                          const baseDuration = 3;
+                          const duration = baseDuration + (viscosity - 1) * 1.5;
+                          const delay = idx * 0.2;
+
+                          return (
+                            <motion.div
+                              key={`particle-${idx}-${viscosity}`}
+                              className="h-1.5 flex items-center"
+                              initial={{ opacity: 0.8 }}
+                            >
+                              <motion.div
+                                className="w-3 h-3 rounded-full bg-orange-400 shadow-sm"
+                                initial={{ x: 0 }}
+                                animate={{ x: ["0%", "85%", "0%"] }}
+                                transition={{
+                                  duration,
+                                  repeat: Infinity,
+                                  ease: "linear",
+                                  delay,
+                                }}
+                              />
+                            </motion.div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <p className="mt-2 text-xs md:text-sm text-gray-700 text-center">
+                      スライダーを右に動かして粘度を上げると、粒がゆっくり動きます。<br />
+                      粘度が高いほど拡散が遅くなり、溶出した薬物が広がりにくくなります。
+                    </p>
+                  </div>
                 </div>
               </div>
 

@@ -1568,6 +1568,31 @@ const Q108_175 = ({ onBack }) => {
               </ul>
             </div>
 
+            <div className="bg-white p-4 md:p-6 rounded-xl border border-gray-200 shadow-sm">
+              <h4 className="font-bold text-gray-800 mb-3">総濃度と分子形濃度のグラフを並べて確認</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex flex-col items-center">
+                  <p className="text-sm font-bold text-gray-700 mb-2">薬物の総濃度</p>
+                  <img
+                    src="/image/108-175-graph_total.png"
+                    alt="第108回問175：薬物の総濃度のグラフ"
+                    className="w-full max-w-md h-auto object-contain border border-gray-200 rounded-md bg-white"
+                  />
+                </div>
+                <div className="flex flex-col items-center">
+                  <p className="text-sm font-bold text-gray-700 mb-2">分子形薬物濃度</p>
+                  <img
+                    src="/image/108-175-graph_unionized.png"
+                    alt="第108回問175：分子形薬物濃度のグラフ"
+                    className="w-full max-w-md h-auto object-contain border border-gray-200 rounded-md bg-white"
+                  />
+                </div>
+              </div>
+              <p className="mt-2 text-xs text-gray-500 text-center">
+                左：薬物の総濃度グラフ ／ 右：分子形薬物濃度グラフ
+              </p>
+            </div>
+
             <div className="bg-yellow-50 p-4 rounded-xl border border-yellow-200 text-sm md:text-base">
               <h4 className="font-bold text-yellow-800 mb-2 flex items-center">
                 <Lightbulb className="w-5 h-5 mr-2" />

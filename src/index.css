@@ -8,3 +8,35 @@ body {
   background-color: #f3f4f6;
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
 }
+/* ================================
+   大画面（PC/教室投影）用フォント拡大モード
+   tailwind の md/lg breakpoints を利用
+   ================================ */
+
+/* 画面幅が 1024px 以上 → PC スクリーン */
+@media (min-width: 1024px) {
+  html {
+    font-size: 20px; /* ← ここで全体の文字倍率を決める */
+  }
+
+  h1 {
+    font-size: 2.4rem; /* Stepタイトル */
+    font-weight: 800;
+  }
+
+  h2, .step-title {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.6rem;
+  }
+
+  p, li, code, .text-base {
+    font-size: 1.15rem; /* 本文を 15% アップ */
+  }
+
+  .option-item {
+    font-size: 1.2rem; /* 選択肢 */
+  }
+}

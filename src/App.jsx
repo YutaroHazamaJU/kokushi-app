@@ -1961,31 +1961,45 @@ const Q109_48 = ({ onBack }) => {
                       : "普通の粉砕粒子"}
                   </div>
 
-                  {/* 粒子径のイラスト：大きな粒 vs 細かい粒 */}
-                  <div className="mt-3 flex justify-center gap-6 text-xs md:text-sm text-gray-600">
+                  {/* 粒子径のイラスト：同じ面積を4分割したときの「新しい表面」 */}
+                  <div className="mt-4 flex flex-col md:flex-row justify-center items-center gap-8 text-xs md:text-sm text-gray-600">
+                    {/* 左：大きな正方形 1つ */}
                     <div className="flex flex-col items-center">
-                      <div className="w-20 h-12 border border-orange-200 rounded-lg bg-white flex items-center justify-center gap-1.5">
-                        <div className="w-4 h-4 rounded-full bg-orange-300" />
-                        <div className="w-4 h-4 rounded-full bg-orange-300" />
-                        <div className="w-4 h-4 rounded-full bg-orange-300" />
+                      <div className="w-24 h-24 border-2 border-orange-400 bg-white relative">
+                        {/* 周囲だけが「表面」 */}
                       </div>
-                      <span className="mt-1">大きな粒（表面積が小さい）</span>
+                      <span className="mt-2 text-center">
+                        大きな粒<br />
+                        （表面：外周だけ）
+                      </span>
+                      <span className="mt-1 text-[10px] text-gray-500">
+                        周囲の長さ：4L
+                      </span>
                     </div>
+
+                    <ArrowRight className="hidden md:block w-6 h-6 text-orange-500" />
+
+                    {/* 右：同じ大きさを 2×2 に分割した正方形 */}
                     <div className="flex flex-col items-center">
-                      <div className="w-20 h-12 border border-orange-200 rounded-lg bg-white flex flex-wrap items-center justify-center gap-0.5">
-                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
-                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
-                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
-                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
-                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
-                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
-                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
-                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
-                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
+                      <div className="w-24 h-24 border-2 border-orange-400 bg-white relative">
+                        {/* 縦横の分割線（新しい表面） */}
+                        <div className="absolute inset-y-0 left-1/2 w-[2px] bg-orange-300 -translate-x-1/2" />
+                        <div className="absolute inset-x-0 top-1/2 h-[2px] bg-orange-300 -translate-y-1/2" />
                       </div>
-                      <span className="mt-1">細かい粒（表面積が大きい）</span>
+                      <span className="mt-2 text-center">
+                        同じ面積を4つに分割<br />
+                        （内部にも新しい表面）
+                      </span>
+                      <span className="mt-1 text-[10px] text-gray-500">
+                        線の合計：8L （2倍）
+                      </span>
                     </div>
                   </div>
+
+                  <p className="mt-3 text-xs md:text-sm text-gray-700 text-center">
+                    同じ「量（面積）」でも、細かく分けると「境目（表面）」が増えます。<br />
+                    粒子を細かく砕くと比表面積が増え、溶液と接する面が増えるので、溶出が速くなります。
+                  </p>                  
                 </div>
                 <div>
                   <label className="block text-gray-700 font-bold mb-2 flex items-center">

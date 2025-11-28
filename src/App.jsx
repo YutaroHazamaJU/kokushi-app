@@ -2044,7 +2044,7 @@ const Q109_48 = ({ onBack }) => {
                     <div className="text-xs md:text-sm text-gray-600 mb-1 text-center">
                       粘度が高いほど、拡散がゆっくりになるイメージ
                     </div>
-                    <div className="relative h-28 md:h-32 bg-gray-50 border border-gray-200 rounded-xl overflow-hidden px-3">
+                    <div className="relative h-28 md:h-32 border border-gray-200 rounded-xl overflow-hidden px-3 bg-gradient-to-r from-orange-200 via-white to-blue-50">
                       {/* 左側：薬物投与部位 */}
                       <div className="absolute inset-y-2 left-2 flex flex-col items-center justify-center text-[10px] text-gray-500">
                         <div className="w-2 h-16 bg-orange-400 rounded-full mb-1" />

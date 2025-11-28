@@ -534,6 +534,7 @@ const Q101_176 = ({ onBack }) => {
   const pka = 6.1;
   const s0 = 0.1; // pH=1での溶解度≈固有溶解度（µg/mL）
   const solubility = s0 * (1 + Math.pow(10, ph - pka));
+  const choices = [2, 5, 7, 10, 12];
 
   const titles = [
     "問題の確認・イメージ",
@@ -575,6 +576,21 @@ const Q101_176 = ({ onBack }) => {
                   <li>pH 1 での溶解度 ≒ <span className="font-bold">S₀</span> とみなせる</li>
                   <li>目標は 1000 μg/mL = <span className="font-bold">1 mg/mL</span></li>
                 </ul>
+              </div>
+
+              <div className="mt-4 bg-white border border-gray-200 rounded-lg p-4 text-sm md:text-base">
+                <h5 className="font-bold text-gray-800 mb-2">選択肢（pH）</h5>
+                <div className="flex flex-wrap justify-center gap-4">
+                  {choices.map((value, index) => (
+                    <div
+                      key={value}
+                      className="flex items-baseline gap-1 min-w-[3.5rem] justify-center"
+                    >
+                      <span className="text-sm text-gray-500">{index + 1}.</span>
+                      <span className="text-lg font-mono">{value}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <div className="mt-6 text-center">

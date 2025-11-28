@@ -2069,12 +2069,11 @@ const Q109_48 = ({ onBack }) => {
                             <motion.div
                               key={`particle-${idx}-${viscosity}`}
                               className="h-1.5 flex items-center relative w-full"
-                              initial={{ opacity: 0.8 }}
                             >
                               <motion.div
                                 className="w-3 h-3 rounded-full bg-orange-400 shadow-sm absolute left-0"
                                 initial={{ x: 0 }}
-                                animate={{ x: ["0%", "85%"] }}
+                                animate={{ x: ["0%", "100%"] }}
                                 transition={{
                                   duration,
                                   repeat: Infinity,

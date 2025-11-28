@@ -1981,10 +1981,12 @@ const Q109_48 = ({ onBack }) => {
 
                     {/* 右：同じ大きさを 2×2 に分割した正方形 */}
                     <div className="flex flex-col items-center">
-                      <div className="w-24 h-24 border-2 border-orange-400 bg-white relative">
-                        {/* 縦横の分割線（新しい表面） */}
-                        <div className="absolute inset-y-0 left-1/2 w-[2px] bg-orange-300 -translate-x-1/2" />
-                        <div className="absolute inset-x-0 top-1/2 h-[2px] bg-orange-300 -translate-y-1/2" />
+                      {/* 右：同じ面積を 4 つに分割（少し隙間あり） */}
+                      <div className="w-24 h-24 grid grid-cols-2 grid-rows-2 gap-[2px]">
+                        <div className="border-2 border-orange-400 bg-white" />
+                        <div className="border-2 border-orange-400 bg-white" />
+                        <div className="border-2 border-orange-400 bg-white" />
+                        <div className="border-2 border-orange-400 bg-white" />
                       </div>
                       <span className="mt-2 text-center">
                         同じ面積を4つに分割<br />

@@ -1961,10 +1961,10 @@ const GenericQuestionPage = ({ title, subTitle, onBack }) => {
 // ==========================================
 const MenuScreen = ({ onSelect }) => {
   const questions = [
-    { id: '99-174', title: '第99回 問174', desc: '物理：弱酸性薬物の溶解度変化', icon: Calculator, color: 'bg-indigo-50 border-indigo-200 text-indigo-700' },
-    { id: '101-176', title: '第101回 問176', desc: '物理：目標溶解度へのpH調整', icon: TestTube, color: 'bg-teal-50 border-teal-200 text-teal-700' },
-    { id: '104-170', title: '第104回 問170', desc: '物理：分配平衡・pHプロファイル', icon: Activity, color: 'bg-white border-gray-200 text-gray-700' },
-    { id: '108-175', title: '第108回 問175', desc: '物理：粉体・レオロジー', icon: Activity, color: 'bg-white border-gray-200 text-gray-700' },
+    { id: '99-174', title: '第99回 問174', desc: '薬剤：弱酸性薬物の溶解度変化', icon: Calculator, color: 'bg-indigo-50 border-indigo-200 text-indigo-700' },
+    { id: '101-176', title: '第101回 問176', desc: '薬剤：目標溶解度へのpH調整', icon: TestTube, color: 'bg-teal-50 border-teal-200 text-teal-700' },
+    { id: '104-170', title: '第104回 問170', desc: '薬剤：分配平衡・pHプロファイル', icon: Activity, color: 'bg-white border-gray-200 text-gray-700' },
+    { id: '108-175', title: '第108回 問175', desc: '薬剤：弱電解質の溶解平衡', icon: Activity, color: 'bg-white border-gray-200 text-gray-700' },
     { id: '109-48',  title: '第109回 問48',  desc: '薬剤：Noyes-Whitney式', icon: RotateCw, color: 'bg-orange-50 border-orange-200 text-orange-700' },
     { id: '109-50',  title: '第109回 問50',  desc: '薬剤：安定性と反応速度論', icon: Thermometer, color: 'bg-rose-50 border-rose-200 text-rose-700' },
   ];

@@ -1961,7 +1961,7 @@ const Q109_48 = ({ onBack }) => {
                       : "普通の粉砕粒子"}
                   </div>
 
-                  {/* 粒子径のイラスト：同じ面積を4分割したときの「新しい表面」 */}
+                  {/* 粒子径のイラスト：分割数をスライダーと同期させた「新しい表面」のイメージ */}
                   <div className="mt-4 flex flex-col md:flex-row justify-center items-center gap-8 text-xs md:text-sm text-gray-600">
                     {/* 左：大きな正方形 1つ */}
                     <div className="flex flex-col items-center">
@@ -1979,21 +1979,35 @@ const Q109_48 = ({ onBack }) => {
 
                     <ArrowRight className="hidden md:block w-6 h-6 text-orange-500" />
 
-                    {/* 右：同じ大きさを 2×2 に分割した正方形 */}
+                    {/* 右：同じ面積を小さな粒に分割（スライダーと同期） */}
                     <div className="flex flex-col items-center">
-                      {/* 右：同じ面積を 4 つに分割（少し隙間あり） */}
-                      <div className="w-24 h-24 grid grid-cols-2 grid-rows-2 gap-[2px]">
-                        <div className="border-2 border-orange-400 bg-white" />
-                        <div className="border-2 border-orange-400 bg-white" />
-                        <div className="border-2 border-orange-400 bg-white" />
-                        <div className="border-2 border-orange-400 bg-white" />
-                      </div>
+                      <motion.div
+                        key={surfaceArea}
+                        className="w-24 h-24 grid gap-[2px]"
+                        style={{
+                          gridTemplateColumns: `repeat(${surfaceArea}, minmax(0, 1fr))`,
+                          gridTemplateRows: `repeat(${surfaceArea}, minmax(0, 1fr))`,
+                        }}
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ type: "spring", stiffness: 220, damping: 18 }}
+                      >
+                        {Array.from({ length: surfaceArea * surfaceArea }).map((_, idx) => (
+                          <motion.div
+                            key={`${surfaceArea}-${idx}`}
+                            className="border-2 border-orange-400 bg-white"
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.15, delay: idx * 0.02 }}
+                          />
+                        ))}
+                      </motion.div>
                       <span className="mt-2 text-center">
-                        同じ面積を4つに分割<br />
+                        同じ面積を {surfaceArea}×{surfaceArea} 個に分割<br />
                         （内部にも新しい表面）
                       </span>
                       <span className="mt-1 text-[10px] text-gray-500">
-                        線の合計：8L （2倍）
+                        粒を細かくするほど「境界線（表面）」が増える
                       </span>
                     </div>
                   </div>

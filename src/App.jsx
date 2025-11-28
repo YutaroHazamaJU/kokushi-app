@@ -2071,9 +2071,9 @@ const Q109_48 = ({ onBack }) => {
                               className="h-1.5 flex items-center relative w-full"
                             >
                               <motion.div
-                                className="w-3 h-3 rounded-full bg-orange-400 shadow-sm absolute left-0"
-                                initial={{ x: 0 }}
-                                animate={{ x: ["0%", "100%"] }}
+                                className="w-3 h-3 rounded-full bg-orange-400 shadow-sm absolute"
+                                initial={{ left: 0 }}
+                                animate={{ left: ["0%", "90%"] }}
                                 transition={{
                                   duration,
                                   repeat: Infinity,

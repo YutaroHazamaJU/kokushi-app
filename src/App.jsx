@@ -1960,6 +1960,32 @@ const Q109_48 = ({ onBack }) => {
                       ? "微粉砕（サラサラ粉末）"
                       : "普通の粉砕粒子"}
                   </div>
+
+                  {/* 粒子径のイラスト：大きな粒 vs 細かい粒 */}
+                  <div className="mt-3 flex justify-center gap-6 text-xs md:text-sm text-gray-600">
+                    <div className="flex flex-col items-center">
+                      <div className="w-20 h-12 border border-orange-200 rounded-lg bg-white flex items-center justify-center gap-1.5">
+                        <div className="w-4 h-4 rounded-full bg-orange-300" />
+                        <div className="w-4 h-4 rounded-full bg-orange-300" />
+                        <div className="w-4 h-4 rounded-full bg-orange-300" />
+                      </div>
+                      <span className="mt-1">大きな粒（表面積が小さい）</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <div className="w-20 h-12 border border-orange-200 rounded-lg bg-white flex flex-wrap items-center justify-center gap-0.5">
+                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
+                      </div>
+                      <span className="mt-1">細かい粒（表面積が大きい）</span>
+                    </div>
+                  </div>
                 </div>
                 <div>
                   <label className="block text-gray-700 font-bold mb-2 flex items-center">

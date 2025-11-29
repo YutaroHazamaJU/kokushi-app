@@ -2242,102 +2242,441 @@ const Q109_48 = ({ onBack }) => {
 };
 
 // ==========================================
-// ★新規: 第109回 問50 (反応速度・安定性)
+// 第109回 問50：疎水性薬物の安定化（複合体形成）
 // ==========================================
 const Q109_50 = ({ onBack }) => {
-  const [temp, setTemp] = useState(25); // 温度
-  
-  // アレニウス式: k = A * exp(-Ea / RT)
-  const rateConstant = Math.pow(2.5, (temp - 25) / 10);
-  const remainingAfter1Year = Math.max(0, 100 - (rateConstant * 10)); // 1年後の残存率(簡易)
+  const [step, setStep] = useState(0);
+  const [openOption, setOpenOption] = useState(null);
+
+  const toggleOption = (index) => {
+    setOpenOption(openOption === index ? null : index);
+  };
+
+  const options = [
+    {
+      text: "1　アスコルビン酸",
+      isCorrect: false,
+      explanation: (
+        <>
+          <span className="font-bold text-red-500">【誤り】</span>
+          <p className="mt-2 text-sm leading-relaxed">
+            アスコルビン酸は<strong>抗酸化剤</strong>として用いられ，
+            溶液中で酸化されやすい薬物（アドレナリンなど）の
+            酸化分解を抑える目的で使われます。
+          </p>
+          <p className="mt-1 text-sm">
+            疎水性薬物を<strong>包接して可溶化・安定化する目的の化合物</strong>
+            ではありません。
+          </p>
+        </>
+      ),
+    },
+    {
+      text: "2　α－シクロデキストリン",
+      isCorrect: true,
+      explanation: (
+        <>
+          <span className="font-bold text-green-600">【正解】</span>
+          <p className="mt-2 text-sm leading-relaxed">
+            シクロデキストリン（CD）は，グルコースが環状につながった
+            「<strong>ドーナツ状の分子</strong>」で，
+            内側に<strong>疎水性の空洞</strong>，外側に親水性の
+            –OH 基を持つ構造です。
+          </p>
+          <p className="mt-2 text-sm leading-relaxed">
+            疎水性薬物の脂溶性部分がこの空洞にすっぽり入り，
+            <strong>包接複合体（インクルージョンコンプレックス）</strong>
+            をつくることで
+            <span className="font-bold">
+              水への溶解性アップ，分解・吸着の抑制，においのマスキング
+            </span>
+            などの効果が得られます。
+          </p>
+          <p className="mt-2 text-sm leading-relaxed">
+            本問のアルプロスタジルのように，
+            <strong>長い炭化水素鎖をもつ疎水性薬物</strong>を
+            水製剤として安定化する際に，α－シクロデキストリンが
+            用いられます。
+          </p>
+        </>
+      ),
+    },
+    {
+      text: "3　カルメロースナトリウム",
+      isCorrect: false,
+      explanation: (
+        <>
+          <span className="font-bold text-red-500">【誤り】</span>
+          <p className="mt-2 text-sm leading-relaxed">
+            カルメロースナトリウム（CMC-Na）は
+            <strong>懸濁化剤・粘稠化剤</strong>として用いられ，
+            懸濁製剤や点眼剤の粘度調整に使われます。
+          </p>
+          <p className="mt-1 text-sm">
+            疎水性薬物と<strong>包接複合体を形成して安定化させる</strong>
+            という用途ではありません。
+          </p>
+        </>
+      ),
+    },
+    {
+      text: "4　エデト酸ナトリウム水和物",
+      isCorrect: false,
+      explanation: (
+        <>
+          <span className="font-bold text-red-500">【誤り】</span>
+          <p className="mt-2 text-sm leading-relaxed">
+            エデト酸ナトリウム（EDTA-Na）は
+            <strong>キレート剤</strong>で，
+            微量金属イオンを捕捉して
+            金属触媒による酸化分解などを抑える目的で使われます。
+          </p>
+          <p className="mt-1 text-sm">
+            疎水性薬物そのものを包み込んで安定化するわけではないので，
+            本問の答えにはなりません。
+          </p>
+        </>
+      ),
+    },
+    {
+      text: "5　パラオキシ安息香酸ブチル",
+      isCorrect: false,
+      explanation: (
+        <>
+          <span className="font-bold text-red-500">【誤り】</span>
+          <p className="mt-2 text-sm leading-relaxed">
+            パラオキシ安息香酸ブチル（ブチルパラベン）は
+            <strong>防腐剤</strong>であり，
+            製剤中の微生物増殖を抑制する目的で用いられます。
+          </p>
+          <p className="mt-1 text-sm">
+            疎水性薬物との複合体形成による安定化とは
+            直接関係しません。
+          </p>
+        </>
+      ),
+    },
+  ];
+
+  const titles = [
+    "問題の確認",
+    "Step 1：アルプロスタジルの性質と問題点",
+    "Step 2：シクロデキストリン包接複合体のイメージ",
+    "Step 3：選択肢ごとの検討・まとめ",
+  ];
+
+  const renderStepContent = (currentStep) => {
+    switch (currentStep) {
+      case 0:
+        return (
+          <div className="space-y-6">
+            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+              <div className="flex items-center mb-4 border-b pb-2">
+                <span className="bg-purple-600 text-white px-3 py-1 rounded text-sm font-bold mr-3">
+                  第109回 問50
+                </span>
+                <h4 className="font-bold text-gray-800 text-lg">
+                  疎水性薬物を「複合体形成」で安定化する添加物
+                </h4>
+              </div>
+              <p className="text-base md:text-lg text-gray-800 leading-relaxed mb-4 font-serif">
+                複合体を形成することによって，以下の疎水性薬物を
+                安定化するのに用いられる化合物はどれか。1つ選べ。
+              </p>
+
+              <div className="bg-white border border-gray-200 rounded-lg p-4 text-sm md:text-base mb-4">
+                <h5 className="font-bold text-gray-800 mb-2">
+                  対象薬物：アルプロスタジル
+                </h5>
+                <div className="flex flex-col md:flex-row items-center gap-4">
+                  <div className="flex-1 text-gray-700">
+                    <p className="mb-1">一般名：アルプロスタジル（PGE₁）</p>
+                    <p className="text-sm">
+                      プロスタグランジン様構造を持つ<strong>強い疎水性薬物</strong>で，
+                      長い炭化水素鎖とカルボン酸を有します。
+                    </p>
+                  </div>
+                  <div className="flex-1 flex justify-center">
+                    <img
+                      src="/image/109-50-fig.png"
+                      alt="アルプロスタジル構造式（109-50-fig）"
+                      className="max-w-xs md:max-w-sm h-auto object-contain border rounded-md bg-white shadow-sm"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm md:text-base">
+                <p className="font-bold text-gray-800 mb-2">選択肢</p>
+                <ol className="space-y-1 text-gray-800">
+                  <li>1　アスコルビン酸</li>
+                  <li>2　α－シクロデキストリン</li>
+                  <li>3　カルメロースナトリウム</li>
+                  <li>4　エデト酸ナトリウム水和物</li>
+                  <li>5　パラオキシ安息香酸ブチル</li>
+                </ol>
+              </div>
+
+              <div className="mt-6 text-center">
+                <button
+                  onClick={() => setStep(1)}
+                  className="px-6 py-3 bg-purple-600 text-white rounded-lg font-bold hover:bg-purple-700 transition-colors shadow-md inline-flex items-center"
+                >
+                  解法ステップを見ていく
+                  <ChevronRight className="w-5 h-5 ml-2" />
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 1:
+        return (
+          <div className="space-y-6">
+            <div className="bg-purple-50 p-4 rounded-xl border-l-4 border-purple-500">
+              <h4 className="font-bold text-purple-700 mb-2">
+                Step 1：アルプロスタジルの「困りごと」
+              </h4>
+              <ul className="list-disc list-inside text-sm md:text-base text-gray-700 space-y-2">
+                <li>長い炭化水素鎖 → <strong>非常に疎水性</strong>で水に溶けにくい</li>
+                <li>界面や容器に<strong>吸着しやすい</strong></li>
+                <li>光・酸素・熱などで<strong>分解しやすい</strong></li>
+                <li>
+                  点滴用注射剤などでは，
+                  <strong>水系で安定・均一に存在させる工夫</strong>が必要
+                </li>
+              </ul>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+              <h4 className="font-bold text-gray-800 mb-3">
+                「複合体形成」で解決したいこと
+              </h4>
+              <p className="text-sm md:text-base text-gray-700 mb-3">
+                疎水性薬物をそのまま水に入れると，ミセルや懸濁状態になり，
+                濃度ムラや分解の問題が出やすくなります。
+              </p>
+              <ul className="list-disc list-inside text-sm md:text-base text-gray-700 space-y-1">
+                <li>水への見かけの溶解度を上げたい</li>
+                <li>分子を外界（光・酸素）からある程度守りたい</li>
+                <li>容器や血管内壁への吸着を減らしたい</li>
+              </ul>
+              <p className="mt-3 text-sm md:text-base text-gray-700">
+                そこで登場するのが
+                <strong>シクロデキストリンによる包接複合体</strong>
+                です。
+              </p>
+            </div>
+          </div>
+        );
+
+      case 2:
+        return (
+          <div className="space-y-6">
+            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+              <h4 className="font-bold text-gray-800 mb-3">
+                Step 2：シクロデキストリン包接複合体のイメージ
+              </h4>
+              <p className="text-sm md:text-base text-gray-700 mb-3">
+                α－シクロデキストリンは，グルコースが6個環状につながった
+                「空洞つきドーナツ」です。内側に疎水性空洞をもち，
+                そこにアルプロスタジルの炭化水素鎖が入り込みます。
+              </p>
+
+              {/* イメージ図（簡易） */}
+              <div className="mt-4 flex flex-col md:flex-row justify-center items-center gap-10">
+                <div className="flex flex-col items-center text-sm text-gray-700">
+                  <div className="relative w-40 h-40 flex items-center justify-center">
+                    {/* CD のドーナツ */}
+                    <div className="w-32 h-32 rounded-full border-4 border-purple-400 bg-gradient-to-br from-purple-50 to-purple-100 shadow-inner" />
+                    <div className="absolute w-16 h-16 rounded-full bg-white border-2 border-purple-200" />
+                    {/* 疎水性鎖（ゲスト） */}
+                    <div className="absolute w-24 h-3 bg-orange-400 rounded-full -right-4 transform rotate-10 shadow">
+                      {/* 先端のカルボン酸を示す丸 */}
+                      <div className="w-4 h-4 bg-red-400 rounded-full absolute -right-2 -top-0.5 border border-white" />
+                    </div>
+                  </div>
+                  <p className="mt-2 text-center">
+                    内側：疎水性空洞<br />
+                    外側：親水性 –OH（グルコース）
+                  </p>
+                </div>
+
+                <div className="text-xs md:text-sm text-gray-700 max-w-xs space-y-2">
+                  <p>
+                    ・疎水性鎖が<strong>CD の空洞にすっぽり入る</strong>ことで，
+                    全体としては水に「そこそこ溶ける」粒として振る舞う。
+                  </p>
+                  <p>
+                    ・外側はグルコースの –OH で覆われているので，
+                    <strong>水とよくなじみ，分子同士も近づきにくい</strong>。
+                  </p>
+                  <p>
+                    → 結果として，
+                    <strong>溶解性↑，吸着↓，分解↓</strong> という
+                    安定化効果が得られる。
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-4 bg-purple-50 border border-purple-200 rounded-lg p-3 text-xs md:text-sm text-gray-700">
+                <p className="font-bold text-purple-800 mb-1">α・β・γ の違い（補足）</p>
+                <p>
+                  α（6員環）&lt; β（7員環）&lt; γ（8員環）の順に空洞が大きくなります。
+                  アルプロスタジル注射剤では
+                  <strong>α－シクロデキストリンとの包接複合体</strong>が
+                  実際に利用されています。
+                </p>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 3:
+        return (
+          <div className="space-y-6">
+            <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
+              Step 3：選択肢ごとの検討・まとめ
+            </h3>
+
+            <div className="space-y-3">
+              {options.map((opt, index) => (
+                <div
+                  key={index}
+                  className="rounded-lg border border-gray-200 overflow-hidden"
+                >
+                  <button
+                    onClick={() => toggleOption(index)}
+                    className={`w-full p-3 md:p-4 text-left flex items-start transition-colors ${
+                      openOption === index
+                        ? "bg-purple-50"
+                        : "hover:bg-gray-50"
+                    }`}
+                  >
+                    <span
+                      className={`font-bold mr-3 w-6 h-6 flex items-center justify-center rounded-full flex-shrink-0 ${
+                        opt.isCorrect
+                          ? "bg-purple-600 text-white"
+                          : "bg-gray-300 text-gray-700"
+                      }`}
+                    >
+                      {index + 1}
+                    </span>
+                    <span className="flex-1 text-sm md:text-base">
+                      {opt.text}
+                    </span>
+                    {openOption === index ? (
+                      <ChevronUp className="w-5 h-5 text-gray-400" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-gray-400" />
+                    )}
+                  </button>
+
+                  <AnimatePresence>
+                    {openOption === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="bg-gray-50 px-4 overflow-hidden"
+                      >
+                        <div className="py-3 border-t border-gray-200 text-sm md:text-base text-gray-700 leading-relaxed">
+                          {opt.explanation}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-sm md:text-base">
+              <p className="font-bold text-green-800 mb-1">結論</p>
+              <p>
+                疎水性薬物を「複合体形成」によって水系製剤中で安定化する
+                代表的な添加物は
+                <strong className="mx-1 text-green-700">
+                  α－シクロデキストリン（選択肢2）
+                </strong>
+                です。
+              </p>
+              <p className="mt-1">
+                他の選択肢は，抗酸化剤（1），粘稠化剤（3），キレート剤（4），
+                防腐剤（5）と，役割がそれぞれ異なることを押さえておきましょう。
+              </p>
+            </div>
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
 
   return (
-    <motion.div 
-      initial="initial" animate="animate" exit="exit" variants={pageVariants}
+    <motion.div
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={pageVariants}
       className="flex flex-col h-screen bg-white"
     >
-      <div className="bg-rose-600 text-white p-4 flex items-center shadow-md">
-        <button onClick={onBack} className="mr-4 hover:bg-rose-500 p-2 rounded-full transition"><Home className="w-6 h-6" /></button>
-        <h1 className="text-xl font-bold">第109回 問50：安定性と温度</h1>
+      <div className="bg-purple-600 text-white p-4 flex items-center shadow-md justify-between z-10">
+        <div className="flex items-center">
+          <button
+            onClick={onBack}
+            className="mr-4 hover:bg-purple-500 p-2 rounded-full transition"
+          >
+            <Home className="w-6 h-6" />
+          </button>
+          <h1 className="text-xl font-bold">第109回 問50：ステップ解説</h1>
+        </div>
+        <div className="text-sm bg-purple-700 px-3 py-1 rounded-full">
+          Step {step + 1} / {titles.length}
+        </div>
       </div>
-      <Slide>
-        <SectionTitle>アレニウスの式と保存温度</SectionTitle>
-        <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-          <div className="flex items-center justify-between mb-6">
-            <label className="text-gray-700 font-bold text-lg flex items-center">
-              <Thermometer className="mr-2 text-rose-600"/> 保存温度: 
-              <span className="text-3xl text-rose-600 font-mono ml-2">{temp} ℃</span>
-            </label>
-            <span className="text-sm bg-gray-100 px-3 py-1 rounded">
-              {temp <= 5 ? '冷蔵庫 (冷所)' : temp <= 25 ? '室温' : '過酷試験'}
-            </span>
-          </div>
-          <input type="range" min="5" max="60" step="5" value={temp} onChange={(e) => setTemp(parseInt(e.target.value))} className="w-full h-4 bg-gray-200 rounded-lg cursor-pointer accent-rose-600 mb-8"/>
 
-          <div className="grid grid-cols-2 gap-6">
-            <div className="p-4 bg-rose-50 rounded-lg border border-rose-200 text-center">
-              <div className="text-rose-800 font-bold">分解速度定数 (k)</div>
-              <motion.div 
-                key={rateConstant}
-                initial={{ scale: 0.8, opacity: 0.5 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="text-3xl font-bold text-rose-600 mt-2"
-              >
-                x {rateConstant.toFixed(2)}
-              </motion.div>
-              <div className="text-xs text-rose-500 mt-1">25℃基準の倍率</div>
-            </div>
-            <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 text-center">
-              <div className="text-gray-800 font-bold flex justify-center items-center">
-                <Clock className="w-4 h-4 mr-1"/> 1年後の残存率(仮想)
-              </div>
-              <motion.div 
-                animate={{ color: remainingAfter1Year < 90 ? '#dc2626' : '#16a34a' }}
-                className="text-3xl font-bold mt-2"
-              >
-                {remainingAfter1Year.toFixed(1)} %
-              </motion.div>
-              <div className="text-xs text-gray-500 mt-1">
-                {remainingAfter1Year < 90 ? '有効期限切れ...' : '品質保持OK'}
-              </div>
-            </div>
-          </div>
+      <Slide className="relative">
+        <SectionTitle>{titles[step]}</SectionTitle>
+        <div className="flex-1">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={step}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              {renderStepContent(step)}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </Slide>
-    </motion.div>
-  );
-};
 
-// ==========================================
-// プレースホルダー (汎用テンプレート)
-// ==========================================
-const GenericQuestionPage = ({ title, subTitle, onBack }) => {
-  return (
-    <motion.div 
-      initial="initial" animate="animate" exit="exit" variants={pageVariants}
-      className="flex flex-col h-screen bg-gray-50"
-    >
-      <div className="bg-slate-700 text-white p-4 flex items-center">
-        <button onClick={onBack} className="mr-4 hover:bg-slate-600 p-2 rounded-full transition"><Home className="w-6 h-6" /></button>
-        <h1 className="text-xl font-bold">{title}</h1>
-      </div>
-      <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
-        <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-200 max-w-lg w-full">
-          <BookOpen className="w-16 h-16 mx-auto text-slate-300 mb-4" />
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">{title}</h2>
-          <p className="text-gray-500 mb-6">{subTitle}</p>
-          <div className="bg-slate-50 p-4 rounded-lg text-left text-sm text-gray-600 mb-6">
-            <p className="font-bold mb-2">【解説のポイント】</p>
-            <ul className="list-disc list-inside space-y-1">
-              <li>問題文の条件を整理する</li>
-              <li>適用する公式を確認する</li>
-              <li>計算プロセスを可視化する</li>
-            </ul>
-          </div>
-          <button onClick={onBack} className="w-full py-3 bg-slate-600 text-white rounded-lg font-bold hover:bg-slate-700 transition">
-            メニューに戻る
-          </button>
-        </div>
+      <div className="p-4 border-t bg-gray-50 flex justify-between z-10">
+        <button
+          onClick={() => setStep(Math.max(0, step - 1))}
+          disabled={step === 0}
+          className={`px-6 py-3 rounded-lg font-bold flex items-center ${
+            step === 0
+              ? "text-gray-300 cursor-not-allowed"
+              : "bg-white border hover:bg-gray-100 text-gray-700"
+          }`}
+        >
+          <ChevronLeft className="w-5 h-5 mr-2" /> 前へ
+        </button>
+        <button
+          onClick={() => setStep(Math.min(titles.length - 1, step + 1))}
+          disabled={step === titles.length - 1}
+          className={`px-6 py-3 rounded-lg font-bold flex items-center ${
+            step === titles.length - 1
+              ? "text-gray-300 cursor-not-allowed"
+              : "bg-purple-600 text-white hover:bg-purple-700 shadow-md"
+          }`}
+        >
+          {step === 0 ? "解法ステップへ" : "次へ"}
+          <ChevronRight className="w-5 h-5 ml-2" />
+        </button>
       </div>
     </motion.div>
   );

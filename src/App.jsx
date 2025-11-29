@@ -1821,7 +1821,7 @@ const Q109_48 = ({ onBack }) => {
   const [viscosity, setViscosity] = useState(3);       // 粘度イメージ用
 
   // 粒子径が小さいほど表面積↑ → 値を反転して表現
-  const surfaceFactor = 6 - surfaceArea;   // 1(大きい粒)→5, 5(微粉)→1
+  const surfaceFactor = surfaceArea;       // 1(大きい粒)→1, 5(微粉)→5
   // 粘度が高いほど拡散速度↓ → 係数は逆比例的に小さく
   const viscosityFactor = 6 - viscosity;   // 1(低粘度)→5, 5(高粘度)→1
   const rate = surfaceFactor * viscosityFactor;

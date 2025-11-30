@@ -56,7 +56,7 @@ const Q99_174 = ({ onBack }) => {
             ∴ [A⁻] / [HA] = 10⁰ = 1
           </div>
           <p className="mt-2">
-            **分子形 [HA] : イオン形 [A⁻] = 1 : 1** で共存します。「分子形のみ」ではありません。
+            <span className="font-bold">分子形 [HA] : イオン形 [A⁻] = 1 : 1</span> で共存します。「分子形のみ」ではありません。
           </p>
         </>
       )
@@ -118,7 +118,7 @@ const Q99_174 = ({ onBack }) => {
             倍率: 101S₀ ÷ 2S₀ ≈ 50.5倍
           </p>
           <div className="bg-green-100 p-2 rounded font-bold text-base text-green-700 mt-2">
-            **約50倍**となり、選択肢は正しい。
+            約50倍となり、選択肢は正しい。
           </div>
         </>
       )

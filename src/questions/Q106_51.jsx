@@ -140,6 +140,143 @@ const Q106_51 = ({ onBack }) => {
                 </p>
               </div>
             </div>
+
+            {/* ★ ここから追加：ヤングの式の解説とベクトル図 */}
+            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
+              <h4 className="font-bold text-gray-800 mb-2">
+                ヤングの式：接触角と界面張力ベクトル
+              </h4>
+              <p className="text-sm md:text-base text-gray-800 mb-2">
+                固体表面上の液滴を考えると、接触線まわりで
+                <span className="font-bold mx-1">力のつり合い</span>
+                をとることで、接触角
+                <span className="font-mono mx-1">θ</span>
+                を表す
+                <span className="font-bold mx-1">ヤングの式</span>
+                が得られます。
+              </p>
+              <div className="bg-gray-50 rounded-lg p-4 text-center">
+                <p className="text-sm text-gray-700 mb-1">
+                  ヤングの式（固体表面に平行な方向の力のつり合い）
+                </p>
+                <p className="text-xl md:text-2xl font-mono font-bold text-indigo-700">
+                  γ<sub>SV</sub> = γ<sub>SL</sub> + γ<sub>LV</sub> cos θ
+                </p>
+                <p className="mt-2 text-xs md:text-sm text-gray-600">
+                  ⇔ cos θ = (γ<sub>SV</sub> − γ<sub>SL</sub>)
+                  / γ<sub>LV</sub>
+                </p>
+              </div>
+              <p className="text-xs md:text-sm text-gray-700">
+                ここでも
+                γ<sub>SV</sub>：固体–気体、
+                γ<sub>LV</sub>：液体–気体、
+                γ<sub>SL</sub>：固体–液体の界面張力です。
+                θ は固体表面と液滴の接線で測る
+                <span className="font-bold mx-1">接触角</span>
+                です。
+              </p>
+
+              <div className="mt-4 flex flex-col md:flex-row items-center md:items-start gap-4">
+                <div className="flex-1 flex items-center justify-center">
+                  <svg
+                    viewBox="0 0 260 160"
+                    className="w-full max-w-xs"
+                    aria-label="ヤングの式の模式図"
+                  >
+                    {/* 固体表面 */}
+                    <rect x="20" y="110" width="220" height="20" fill="#e5e7eb" />
+                    {/* 液滴（円の一部） */}
+                    <path
+                      d="M60 110 Q 130 30 200 110 Z"
+                      fill="#bfdbfe"
+                      stroke="#60a5fa"
+                      strokeWidth="2"
+                    />
+                    {/* 接触角 θ の弧 */}
+                    <path
+                      d="M60 110 A 25 25 0 0 1 85 95"
+                      fill="none"
+                      stroke="#f97316"
+                      strokeWidth="2"
+                    />
+                    <text x="88" y="95" fontSize="10" fill="#f97316">
+                      θ
+                    </text>
+                    {/* γ_LV ベクトル */}
+                    <line
+                      x1="60"
+                      y1="110"
+                      x2="105"
+                      y2="85"
+                      stroke="#2563eb"
+                      strokeWidth="2"
+                    />
+                    <text x="108" y="85" fontSize="10" fill="#2563eb">
+                      γ_LV
+                    </text>
+                    {/* γ_SV ベクトル */}
+                    <line
+                      x1="60"
+                      y1="110"
+                      x2="110"
+                      y2="110"
+                      stroke="#16a34a"
+                      strokeWidth="2"
+                    />
+                    <text x="112" y="120" fontSize="10" fill="#16a34a">
+                      γ_SV
+                    </text>
+                    {/* γ_SL ベクトル */}
+                    <line
+                      x1="60"
+                      y1="110"
+                      x2="20"
+                      y2="110"
+                      stroke="#f97316"
+                      strokeWidth="2"
+                    />
+                    <text x="10" y="120" fontSize="10" fill="#f97316">
+                      γ_SL
+                    </text>
+                  </svg>
+                </div>
+                <p className="flex-1 text-xs md:text-sm text-gray-600">
+                  図では、固体表面上の液滴と、接触線まわりの
+                  γ<sub>SV</sub>, γ<sub>SL</sub>, γ<sub>LV</sub> の
+                  ベクトルを模式的に示しています。
+                  ヤングの式は、固体表面に平行な方向での
+                  力のつり合いを表していることに注意しましょう。
+                </p>
+              </div>
+            </div>
+
+            {/* ★ ここから追加：接触角によるぬれの分類 */}
+            <div className="bg-green-50 rounded-xl p-4 text-sm md:text-base text-gray-800">
+              <h4 className="font-bold text-green-800 mb-2">
+                接触角による 3 つの「ぬれ」の分類
+              </h4>
+              <ul className="list-disc list-inside space-y-1">
+                <li>
+                  <span className="font-bold">拡張ぬれ</span>：
+                  θ = 0°（液が全面に薄膜となって広がる）
+                </li>
+                <li>
+                  <span className="font-bold">浸漬ぬれ</span>：
+                  0° &lt; θ ≦ 90°（よく濡れている状態）
+                </li>
+                <li>
+                  <span className="font-bold">付着ぬれ</span>：
+                  90° &lt; θ &lt; 180°（あまり濡れず、液滴に近い）
+                </li>
+              </ul>
+              <p className="mt-2 text-xs md:text-sm text-gray-700">
+                薬剤学では、固体表面への液の広がりや、懸濁剤・乳剤・
+                コーティングなどでの「ぬれ」の良し悪しを評価するときに、
+                接触角 θ や拡張係数 S を組み合わせて考えます。
+                本問の「拡張ぬれ」は θ → 0°、S ≥ 0 の典型例です。
+              </p>
+            </div>
           </div>
         );
 

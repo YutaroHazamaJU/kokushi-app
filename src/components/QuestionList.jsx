@@ -4,12 +4,12 @@ import { motion } from 'framer-motion';
 import { pageVariants } from './Layout';
 import { Search, Filter, X } from 'lucide-react';
 
-const QuestionList = ({ questions, onSelect }) => {
+const QuestionList = ({ questions, onSelect, initialIdFilter = '' }) => {
   // フィルタ用 state
   const [yearFilter, setYearFilter] = useState('all');
   const [fieldFilter, setFieldFilter] = useState('all');
   const [keyword, setKeyword] = useState('');
-  const [idFilter, setIdFilter] = useState('');
+  const [idFilter, setIdFilter] = useState(initialIdFilter);
 
   // 年度リスト（プルダウン用）
   const yearOptions = useMemo(() => {

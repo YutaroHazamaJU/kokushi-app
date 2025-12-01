@@ -27,6 +27,7 @@ const App = () => {
             <QuestionList
               questions={questionList}
               onSelect={(id) => setCurrentId(id)}
+              initialIdFilter={initialIdFilter}
             />
           )}
         </div>

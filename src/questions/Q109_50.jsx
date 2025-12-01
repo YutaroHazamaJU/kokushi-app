@@ -1,4 +1,3 @@
-// src/questions/Q109_50.jsx
 import React, { useState } from 'react';
 import {
   Home,
@@ -313,6 +312,15 @@ const Q109_50 = ({ onBack }) => {
                 </span>
                 です。
               </p>
+            </div>
+
+            <div className="text-center mt-4">
+              <button
+                onClick={onBack}
+                className="px-8 py-3 bg-gray-800 text-white rounded-xl font-bold text-lg hover:bg-gray-900 transition shadow-lg"
+              >
+                問題一覧に戻る
+              </button>
             </div>
           </div>
         );

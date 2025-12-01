@@ -76,7 +76,7 @@ export const questionList = [
     num: 50,
     title: '第109回 問50',
     desc: '薬剤：安定性と反応速度論',
-    field: '製剤',
+    field: '薬剤',
     tags: ['反応速度論', '安定性', '薬剤'],
     icon: Thermometer,
     color: 'bg-rose-50 border-rose-200 text-rose-700',

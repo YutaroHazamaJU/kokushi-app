@@ -9,6 +9,9 @@ import { questionList } from './questions';
 const App = () => {
   // null のときはトップ（問題一覧）を表示
   const [currentId, setCurrentId] = useState(null);
+  // URLクエリ (?ids=99-174,101-176) から初期IDフィルタ文字列を取得
+  const searchParams = new URLSearchParams(window.location.search);
+  const initialIdFilter = searchParams.get('ids') || '';
 
   // 選択中の問題コンポーネントを questionList から取得
   const CurrentQuestion = currentId

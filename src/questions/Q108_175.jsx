@@ -367,9 +367,7 @@ const Q108_175 = ({ onBack }) => {
                   <button
                     onClick={() => toggleOption(index)}
                     className={`w-full p-3 md:p-4 text-left flex items-start transition-colors ${
-                      openOption === index
-                        ? 'bg-blue-50'
-                        : 'hover:bg-gray-50'
+                      openOption === index ? 'bg-blue-50' : 'hover:bg-gray-50'
                     }`}
                   >
                     <span
@@ -415,6 +413,15 @@ const Q108_175 = ({ onBack }) => {
                 以上より、正しい選択肢は{' '}
                 <span className="font-bold text-green-700">2 と 4</span> です。
               </p>
+            </div>
+
+            <div className="pt-2 flex justify-center">
+              <button
+                onClick={onBack}
+                className="px-8 py-3 bg-gray-800 text-white rounded-xl font-bold text-sm md:text-base hover:bg-gray-900 transition shadow-md"
+              >
+                問題一覧に戻る
+              </button>
             </div>
           </div>
         );

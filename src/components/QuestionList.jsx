@@ -71,7 +71,7 @@ const QuestionList = ({ questions, onSelect }) => {
       animate="animate"
       exit="exit"
       variants={pageVariants}
-      className="min-h-screen bg-gray-100 flex flex-col items-center p-6 font-sans"
+      className="h-screen overflow-y-auto bg-gray-100 flex flex-col items-center p-6 font-sans"
     >
       <div className="max-w-5xl w-full">
         {/* ヘッダー */}

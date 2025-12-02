@@ -443,6 +443,62 @@ const Q106_51 = ({ onBack }) => {
                   </li>
                 </ul>
               </div>
+              {/* 確認クイズ（小テスト） */}
+              <div className="mt-6 bg-indigo-50 p-4 rounded-lg text-left text-sm md:text-base text-gray-800 border border-indigo-100 space-y-3">
+                <p className="font-bold text-indigo-800">
+                  確認クイズ（小テスト：授業のまとめ用）
+                </p>
+
+                {/* Q1 */}
+                <div>
+                  <p className="font-semibold">
+                    Q1. 接触角 θ による「拡張ぬれ」「浸漬ぬれ」「付着ぬれ」の関係として正しいものはどれか。
+                  </p>
+                  <ul className="list-disc list-inside ml-4 mt-1 text-sm md:text-base">
+                    <li>A. 拡張ぬれ：θ = 0°</li>
+                    <li>B. 浸漬ぬれ：0° &lt; θ ≦ 90°</li>
+                    <li>C. 付着ぬれ：90° &lt; θ &lt; 180°</li>
+                  </ul>
+                  <p className="mt-1 text-xs text-gray-600">
+                    解答：A, B, C すべて正しい。
+                    本問の条件「拡張ぬれ」は θ = 0° の状態を指す。
+                  </p>
+                </div>
+
+                {/* Q2 */}
+                <div>
+                  <p className="font-semibold">
+                    Q2. ヤングの式
+                    <span className="font-mono mx-1">
+                      γ<sub>SV</sub> = γ<sub>SL</sub> + γ<sub>LV</sub> cos θ
+                    </span>
+                    から、cos θ を γ<sub>SV</sub>, γ<sub>SL</sub>, γ<sub>LV</sub> で表した式として正しいものはどれか。
+                  </p>
+                  <p className="mt-1 text-sm md:text-base font-mono text-center">
+                    cos θ = (γ<sub>SV</sub> − γ<sub>SL</sub>) / γ<sub>LV</sub>
+                  </p>
+                  <p className="mt-1 text-xs text-gray-600">
+                    解答：上式が正しい。
+                    固体表面に平行な方向の力のつり合いをとることで導かれる。
+                  </p>
+                </div>
+
+                {/* Q3 */}
+                <div>
+                  <p className="font-semibold">
+                    Q3. 本問の条件（拡張ぬれ：θ = 0°）では、固液界面張力 γ<sub>SL</sub> は
+                    γ<sub>SV</sub>, γ<sub>LV</sub> を用いてどのように表されるか。
+                  </p>
+                  <p className="mt-1 text-sm md:text-base font-mono text-center">
+                    γ<sub>SL</sub> = γ<sub>SV</sub> − γ<sub>LV</sub>
+                  </p>
+                  <p className="mt-1 text-xs text-gray-600">
+                    解答：拡張ぬれで θ = 0° なので cos θ = 1。
+                    ヤングの式から γ<sub>SV</sub> = γ<sub>SL</sub> + γ<sub>LV</sub>
+                    ⇒ γ<sub>SL</sub> = γ<sub>SV</sub> − γ<sub>LV</sub> と整理できる。
+                  </p>
+                </div>
+              </div>
             </motion.div>
 
             <button

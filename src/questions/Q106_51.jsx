@@ -200,19 +200,63 @@ const Q106_51 = ({ onBack }) => {
               </p>
               <div className="mt-3 bg-yellow-50 rounded-lg p-4 text-xs md:text-sm text-gray-800 border border-yellow-100">
                 <p className="font-bold text-yellow-800 mb-1">
-                  三角関数が苦手な人向けおまけ：なぜ θ = 0° だと cos θ = 1 ？
+                  三角関数が苦手な人向けミニ復習：cosθ は何を表している？
                 </p>
-                <p className="mb-1">
-                  cos θ は「矢印がどれだけ横向きか（横方向の成分の割合）」を表す量とイメージすると分かりやすいです。
+                <p className="mb-2">
+                  数学では、直角三角形を使って
+                  <span className="font-mono mx-1">
+                    cosθ = （隣の辺） / （斜辺）
+                  </span>
+                  と定義します。これは「矢印がどれだけ横向きか（横方向成分の割合）」を表しています。
                 </p>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>θ = 0°：矢印はまっすぐ右向き → 横方向が 100% → cos 0° = 1</li>
-                  <li>θ = 90°：矢印は真上向き → 横方向は 0% → cos 90° = 0</li>
-                </ul>
-                <p className="mt-1">
-                  本問の<strong>拡張ぬれ</strong>では θ = 0° とみなせるので、
-                  ヤングの式 γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ に
-                  <span className="font-mono mx-1">cos θ = 1</span> を代入できる、というのが計算のポイントです。
+                <p className="mb-2">
+                  さらに、原点を中心とする半径 1 の円（単位円）を考えると、円周上の点 P の座標は
+                  <span className="font-mono mx-1">
+                    P(cosθ, sinθ)
+                  </span>
+                  と書けます。つまり、
+                  <span className="font-bold mx-1">cosθ は P の x 座標（横方向）</span>
+                  、<span className="font-bold mx-1">sinθ は y 座標（縦方向）</span>
+                  を表しています。
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-2 text-center">
+                  <div className="bg-white rounded-md p-2 border border-gray-200">
+                    <p className="font-mono text-xs">θ = 0°</p>
+                    <p className="text-xs">
+                      P = (1, 0) → cos0° = 1
+                    </p>
+                    <p className="text-[11px] text-gray-500">
+                      100% 右向き（横成分が最大）
+                    </p>
+                  </div>
+                  <div className="bg-white rounded-md p-2 border border-gray-200">
+                    <p className="font-mono text-xs">θ = 90°</p>
+                    <p className="text-xs">
+                      P = (0, 1) → cos90° = 0
+                    </p>
+                    <p className="text-[11px] text-gray-500">
+                      真上向きなので横成分は 0
+                    </p>
+                  </div>
+                  <div className="bg-white rounded-md p-2 border border-gray-200">
+                    <p className="font-mono text-xs">θ が大きくなるほど…</p>
+                    <p className="text-xs">
+                      cosθ は 1 → 0 → −1 と変化
+                    </p>
+                    <p className="text-[11px] text-gray-500">
+                      横成分がだんだん減り、向きも反転する
+                    </p>
+                  </div>
+                </div>
+                <p className="mt-2">
+                  本問の<strong>拡張ぬれ</strong>では
+                  <span className="font-mono mx-1">θ = 0°</span>
+                  とみなせるので、ヤングの式
+                  <span className="font-mono mx-1">
+                    γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ
+                  </span>
+                  に <span className="font-mono mx-1">cos θ = 1</span> を代入できます。
+                  cosθ を「横方向成分」としてイメージしておくと、力のつり合いとの対応が分かりやすくなります。
                 </p>
               </div>
 

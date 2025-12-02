@@ -18,7 +18,7 @@ const Q106_51 = ({ onBack }) => {
 
   const titles = [
     '問題の確認',
-    'Step 1：拡張ぬれと拡張係数 S',
+    'Step 1：ヤングの式と拡張ぬれ',
     'Step 2：式に代入して固液界面張力を求める',
     'Step 3：選択肢の確認とまとめ',
   ];
@@ -74,9 +74,12 @@ const Q106_51 = ({ onBack }) => {
                   <span className="font-bold">ポイント：</span>
                   「拡張ぬれが成立する」とは、液滴ではなく
                   <span className="font-bold">固体表面に液が薄い膜として広がる状態</span>
-                  のことです。このときのエネルギーバランスを、拡張係数
-                  <span className="font-mono mx-1">S</span>
-                  で表します。
+                  のことです。
+                  このとき接触角は <span className="font-mono">θ = 0°</span> となり、
+                  <span className="font-bold mx-1">ヤングの式</span>
+                  で
+                  <span className="font-mono mx-1">cos θ = 1</span>
+                  とおけるのが解法のカギになります。
                 </p>
               </div>
             </div>
@@ -87,89 +90,77 @@ const Q106_51 = ({ onBack }) => {
         return (
           <div className="space-y-6">
             <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
-              拡張ぬれと拡張係数 S の意味
+              ヤングの式と拡張ぬれのイメージ
             </h3>
 
             <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
               <p className="text-sm md:text-base text-gray-800">
-                固体・液体・気体の三相が接する系を考えるとき、
-                <span className="font-bold">拡張ぬれ</span>の条件は
-                <span className="font-mono font-bold ml-1">拡張係数 S</span>
-                を使って表されます。
+                固体表面上の液体の「ぬれ」は、
+                <span className="font-bold mx-1">接触角 θ</span>
+                で評価するのが薬学では一般的です。
+                θ の大きさによって、液がどの程度広がるかが決まります。
               </p>
 
-              <div className="bg-gray-50 rounded-lg p-4 text-center">
-                <p className="text-sm text-gray-700 mb-2">
-                  拡張係数 S の定義（単位：mN/m）
-                </p>
-                <p className="text-xl md:text-2xl font-mono font-bold text-indigo-700">
-                  S = γ<sub>SV</sub> − (γ<sub>SL</sub> + γ<sub>LV</sub>)
-                </p>
-                <p className="mt-2 text-xs md:text-sm text-gray-600">
-                  γ<sub>SV</sub>：固体–気体界面張力（固体の表面張力）
-                  <br />
-                  γ<sub>LV</sub>：液体–気体界面張力（液体の表面張力）
-                  <br />
-                  γ<sub>SL</sub>：固体–液体界面張力
+              <div className="bg-blue-50 rounded-lg p-4 text-xs md:text-sm text-gray-800">
+                <p className="font-bold text-blue-800 mb-2">接触角による 3 つのぬれ</p>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>
+                    <span className="font-bold">拡張ぬれ</span>：θ = 0°
+                    （液が全面に薄膜となって広がる）
+                  </li>
+                  <li>
+                    <span className="font-bold">浸漬ぬれ</span>：0° &lt; θ ≦ 90°
+                    （よく濡れている状態）
+                  </li>
+                  <li>
+                    <span className="font-bold">付着ぬれ</span>：90° &lt; θ &lt; 180°
+                    （あまり濡れず、液滴に近い）
+                  </li>
+                </ul>
+                <p className="mt-2">
+                  本問の「拡張ぬれ」は、
+                  <span className="font-mono mx-1">θ = 0°</span>
+                  の極限状態を表します。
                 </p>
               </div>
 
-              <div className="bg-emerald-50 rounded-lg p-4 text-xs md:text-sm text-gray-800">
-                <p className="font-bold text-emerald-800 mb-1">
-                  S が表しているもの（表面自由エネルギーの変化）
-                </p>
-                <p className="mb-1">
-                  固体表面の 1 m
-                  <sup>2</sup> を、
-                  「固体−気体界面（γ
-                  <sub>SV</sub>）」から「固体−液体界面（γ
-                  <sub>SL</sub>）と液体−気体界面（γ
-                  <sub>LV</sub>）」に置き換えたときの
-                  <span className="font-bold">表面自由エネルギーの変化</span>
-                  を表します。
-                </p>
-                <p className="font-mono text-center mb-1">
-                  ΔG<sub>spread</sub> = − S
-                </p>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>
-                    S &gt; 0：ΔG が負になり、エネルギーが下がるので
-                    <span className="font-bold">自発的に広がる</span>
-                  </li>
-                  <li>
-                    S = 0：広がっても広がらなくてもエネルギーは同じ →
-                    <span className="font-bold">拡張ぬれの境界</span>
-                  </li>
-                  <li>
-                    S &lt; 0：広がるとエネルギーが増えるので、液滴状のまま
-                  </li>
-                </ul>
-              </div>
+              <div className="mt-4 flex justify-center">
+                <svg
+                  viewBox="0 0 320 90"
+                  className="w-full max-w-md"
+                  aria-label="接触角によるぬれの模式図"
+                >
+                  {/* 固体表面 */}
+                  <rect x="10" y="60" width="300" height="8" fill="#e5e7eb" />
 
-              <div className="bg-blue-50 rounded-lg p-4 text-sm md:text-base text-gray-800">
-                <p className="font-bold text-blue-800 mb-2">
-                  拡張ぬれ（完全に薄膜状に広がる）の条件
-                </p>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>
-                    <span className="font-mono font-bold">S &gt; 0</span>：
-                    液が自発的に広がる（拡張ぬれ）
-                  </li>
-                  <li>
-                    <span className="font-mono font-bold">S = 0</span>：
-                    拡張ぬれの境界状態（ギリギリ広がる）
-                  </li>
-                  <li>
-                    <span className="font-mono font-bold">S &lt; 0</span>：
-                    液は広がらず、液滴状のまま
-                  </li>
-                </ul>
-                <p className="mt-2 text-xs md:text-sm text-gray-700">
-                  本問では「拡張ぬれが成立するときの
-                  γ<sub>SL</sub>」を聞いているので、
-                  最もシンプルに <span className="font-bold">S = 0</span> の状態
-                  を仮定してよいと考えます。
-                </p>
+                  {/* θ = 0° 完全なぬれ */}
+                  <rect x="25" y="58" width="60" height="4" fill="#bfdbfe" />
+                  <text x="30" y="50" fontSize="10" fill="#374151">
+                    θ = 0°
+                  </text>
+
+                  {/* 0 < θ < 90° 浸漬ぬれ */}
+                  <path
+                    d="M140 60 Q 155 40 170 60 Z"
+                    fill="#bfdbfe"
+                    stroke="#60a5fa"
+                    strokeWidth="1.5"
+                  />
+                  <text x="135" y="50" fontSize="10" fill="#374151">
+                    0° &lt; θ &lt; 90°
+                  </text>
+
+                  {/* θ > 90° 付着ぬれ */}
+                  <path
+                    d="M240 60 Q 250 35 260 60 Z"
+                    fill="#bfdbfe"
+                    stroke="#60a5fa"
+                    strokeWidth="1.5"
+                  />
+                  <text x="235" y="50" fontSize="10" fill="#374151">
+                    θ &gt; 90°
+                  </text>
+                </svg>
               </div>
             </div>
 
@@ -324,82 +315,8 @@ const Q106_51 = ({ onBack }) => {
               <p className="mt-2 text-xs md:text-sm text-gray-700">
                 薬剤学では、固体表面への液の広がりや、懸濁剤・乳剤・
                 コーティングなどでの「ぬれ」の良し悪しを評価するときに、
-                接触角 θ や拡張係数 S を組み合わせて考えます。
-                本問の「拡張ぬれ」は θ → 0°、S ≥ 0 の典型例です。
-              </p>
-              <div className="mt-4 flex justify-center">
-                <svg
-                  viewBox="0 0 320 90"
-                  className="w-full max-w-md"
-                  aria-label="接触角によるぬれの模式図"
-                >
-                  {/* 固体表面 */}
-                  <rect x="10" y="60" width="300" height="8" fill="#e5e7eb" />
-
-                  {/* θ = 0° 完全なぬれ */}
-                  <rect x="25" y="58" width="60" height="4" fill="#bfdbfe" />
-                  <text x="30" y="50" fontSize="10" fill="#374151">
-                    θ = 0°
-                  </text>
-
-                  {/* 0 < θ < 90° 浸漬ぬれ */}
-                  <path
-                    d="M140 60 Q 155 40 170 60 Z"
-                    fill="#bfdbfe"
-                    stroke="#60a5fa"
-                    strokeWidth="1.5"
-                  />
-                  <text x="135" y="50" fontSize="10" fill="#374151">
-                    0° &lt; θ &lt; 90°
-                  </text>
-
-                  {/* θ > 90° 付着ぬれ */}
-                  <path
-                    d="M240 60 Q 250 35 260 60 Z"
-                    fill="#bfdbfe"
-                    stroke="#60a5fa"
-                    strokeWidth="1.5"
-                  />
-                  <text x="235" y="50" fontSize="10" fill="#374151">
-                    θ &gt; 90°
-                  </text>
-                </svg>
-              </div>
-            </div>
-
-            {/* ★ まとめスライド：S と θ の関係 */}
-            <div className="bg-orange-50 rounded-xl p-4 mt-4 text-sm md:text-base text-gray-800 space-y-3">
-              <h4 className="font-bold text-orange-800">
-                拡張係数 S と接触角 θ の関係（固体＋液体＋気相）
-              </h4>
-              <p className="text-xs md:text-sm text-gray-700">
-                ヤングの式 <span className="font-mono">γ_S = γ_SL + γ_L cosθ</span> と
-                拡張係数の定義 <span className="font-mono">S = γ_S − (γ_SL + γ_L)</span>
-                を組み合わせると，
-              </p>
-              <p className="font-mono text-center text-base md:text-lg">
-                S = γ_L (cosθ − 1)
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs md:text-sm">
-                <div className="bg-white/70 rounded-lg p-3">
-                  <p className="font-bold mb-1">拡張ぬれ</p>
-                  <p>θ = 0° → cosθ = 1</p>
-                  <p>S = 0 以上（薄膜状に広がる）</p>
-                </div>
-                <div className="bg-white/70 rounded-lg p-3">
-                  <p className="font-bold mb-1">浸漬ぬれ</p>
-                  <p>0° &lt; θ ≦ 90° → 0 &lt; cosθ &lt; 1</p>
-                  <p>S &lt; 0（液滴だが比較的よくぬれる）</p>
-                </div>
-                <div className="bg-white/70 rounded-lg p-3">
-                  <p className="font-bold mb-1">付着ぬれ</p>
-                  <p>90° &lt; θ &lt; 180° → cosθ ≦ 0</p>
-                  <p>S &lt; 0（ぬれにくく，ほぼ液滴）</p>
-                </div>
-              </div>
-              <p className="text-xs md:text-sm text-gray-700">
-                授業では，「普段のぬれの評価＝θ」「完全に広がるかどうか＝S」と
-                役割分担させて説明すると，学生にも整理しやすくなります。
+                接触角 θ と界面張力 γ を組み合わせて考えます。
+                本問の「拡張ぬれ」は θ → 0° の典型例です。
               </p>
             </div>
           </div>
@@ -428,15 +345,19 @@ const Q106_51 = ({ onBack }) => {
 
               <div className="bg-yellow-50 rounded-lg p-4 text-sm md:text-base text-gray-800">
                 <p className="font-bold text-yellow-800 mb-2">
-                  S = 0 とおいて γ<sub>SL</sub> を解く
+                  ヤングの式に θ = 0° を代入して γ<sub>SL</sub> を解く
                 </p>
                 <p className="font-mono mb-2 text-center">
-                  S = γ<sub>SV</sub> − (γ<sub>SL</sub> + γ<sub>LV</sub>) = 0
+                  γ<sub>SV</sub> = γ<sub>SL</sub> + γ<sub>LV</sub> cos θ
                 </p>
                 <p className="text-center mb-2">
-                  ⇒ γ<sub>SV</sub> = γ<sub>SL</sub> + γ<sub>LV</sub>
+                  拡張ぬれでは <span className="font-mono">θ = 0°</span> なので
+                  <span className="font-mono mx-1">cos θ = 1</span>
                 </p>
-                <p className="text-center mb-2">
+                <p className="text-center mb-2 font-mono">
+                  γ<sub>SV</sub> = γ<sub>SL</sub> + γ<sub>LV</sub>
+                </p>
+                <p className="text-center mb-2 font-mono">
                   ⇒ γ<sub>SL</sub> = γ<sub>SV</sub> − γ<sub>LV</sub>
                 </p>
               </div>
@@ -474,17 +395,22 @@ const Q106_51 = ({ onBack }) => {
                 解説終了：正解は「3　512 mN/m」
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                拡張ぬれが成立する条件
+                拡張ぬれが成立するとき、接触角は
+                <span className="font-mono mx-1">θ = 0°</span>
+                となります。
+                ヤングの式
                 <span className="font-mono mx-1">
-                  S = γ<sub>SV</sub> − (γ<sub>SL</sub> + γ<sub>LV</sub>) ≥ 0
+                  γ<sub>SV</sub> = γ<sub>SL</sub> + γ<sub>LV</sub> cos θ
                 </span>
-                を用い、境界として S = 0 とおくことで
-                <br />
-                <span className="font-mono">
+                に θ = 0° を代入すると
+                <span className="font-mono mx-1">
+                  γ<sub>SV</sub> = γ<sub>SL</sub> + γ<sub>LV</sub>
+                </span>
+                となり、
+                <span className="font-mono mx-1">
                   γ<sub>SL</sub> = γ<sub>SV</sub> − γ<sub>LV</sub>
                 </span>
-                を導きました。
-                <br />
+                が得られます。
                 数値を代入すると γ<sub>SL</sub> = 585 − 73 = 512 mN/m となります。
               </p>
 
@@ -492,23 +418,25 @@ const Q106_51 = ({ onBack }) => {
                 <p className="font-bold mb-2">【重要ポイントのまとめ】</p>
                 <ul className="list-disc list-inside space-y-2">
                   <li>
-                    拡張ぬれ：液が薄膜として広がる状態で、
-                    拡張係数
+                    拡張ぬれ：液が薄膜として広がる状態で、接触角
+                    <span className="font-mono mx-1">θ = 0°</span> とみなせる。
+                  </li>
+                  <li>
+                    ヤングの式
                     <span className="font-mono mx-1">
-                      S = γ<sub>SV</sub> − (γ<sub>SL</sub> + γ<sub>LV</sub>)
+                      γ<sub>SV</sub> = γ<sub>SL</sub> + γ<sub>LV</sub> cos θ
                     </span>
-                    で表す。
-                  </li>
-                  <li>
-                    拡張ぬれの境界では
-                    <span className="font-mono mx-1">S = 0</span> とおける。
-                  </li>
-                  <li>
-                    そのとき
+                    から、θ = 0° では
                     <span className="font-mono mx-1">
                       γ<sub>SL</sub> = γ<sub>SV</sub> − γ<sub>LV</sub>
                     </span>
-                    となり、与えられた表面張力から固液界面張力を計算できる。
+                    が導ける。
+                  </li>
+                  <li>
+                    与えられた
+                    <span className="font-mono mx-1">γ<sub>SV</sub> = 585</span>,
+                    <span className="font-mono mx-1">γ<sub>LV</sub> = 73</span>
+                    から、固液界面張力は 512 mN/m となる。
                   </li>
                   <li>
                     単位（mN/m）をそろえて計算することも確認ポイント。

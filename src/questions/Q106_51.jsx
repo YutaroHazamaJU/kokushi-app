@@ -262,67 +262,106 @@ const Q106_51 = ({ onBack }) => {
                       </text>
 
                       {/* 右側：単位円 */}
-                      {/* 座標軸 */}
-                      <line x1="180" y1="95" x2="290" y2="95" stroke="#9ca3af" strokeWidth="1.2" />
-                      <line x1="235" y1="110" x2="235" y2="20" stroke="#9ca3af" strokeWidth="1.2" />
-                      {/* 円（半径 30） */}
-                      <circle
-                        cx="235"
-                        cy="95"
-                        r="30"
-                        fill="#eff6ff"
-                        stroke="#60a5fa"
-                        strokeWidth="1.5"
-                      />
-                      {/* 半径ベクトル */}
-                      <line
-                        x1="235"
-                        y1="95"
-                        x2="260"
-                        y2="75"
-                        stroke="#2563eb"
-                        strokeWidth="1.8"
-                      />
-                      {/* 角 θ の弧 */}
-                      <path
-                        d="M255 95 A 18 18 0 0 1 258 82"
-                        fill="none"
-                        stroke="#f97316"
-                        strokeWidth="1.5"
-                      />
-                      <text x="247" y="83" fontSize="10" fill="#f97316">
-                        θ
-                      </text>
-                      {/* 点 P と座標 */}
-                      <circle cx="260" cy="75" r="3" fill="#1d4ed8" />
-                      <text x="264" y="72" fontSize="10" fill="#1d4ed8">
-                        P(cosθ, sinθ)
-                      </text>
-                      {/* cosθ, sinθ の成分（補助線） */}
-                      <line
-                        x1="260"
-                        y1="75"
-                        x2="260"
-                        y2="95"
-                        stroke="#93c5fd"
-                        strokeDasharray="4 3"
-                        strokeWidth="1.3"
-                      />
-                      <line
-                        x1="235"
-                        y1="95"
-                        x2="260"
-                        y2="95"
-                        stroke="#93c5fd"
-                        strokeDasharray="4 3"
-                        strokeWidth="1.3"
-                      />
-                      <text x="264" y="98" fontSize="9" fill="#374151">
-                        cosθ
-                      </text>
-                      <text x="226" y="82" fontSize="9" fill="#374151">
-                        sinθ
-                      </text>
+                      {(() => {
+                        const cx = 260; // 円の中心 x
+                        const cy = 85; // 円の中心 y
+                        const r = 28; // 円の半径
+                        const theta = (30 * Math.PI) / 180; // 例として θ = 30°
+
+                        const px = cx + r * Math.cos(theta); // 点Pのx座標
+                        const py = cy - r * Math.sin(theta); // 点Pのy座標
+
+                        const arcR = 16; // 角度表示用の小さい半径
+                        const arcStartX = cx + arcR;
+                        const arcStartY = cy;
+                        const arcEndX = cx + arcR * Math.cos(theta);
+                        const arcEndY = cy - arcR * Math.sin(theta);
+
+                        return (
+                          <g>
+                            {/* 座標軸 */}
+                            <line
+                              x1={cx - 45}
+                              y1={cy}
+                              x2={cx + 45}
+                              y2={cy}
+                              stroke="#9ca3af"
+                              strokeWidth="1.2"
+                            />
+                            <line
+                              x1={cx}
+                              y1={cy + 40}
+                              x2={cx}
+                              y2={cy - 40}
+                              stroke="#9ca3af"
+                              strokeWidth="1.2"
+                            />
+
+                            {/* 円 */}
+                            <circle
+                              cx={cx}
+                              cy={cy}
+                              r={r}
+                              fill="#eff6ff"
+                              stroke="#60a5fa"
+                              strokeWidth="1.5"
+                            />
+
+                            {/* 半径ベクトル OP */}
+                            <line
+                              x1={cx}
+                              y1={cy}
+                              x2={px}
+                              y2={py}
+                              stroke="#2563eb"
+                              strokeWidth="1.8"
+                            />
+
+                            {/* 角 θ の弧（原点まわり） */}
+                            <path
+                              d={`M ${arcStartX} ${arcStartY} A ${arcR} ${arcR} 0 0 1 ${arcEndX} ${arcEndY}`}
+                              fill="none"
+                              stroke="#f97316"
+                              strokeWidth="1.5"
+                            />
+                            <text x={cx + arcR + 4} y={cy - 4} fontSize="10" fill="#f97316">
+                              θ
+                            </text>
+
+                            {/* 点P と座標ラベル */}
+                            <circle cx={px} cy={py} r={3} fill="#1d4ed8" />
+                            <text x={px + 4} y={py - 4} fontSize="10" fill="#1d4ed8">
+                              P(cosθ, sinθ)
+                            </text>
+
+                            {/* cosθ, sinθ の成分（補助線） */}
+                            <line
+                              x1={px}
+                              y1={py}
+                              x2={px}
+                              y2={cy}
+                              stroke="#93c5fd"
+                              strokeDasharray="4 3"
+                              strokeWidth="1.3"
+                            />
+                            <line
+                              x1={cx}
+                              y1={cy}
+                              x2={px}
+                              y2={cy}
+                              stroke="#93c5fd"
+                              strokeDasharray="4 3"
+                              strokeWidth="1.3"
+                            />
+                            <text x={px + 4} y={cy + 10} fontSize="9" fill="#374151">
+                              cosθ
+                            </text>
+                            <text x={cx - 18} y={py - 2} fontSize="9" fill="#374151">
+                              sinθ
+                            </text>
+                          </g>
+                        );
+                      })()}
                     </svg>
                   </div>
                 </div>

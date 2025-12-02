@@ -183,18 +183,17 @@ const Q106_51 = ({ onBack }) => {
                   ヤングの式（固体表面に平行な方向の力のつり合い）
                 </p>
                 <p className="text-xl md:text-2xl font-mono font-bold text-indigo-700">
-                  γ<sub>SV</sub> = γ<sub>SL</sub> + γ<sub>LV</sub> cos θ
+                  γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ
                 </p>
                 <p className="mt-2 text-xs md:text-sm text-gray-600">
-                  ⇔ cos θ = (γ<sub>SV</sub> − γ<sub>SL</sub>)
-                  / γ<sub>LV</sub>
+                  ⇔ cos θ = (γ<sub>S</sub> − γ<sub>SL</sub>) / γ<sub>L</sub>
                 </p>
               </div>
               <p className="text-xs md:text-sm text-gray-700">
                 ここでも
-                γ<sub>SV</sub>：固体–気体、
-                γ<sub>LV</sub>：液体–気体、
-                γ<sub>SL</sub>：固体–液体の界面張力です。
+                γ<sub>S</sub>：固体表面張力、
+                γ<sub>L</sub>：液体（ここでは水）の表面張力、
+                γ<sub>SL</sub>：固液界面張力です。
                 θ は固体表面と液滴の接線で測る
                 <span className="font-bold mx-1">接触角</span>
                 です。
@@ -239,7 +238,7 @@ const Q106_51 = ({ onBack }) => {
                       strokeWidth="2.5"
                     />
                     <text x="128" y="86" fontSize="11" fill="#2563eb">
-                      γ_LV
+                      γ_L
                     </text>
 
                     {/* γ_LV cosθ の水平方向成分 */}
@@ -253,7 +252,7 @@ const Q106_51 = ({ onBack }) => {
                       strokeWidth="2"
                     />
                     <text x="128" y="124" fontSize="10" fill="#60a5fa">
-                      γ_LV cosθ
+                      γ_L cosθ
                     </text>
 
                     {/* γ_SV ベクトル（固体-気体）*/}
@@ -266,7 +265,7 @@ const Q106_51 = ({ onBack }) => {
                       strokeWidth="2.5"
                     />
                     <text x="153" y="132" fontSize="11" fill="#16a34a">
-                      γ_SV
+                      γ_S
                     </text>
 
                     {/* γ_SL ベクトル（固体-液体）*/}
@@ -336,9 +335,9 @@ const Q106_51 = ({ onBack }) => {
                 本問で与えられている値：
               </p>
               <div className="bg-gray-50 rounded-lg p-4 font-mono text-sm md:text-base text-center leading-relaxed">
-                γ<sub>SV</sub>（固体の表面張力） = {solidGamma} mN/m
+                γ<sub>S</sub>（固体の表面張力） = {solidGamma} mN/m
                 <br />
-                γ<sub>LV</sub>（水の表面張力） = {waterGamma} mN/m
+                γ<sub>L</sub>（水の表面張力） = {waterGamma} mN/m
                 <br />
                 求めたいもの： γ<sub>SL</sub>（固液界面張力）
               </div>
@@ -348,17 +347,17 @@ const Q106_51 = ({ onBack }) => {
                   ヤングの式に θ = 0° を代入して γ<sub>SL</sub> を解く
                 </p>
                 <p className="font-mono mb-2 text-center">
-                  γ<sub>SV</sub> = γ<sub>SL</sub> + γ<sub>LV</sub> cos θ
+                  γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ
                 </p>
                 <p className="text-center mb-2">
                   拡張ぬれでは <span className="font-mono">θ = 0°</span> なので
                   <span className="font-mono mx-1">cos θ = 1</span>
                 </p>
                 <p className="text-center mb-2 font-mono">
-                  γ<sub>SV</sub> = γ<sub>SL</sub> + γ<sub>LV</sub>
+                  γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub>
                 </p>
                 <p className="text-center mb-2 font-mono">
-                  ⇒ γ<sub>SL</sub> = γ<sub>SV</sub> − γ<sub>LV</sub>
+                  ⇒ γ<sub>SL</sub> = γ<sub>S</sub> − γ<sub>L</sub>
                 </p>
               </div>
 
@@ -400,15 +399,15 @@ const Q106_51 = ({ onBack }) => {
                 となります。
                 ヤングの式
                 <span className="font-mono mx-1">
-                  γ<sub>SV</sub> = γ<sub>SL</sub> + γ<sub>LV</sub> cos θ
+                  γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ
                 </span>
                 に θ = 0° を代入すると
                 <span className="font-mono mx-1">
-                  γ<sub>SV</sub> = γ<sub>SL</sub> + γ<sub>LV</sub>
+                  γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub>
                 </span>
                 となり、
                 <span className="font-mono mx-1">
-                  γ<sub>SL</sub> = γ<sub>SV</sub> − γ<sub>LV</sub>
+                  γ<sub>SL</sub> = γ<sub>S</sub> − γ<sub>L</sub>
                 </span>
                 が得られます。
                 数値を代入すると γ<sub>SL</sub> = 585 − 73 = 512 mN/m となります。
@@ -424,80 +423,24 @@ const Q106_51 = ({ onBack }) => {
                   <li>
                     ヤングの式
                     <span className="font-mono mx-1">
-                      γ<sub>SV</sub> = γ<sub>SL</sub> + γ<sub>LV</sub> cos θ
+                      γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ
                     </span>
                     から、θ = 0° では
                     <span className="font-mono mx-1">
-                      γ<sub>SL</sub> = γ<sub>SV</sub> − γ<sub>LV</sub>
+                      γ<sub>SL</sub> = γ<sub>S</sub> − γ<sub>L</sub>
                     </span>
                     が導ける。
                   </li>
                   <li>
                     与えられた
-                    <span className="font-mono mx-1">γ<sub>SV</sub> = 585</span>,
-                    <span className="font-mono mx-1">γ<sub>LV</sub> = 73</span>
+                    <span className="font-mono mx-1">γ<sub>S</sub> = 585</span>,
+                    <span className="font-mono mx-1">γ<sub>L</sub> = 73</span>
                     から、固液界面張力は 512 mN/m となる。
                   </li>
                   <li>
                     単位（mN/m）をそろえて計算することも確認ポイント。
                   </li>
                 </ul>
-              </div>
-              {/* 確認クイズ（小テスト） */}
-              <div className="mt-6 bg-indigo-50 p-4 rounded-lg text-left text-sm md:text-base text-gray-800 border border-indigo-100 space-y-3">
-                <p className="font-bold text-indigo-800">
-                  確認クイズ（小テスト：授業のまとめ用）
-                </p>
-
-                {/* Q1 */}
-                <div>
-                  <p className="font-semibold">
-                    Q1. 接触角 θ による「拡張ぬれ」「浸漬ぬれ」「付着ぬれ」の関係として正しいものはどれか。
-                  </p>
-                  <ul className="list-disc list-inside ml-4 mt-1 text-sm md:text-base">
-                    <li>A. 拡張ぬれ：θ = 0°</li>
-                    <li>B. 浸漬ぬれ：0° &lt; θ ≦ 90°</li>
-                    <li>C. 付着ぬれ：90° &lt; θ &lt; 180°</li>
-                  </ul>
-                  <p className="mt-1 text-xs text-gray-600">
-                    解答：A, B, C すべて正しい。
-                    本問の条件「拡張ぬれ」は θ = 0° の状態を指す。
-                  </p>
-                </div>
-
-                {/* Q2 */}
-                <div>
-                  <p className="font-semibold">
-                    Q2. ヤングの式
-                    <span className="font-mono mx-1">
-                      γ<sub>SV</sub> = γ<sub>SL</sub> + γ<sub>LV</sub> cos θ
-                    </span>
-                    から、cos θ を γ<sub>SV</sub>, γ<sub>SL</sub>, γ<sub>LV</sub> で表した式として正しいものはどれか。
-                  </p>
-                  <p className="mt-1 text-sm md:text-base font-mono text-center">
-                    cos θ = (γ<sub>SV</sub> − γ<sub>SL</sub>) / γ<sub>LV</sub>
-                  </p>
-                  <p className="mt-1 text-xs text-gray-600">
-                    解答：上式が正しい。
-                    固体表面に平行な方向の力のつり合いをとることで導かれる。
-                  </p>
-                </div>
-
-                {/* Q3 */}
-                <div>
-                  <p className="font-semibold">
-                    Q3. 本問の条件（拡張ぬれ：θ = 0°）では、固液界面張力 γ<sub>SL</sub> は
-                    γ<sub>SV</sub>, γ<sub>LV</sub> を用いてどのように表されるか。
-                  </p>
-                  <p className="mt-1 text-sm md:text-base font-mono text-center">
-                    γ<sub>SL</sub> = γ<sub>SV</sub> − γ<sub>LV</sub>
-                  </p>
-                  <p className="mt-1 text-xs text-gray-600">
-                    解答：拡張ぬれで θ = 0° なので cos θ = 1。
-                    ヤングの式から γ<sub>SV</sub> = γ<sub>SL</sub> + γ<sub>LV</sub>
-                    ⇒ γ<sub>SL</sub> = γ<sub>SV</sub> − γ<sub>LV</sub> と整理できる。
-                  </p>
-                </div>
               </div>
             </motion.div>
 

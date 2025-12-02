@@ -114,6 +114,38 @@ const Q106_51 = ({ onBack }) => {
                 </p>
               </div>
 
+              <div className="bg-emerald-50 rounded-lg p-4 text-xs md:text-sm text-gray-800">
+                <p className="font-bold text-emerald-800 mb-1">
+                  S が表しているもの（表面自由エネルギーの変化）
+                </p>
+                <p className="mb-1">
+                  固体表面の 1 m
+                  <sup>2</sup> を、
+                  「固体−気体界面（γ
+                  <sub>SV</sub>）」から「固体−液体界面（γ
+                  <sub>SL</sub>）と液体−気体界面（γ
+                  <sub>LV</sub>）」に置き換えたときの
+                  <span className="font-bold">表面自由エネルギーの変化</span>
+                  を表します。
+                </p>
+                <p className="font-mono text-center mb-1">
+                  ΔG<sub>spread</sub> = − S
+                </p>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>
+                    S &gt; 0：ΔG が負になり、エネルギーが下がるので
+                    <span className="font-bold">自発的に広がる</span>
+                  </li>
+                  <li>
+                    S = 0：広がっても広がらなくてもエネルギーは同じ →
+                    <span className="font-bold">拡張ぬれの境界</span>
+                  </li>
+                  <li>
+                    S &lt; 0：広がるとエネルギーが増えるので、液滴状のまま
+                  </li>
+                </ul>
+              </div>
+
               <div className="bg-blue-50 rounded-lg p-4 text-sm md:text-base text-gray-800">
                 <p className="font-bold text-blue-800 mb-2">
                   拡張ぬれ（完全に薄膜状に広がる）の条件
@@ -333,6 +365,42 @@ const Q106_51 = ({ onBack }) => {
                   </text>
                 </svg>
               </div>
+            </div>
+
+            {/* ★ まとめスライド：S と θ の関係 */}
+            <div className="bg-orange-50 rounded-xl p-4 mt-4 text-sm md:text-base text-gray-800 space-y-3">
+              <h4 className="font-bold text-orange-800">
+                拡張係数 S と接触角 θ の関係（固体＋液体＋気相）
+              </h4>
+              <p className="text-xs md:text-sm text-gray-700">
+                ヤングの式 <span className="font-mono">γ_S = γ_SL + γ_L cosθ</span> と
+                拡張係数の定義 <span className="font-mono">S = γ_S − (γ_SL + γ_L)</span>
+                を組み合わせると，
+              </p>
+              <p className="font-mono text-center text-base md:text-lg">
+                S = γ_L (cosθ − 1)
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs md:text-sm">
+                <div className="bg-white/70 rounded-lg p-3">
+                  <p className="font-bold mb-1">拡張ぬれ</p>
+                  <p>θ = 0° → cosθ = 1</p>
+                  <p>S = 0 以上（薄膜状に広がる）</p>
+                </div>
+                <div className="bg-white/70 rounded-lg p-3">
+                  <p className="font-bold mb-1">浸漬ぬれ</p>
+                  <p>0° &lt; θ ≦ 90° → 0 &lt; cosθ &lt; 1</p>
+                  <p>S &lt; 0（液滴だが比較的よくぬれる）</p>
+                </div>
+                <div className="bg-white/70 rounded-lg p-3">
+                  <p className="font-bold mb-1">付着ぬれ</p>
+                  <p>90° &lt; θ &lt; 180° → cosθ ≦ 0</p>
+                  <p>S &lt; 0（ぬれにくく，ほぼ液滴）</p>
+                </div>
+              </div>
+              <p className="text-xs md:text-sm text-gray-700">
+                授業では，「普段のぬれの評価＝θ」「完全に広がるかどうか＝S」と
+                役割分担させて説明すると，学生にも整理しやすくなります。
+              </p>
             </div>
           </div>
         );

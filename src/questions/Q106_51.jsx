@@ -180,63 +180,82 @@ const Q106_51 = ({ onBack }) => {
               <div className="mt-4 flex flex-col md:flex-row items-center md:items-start gap-4">
                 <div className="flex-1 flex items-center justify-center">
                   <svg
-                    viewBox="0 0 260 160"
+                    viewBox="0 0 320 180"
                     className="w-full max-w-xs"
                     aria-label="ヤングの式の模式図"
                   >
                     {/* 固体表面 */}
-                    <rect x="20" y="110" width="220" height="20" fill="#e5e7eb" />
-                    {/* 液滴（円の一部） */}
+                    <rect x="20" y="120" width="280" height="18" fill="#e5e7eb" />
+
+                    {/* 液滴（円弧で表現） */}
                     <path
-                      d="M60 110 Q 130 30 200 110 Z"
-                      fill="#bfdbfe"
+                      d="M70 120 Q 170 30 270 120 Z"
+                      fill="#dbeafe"
                       stroke="#60a5fa"
                       strokeWidth="2"
                     />
+
                     {/* 接触角 θ の弧 */}
                     <path
-                      d="M60 110 A 25 25 0 0 1 85 95"
+                      d="M70 120 A 26 26 0 0 1 100 96"
                       fill="none"
                       stroke="#f97316"
                       strokeWidth="2"
                     />
-                    <text x="88" y="95" fontSize="10" fill="#f97316">
+                    <text x="104" y="96" fontSize="11" fill="#f97316">
                       θ
                     </text>
-                    {/* γ_LV ベクトル */}
+
+                    {/* γ_LV ベクトル（液体-気体）*/}
                     <line
-                      x1="60"
-                      y1="110"
-                      x2="105"
-                      y2="85"
+                      x1="70"
+                      y1="120"
+                      x2="125"
+                      y2="88"
                       stroke="#2563eb"
-                      strokeWidth="2"
+                      strokeWidth="2.5"
                     />
-                    <text x="108" y="85" fontSize="10" fill="#2563eb">
+                    <text x="128" y="86" fontSize="11" fill="#2563eb">
                       γ_LV
                     </text>
-                    {/* γ_SV ベクトル */}
+
+                    {/* γ_LV cosθ の水平方向成分 */}
                     <line
-                      x1="60"
-                      y1="110"
-                      x2="110"
-                      y2="110"
-                      stroke="#16a34a"
+                      x1="70"
+                      y1="120"
+                      x2="125"
+                      y2="120"
+                      stroke="#93c5fd"
+                      strokeDasharray="4 3"
                       strokeWidth="2"
                     />
-                    <text x="112" y="120" fontSize="10" fill="#16a34a">
+                    <text x="128" y="124" fontSize="10" fill="#60a5fa">
+                      γ_LV cosθ
+                    </text>
+
+                    {/* γ_SV ベクトル（固体-気体）*/}
+                    <line
+                      x1="70"
+                      y1="120"
+                      x2="150"
+                      y2="120"
+                      stroke="#16a34a"
+                      strokeWidth="2.5"
+                    />
+                    <text x="153" y="132" fontSize="11" fill="#16a34a">
                       γ_SV
                     </text>
-                    {/* γ_SL ベクトル */}
+
+                    {/* γ_SL ベクトル（固体-液体）*/}
                     <line
-                      x1="60"
-                      y1="110"
-                      x2="20"
-                      y2="110"
+                      x1="70"
+                      y1="120"
+                      x2="30"
+                      y2="120"
                       stroke="#f97316"
-                      strokeWidth="2"
+                      strokeWidth="2.5"
                     />
-                    <text x="10" y="120" fontSize="10" fill="#f97316">
+                    <text x="18" y="132" fontSize="11" fill="#f97316">
                       γ_SL
                     </text>
                   </svg>
@@ -276,6 +295,44 @@ const Q106_51 = ({ onBack }) => {
                 接触角 θ や拡張係数 S を組み合わせて考えます。
                 本問の「拡張ぬれ」は θ → 0°、S ≥ 0 の典型例です。
               </p>
+              <div className="mt-4 flex justify-center">
+                <svg
+                  viewBox="0 0 320 90"
+                  className="w-full max-w-md"
+                  aria-label="接触角によるぬれの模式図"
+                >
+                  {/* 固体表面 */}
+                  <rect x="10" y="60" width="300" height="8" fill="#e5e7eb" />
+
+                  {/* θ = 0° 完全なぬれ */}
+                  <rect x="25" y="58" width="60" height="4" fill="#bfdbfe" />
+                  <text x="30" y="50" fontSize="10" fill="#374151">
+                    θ = 0°
+                  </text>
+
+                  {/* 0 < θ < 90° 浸漬ぬれ */}
+                  <path
+                    d="M140 60 Q 155 40 170 60 Z"
+                    fill="#bfdbfe"
+                    stroke="#60a5fa"
+                    strokeWidth="1.5"
+                  />
+                  <text x="135" y="50" fontSize="10" fill="#374151">
+                    0° &lt; θ &lt; 90°
+                  </text>
+
+                  {/* θ > 90° 付着ぬれ */}
+                  <path
+                    d="M240 60 Q 250 35 260 60 Z"
+                    fill="#bfdbfe"
+                    stroke="#60a5fa"
+                    strokeWidth="1.5"
+                  />
+                  <text x="235" y="50" fontSize="10" fill="#374151">
+                    θ &gt; 90°
+                  </text>
+                </svg>
+              </div>
             </div>
           </div>
         );

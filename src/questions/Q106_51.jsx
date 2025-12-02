@@ -86,7 +86,17 @@ const Q106_51 = ({ onBack }) => {
           </div>
         );
 
-      case 1:
+      case 1: {
+        const thetaDeg = 40; // 接触角のイメージ用（40°程度）
+        const theta = (Math.PI / 180) * thetaDeg;
+        const contactX = 70; // 接触線の位置 (x)
+        const contactY = 120; // 接触線の位置 (y)
+        const arcR = 26; // 接触角を描く弧の半径
+        const arcEndX = contactX + arcR * Math.cos(theta);
+        const arcEndY = contactY - arcR * Math.sin(theta);
+        const gammaVecLen = 60; // γ_L ベクトルの長さ
+        const gammaLX = contactX + gammaVecLen * Math.cos(theta);
+        const gammaLY = contactY - gammaVecLen * Math.sin(theta);
         return (
           <div className="space-y-6">
             <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
@@ -367,82 +377,107 @@ const Q106_51 = ({ onBack }) => {
                     {/* 固体表面 */}
                     <rect x="20" y="120" width="280" height="18" fill="#e5e7eb" />
 
-                    {/* 液滴（円弧で表現） */}
+                    {/* 液滴（円弧で表現：イメージ図なのでここは固定パスでOK） */}
                     <path
-                      d="M70 120 Q 170 30 270 120 Z"
+                      d="M40 120 Q 160 40 280 120 Z"
                       fill="#dbeafe"
                       stroke="#60a5fa"
                       strokeWidth="2"
                     />
 
-                    {/* 接触角 θ の弧 */}
+                    {/* 接触角 θ の弧（contactX, contactY を中心に θ を三角関数で描画） */}
                     <path
-                      d="M70 120 A 26 26 0 0 1 100 96"
+                      d={`M ${contactX + arcR} ${contactY} A ${arcR} ${arcR} 0 0 1 ${arcEndX} ${arcEndY}`}
                       fill="none"
                       stroke="#f97316"
                       strokeWidth="2"
                     />
-                    <text x="104" y="96" fontSize="11" fill="#f97316">
+                    <text
+                      x={contactX + arcR + 6}
+                      y={contactY - 6}
+                      fontSize="11"
+                      fill="#f97316"
+                    >
                       θ
                     </text>
 
-                    {/* γ_LV ベクトル（液体-気体）*/}
+                    {/* γ_L ベクトル（液体-気体，θ 方向）*/}
                     <line
-                      x1="70"
-                      y1="120"
-                      x2="125"
-                      y2="88"
+                      x1={contactX}
+                      y1={contactY}
+                      x2={gammaLX}
+                      y2={gammaLY}
                       stroke="#2563eb"
                       strokeWidth="2.5"
                     />
-                    <text x="128" y="86" fontSize="11" fill="#2563eb">
+                    <text
+                      x={gammaLX + 4}
+                      y={gammaLY}
+                      fontSize="11"
+                      fill="#2563eb"
+                    >
                       γ_L
                     </text>
 
-                    {/* γ_LV cosθ の水平方向成分 */}
+                    {/* γ_L cosθ の水平方向成分（横向き成分） */}
                     <line
-                      x1="70"
-                      y1="120"
-                      x2="125"
-                      y2="120"
+                      x1={contactX}
+                      y1={contactY}
+                      x2={contactX + gammaVecLen * Math.cos(theta)}
+                      y2={contactY}
                       stroke="#93c5fd"
                       strokeDasharray="4 3"
                       strokeWidth="2"
                     />
-                    <text x="128" y="124" fontSize="10" fill="#60a5fa">
+                    <text
+                      x={contactX + gammaVecLen * Math.cos(theta) + 4}
+                      y={contactY + 4}
+                      fontSize="10"
+                      fill="#60a5fa"
+                    >
                       γ_L cosθ
                     </text>
 
-                    {/* γ_SV ベクトル（固体-気体）*/}
+                    {/* γ_S ベクトル（固体-気体，右向き）*/}
                     <line
-                      x1="70"
-                      y1="120"
-                      x2="150"
-                      y2="120"
+                      x1={contactX}
+                      y1={contactY}
+                      x2={contactX + 80}
+                      y2={contactY}
                       stroke="#16a34a"
                       strokeWidth="2.5"
                     />
-                    <text x="153" y="132" fontSize="11" fill="#16a34a">
+                    <text
+                      x={contactX + 84}
+                      y={contactY + 12}
+                      fontSize="11"
+                      fill="#16a34a"
+                    >
                       γ_S
                     </text>
 
-                    {/* γ_SL ベクトル（固体-液体）*/}
+                    {/* γ_SL ベクトル（固体-液体，左向き）*/}
                     <line
-                      x1="70"
-                      y1="120"
-                      x2="30"
-                      y2="120"
+                      x1={contactX}
+                      y1={contactY}
+                      x2={contactX - 60}
+                      y2={contactY}
                       stroke="#f97316"
                       strokeWidth="2.5"
                     />
-                    <text x="18" y="132" fontSize="11" fill="#f97316">
+                    <text
+                      x={contactX - 72}
+                      y={contactY + 12}
+                      fontSize="11"
+                      fill="#f97316"
+                    >
                       γ_SL
                     </text>
                   </svg>
                 </div>
                 <p className="flex-1 text-xs md:text-sm text-gray-600">
                   図では、固体表面上の液滴と、接触線まわりの
-                  γ<sub>SV</sub>, γ<sub>SL</sub>, γ<sub>LV</sub> の
+                  γ<sub>S</sub>, γ<sub>SL</sub>, γ<sub>L</sub> の
                   ベクトルを模式的に示しています。
                   ヤングの式は、固体表面に平行な方向での
                   力のつり合いを表していることに注意しましょう。
@@ -478,6 +513,7 @@ const Q106_51 = ({ onBack }) => {
             </div>
           </div>
         );
+      }
 
       case 2:
         return (

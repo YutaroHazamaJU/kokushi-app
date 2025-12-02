@@ -275,7 +275,7 @@ const Q106_51 = ({ onBack }) => {
                       />
                       {/* 角 θ の弧 */}
                       <path
-                        d="M255 95 A 20 20 0 0 0 246 79"
+                        d="M255 95 A 18 18 0 0 1 258 82"
                         fill="none"
                         stroke="#f97316"
                         strokeWidth="1.5"

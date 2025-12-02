@@ -221,7 +221,7 @@ const Q106_51 = ({ onBack }) => {
                 </p>
                 <div className="mt-3 flex justify-center">
                   <svg
-                    viewBox="0 0 260 120"
+                    viewBox="0 0 320 120"
                     className="w-full max-w-sm"
                     aria-label="cosθ の直角三角形と単位円の図"
                   >
@@ -252,57 +252,64 @@ const Q106_51 = ({ onBack }) => {
 
                     {/* 右側：単位円 */}
                     {/* 座標軸 */}
-                    <line x1="150" y1="95" x2="240" y2="95" stroke="#9ca3af" strokeWidth="1.2" />
-                    <line x1="195" y1="110" x2="195" y2="20" stroke="#9ca3af" strokeWidth="1.2" />
+                    <line x1="150" y1="95" x2="260" y2="95" stroke="#9ca3af" strokeWidth="1.2" />
+                    <line x1="205" y1="110" x2="205" y2="20" stroke="#9ca3af" strokeWidth="1.2" />
                     {/* 円（半径 30） */}
-                    <circle cx="195" cy="95" r="30" fill="#eff6ff" stroke="#60a5fa" strokeWidth="1.5" />
+                    <circle
+                      cx="205"
+                      cy="95"
+                      r="30"
+                      fill="#eff6ff"
+                      stroke="#60a5fa"
+                      strokeWidth="1.5"
+                    />
                     {/* 半径ベクトル */}
                     <line
-                      x1="195"
+                      x1="205"
                       y1="95"
-                      x2="220"
+                      x2="230"
                       y2="75"
                       stroke="#2563eb"
                       strokeWidth="1.8"
                     />
                     {/* 角 θ の弧 */}
                     <path
-                      d="M215 95 A 20 20 0 0 0 206 79"
+                      d="M225 95 A 20 20 0 0 0 216 79"
                       fill="none"
                       stroke="#f97316"
                       strokeWidth="1.5"
                     />
-                    <text x="207" y="83" fontSize="10" fill="#f97316">
+                    <text x="217" y="83" fontSize="10" fill="#f97316">
                       θ
                     </text>
                     {/* 点 P と座標 */}
-                    <circle cx="220" cy="75" r="3" fill="#1d4ed8" />
-                    <text x="224" y="72" fontSize="10" fill="#1d4ed8">
+                    <circle cx="230" cy="75" r="3" fill="#1d4ed8" />
+                    <text x="234" y="72" fontSize="10" fill="#1d4ed8">
                       P(cosθ, sinθ)
                     </text>
                     {/* cosθ, sinθ の成分（補助線） */}
                     <line
-                      x1="220"
+                      x1="230"
                       y1="75"
-                      x2="220"
+                      x2="230"
                       y2="95"
                       stroke="#93c5fd"
                       strokeDasharray="4 3"
                       strokeWidth="1.3"
                     />
                     <line
-                      x1="195"
+                      x1="205"
                       y1="95"
-                      x2="220"
+                      x2="230"
                       y2="95"
                       stroke="#93c5fd"
                       strokeDasharray="4 3"
                       strokeWidth="1.3"
                     />
-                    <text x="224" y="98" fontSize="9" fill="#374151">
+                    <text x="234" y="98" fontSize="9" fill="#374151">
                       cosθ
                     </text>
-                    <text x="186" y="82" fontSize="9" fill="#374151">
+                    <text x="196" y="82" fontSize="9" fill="#374151">
                       sinθ
                     </text>
                   </svg>

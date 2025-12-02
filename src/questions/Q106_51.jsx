@@ -198,6 +198,23 @@ const Q106_51 = ({ onBack }) => {
                 <span className="font-bold mx-1">接触角</span>
                 です。
               </p>
+              <div className="mt-3 bg-yellow-50 rounded-lg p-4 text-xs md:text-sm text-gray-800 border border-yellow-100">
+                <p className="font-bold text-yellow-800 mb-1">
+                  三角関数が苦手な人向けおまけ：なぜ θ = 0° だと cos θ = 1 ？
+                </p>
+                <p className="mb-1">
+                  cos θ は「矢印がどれだけ横向きか（横方向の成分の割合）」を表す量とイメージすると分かりやすいです。
+                </p>
+                <ul className="list-disc list-inside space-y-1">
+                  <li>θ = 0°：矢印はまっすぐ右向き → 横方向が 100% → cos 0° = 1</li>
+                  <li>θ = 90°：矢印は真上向き → 横方向は 0% → cos 90° = 0</li>
+                </ul>
+                <p className="mt-1">
+                  本問の<strong>拡張ぬれ</strong>では θ = 0° とみなせるので、
+                  ヤングの式 γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ に
+                  <span className="font-mono mx-1">cos θ = 1</span> を代入できる、というのが計算のポイントです。
+                </p>
+              </div>
 
               <div className="mt-4 flex flex-col md:flex-row items-center md:items-start gap-4">
                 <div className="flex-1 flex items-center justify-center">

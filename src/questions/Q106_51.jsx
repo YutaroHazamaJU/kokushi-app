@@ -219,6 +219,94 @@ const Q106_51 = ({ onBack }) => {
                   、<span className="font-bold mx-1">sinθ は y 座標（縦方向）</span>
                   を表しています。
                 </p>
+                <div className="mt-3 flex justify-center">
+                  <svg
+                    viewBox="0 0 260 120"
+                    className="w-full max-w-sm"
+                    aria-label="cosθ の直角三角形と単位円の図"
+                  >
+                    {/* 左側：直角三角形 */}
+                    <line x1="20" y1="95" x2="110" y2="95" stroke="#9ca3af" strokeWidth="1.5" />
+                    <line x1="20" y1="95" x2="20" y2="35" stroke="#9ca3af" strokeWidth="1.5" />
+                    <line x1="20" y1="35" x2="110" y2="95" stroke="#9ca3af" strokeWidth="1.5" />
+                    {/* 角 θ */}
+                    <path
+                      d="M32 95 A 15 15 0 0 1 40 80"
+                      fill="none"
+                      stroke="#f97316"
+                      strokeWidth="1.5"
+                    />
+                    <text x="42" y="82" fontSize="10" fill="#f97316">
+                      θ
+                    </text>
+                    {/* 辺のラベル */}
+                    <text x="55" y="105" fontSize="10" fill="#374151">
+                      隣の辺（= cosθ）
+                    </text>
+                    <text x="8" y="65" fontSize="10" fill="#374151">
+                      向かいの辺（= sinθ）
+                    </text>
+                    <text x="60" y="55" fontSize="10" fill="#374151">
+                      斜辺 = 1
+                    </text>
+
+                    {/* 右側：単位円 */}
+                    {/* 座標軸 */}
+                    <line x1="150" y1="95" x2="240" y2="95" stroke="#9ca3af" strokeWidth="1.2" />
+                    <line x1="195" y1="110" x2="195" y2="20" stroke="#9ca3af" strokeWidth="1.2" />
+                    {/* 円（半径 30） */}
+                    <circle cx="195" cy="95" r="30" fill="#eff6ff" stroke="#60a5fa" strokeWidth="1.5" />
+                    {/* 半径ベクトル */}
+                    <line
+                      x1="195"
+                      y1="95"
+                      x2="220"
+                      y2="75"
+                      stroke="#2563eb"
+                      strokeWidth="1.8"
+                    />
+                    {/* 角 θ の弧 */}
+                    <path
+                      d="M215 95 A 20 20 0 0 0 206 79"
+                      fill="none"
+                      stroke="#f97316"
+                      strokeWidth="1.5"
+                    />
+                    <text x="207" y="83" fontSize="10" fill="#f97316">
+                      θ
+                    </text>
+                    {/* 点 P と座標 */}
+                    <circle cx="220" cy="75" r="3" fill="#1d4ed8" />
+                    <text x="224" y="72" fontSize="10" fill="#1d4ed8">
+                      P(cosθ, sinθ)
+                    </text>
+                    {/* cosθ, sinθ の成分（補助線） */}
+                    <line
+                      x1="220"
+                      y1="75"
+                      x2="220"
+                      y2="95"
+                      stroke="#93c5fd"
+                      strokeDasharray="4 3"
+                      strokeWidth="1.3"
+                    />
+                    <line
+                      x1="195"
+                      y1="95"
+                      x2="220"
+                      y2="95"
+                      stroke="#93c5fd"
+                      strokeDasharray="4 3"
+                      strokeWidth="1.3"
+                    />
+                    <text x="224" y="98" fontSize="9" fill="#374151">
+                      cosθ
+                    </text>
+                    <text x="186" y="82" fontSize="9" fill="#374151">
+                      sinθ
+                    </text>
+                  </svg>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-2 text-center">
                   <div className="bg-white rounded-md p-2 border border-gray-200">
                     <p className="font-mono text-xs">θ = 0°</p>

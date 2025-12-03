@@ -1,5 +1,5 @@
 // src/questions/index.js
-import { Calculator, TestTube, Activity, RotateCw, Thermometer } from 'lucide-react';
+import { Calculator, TestTube, Activity, RotateCw, Thermometer, Beaker } from 'lucide-react';
 
 import Q99_174 from './Q99_174';
 import Q101_176 from './Q101_176';

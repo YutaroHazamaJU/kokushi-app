@@ -47,7 +47,7 @@ export const questionList = [
   color: 'bg-orange-50 border-orange-200 text-orange-900',
   icon: Beaker,     // index.js 側で Beaker を import している前提
   component: Q107_49,
-},
+  },
   {
     id: '104-170',
     year: 104,

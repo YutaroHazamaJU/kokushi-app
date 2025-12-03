@@ -123,7 +123,7 @@ const Q107_49 = ({ onBack }) => {
                 <div className="flex flex-col items-center">
                   {/* 分散媒ラベル（箱の上に表示） */}
                   <span className="mb-1 text-[11px] md:text-xs font-semibold text-blue-700">
-                    分散媒（外側に広がっている相）
+                    分散媒（外側に連続して広がっている相：連続相）
                   </span>
 
                   {/* 分散媒の中に分散相の粒子が浮かんでいる箱 */}
@@ -139,7 +139,7 @@ const Q107_49 = ({ onBack }) => {
                       />
                     ))}
                     <span className="absolute bottom-1 right-1 text-[10px] md:text-[11px] text-orange-600 bg-white/70 px-1.5 py-0.5 rounded-full border border-orange-200">
-                      分散相（中に分かれている側）
+                      分散相（中で細かく分かれて散らばっている相：不連続相）
                     </span>
                   </div>
                 </div>
@@ -149,12 +149,12 @@ const Q107_49 = ({ onBack }) => {
                   <p>
                     ・
                     <span className="font-semibold">分散相</span>：
-                    中に細かく浮かんでいる側（粒子・液滴・気泡など）
+                    中で細かく分かれて散らばっている側（不連続相、粒子・液滴・気泡など）
                   </p>
                   <p>
                     ・
                     <span className="font-semibold">分散媒</span>：
-                    それらを包んでいる側（外側に連続して広がっている相）
+                    それらを包んでいる側（外側に連続して広がっている相＝連続相）
                   </p>
                   <p className="text-[11px] md:text-xs text-gray-600 mt-1">
                     「コップの中の水 &amp; その中に浮かぶ粒子」をイメージすると，

@@ -106,87 +106,6 @@ const Q107_49 = ({ onBack }) => {
                 </ul>
               </div>
             </div>
-            {/* 分散系のイメージ図（模式図） */}
-            <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
-              <p className="font-bold text-gray-800 mb-2 text-sm md:text-base">
-                分散系のイメージ（模式図）
-              </p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs md:text-sm">
-                {/* サスペンション：固体 in 液体 */}
-                <div className="flex flex-col items-center">
-                  <div className="w-24 h-24 rounded-lg bg-blue-50 border border-blue-200 relative overflow-hidden">
-                    {[...Array(8)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="w-2 h-2 bg-gray-700 rounded-sm absolute"
-                        style={{
-                          left: `${15 + (i % 4) * 15}%`,
-                          top: `${15 + Math.floor(i / 4) * 25}%`,
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <p className="mt-2 font-semibold text-gray-800">サスペンション</p>
-                  <p className="text-gray-600 text-[11px]">固体粒子 in 液体</p>
-                </div>
-
-                {/* エマルション：液体 in 液体 */}
-                <div className="flex flex-col items-center">
-                  <div className="w-24 h-24 rounded-lg bg-orange-50 border border-orange-200 relative overflow-hidden">
-                    {[...Array(6)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="w-4 h-4 bg-white rounded-full border border-orange-400 absolute"
-                        style={{
-                          left: `${20 + (i % 3) * 20}%`,
-                          top: `${20 + Math.floor(i / 3) * 25}%`,
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <p className="mt-2 font-semibold text-gray-800">エマルション</p>
-                  <p className="text-gray-600 text-[11px]">液滴 in 液体</p>
-                </div>
-
-                {/* エアゾール：液体/固体 in 気体 */}
-                <div className="flex flex-col items-center">
-                  <div className="w-24 h-24 rounded-lg bg-sky-50 border border-sky-200 relative overflow-hidden">
-                    {[...Array(10)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="w-2 h-2 bg-sky-500 rounded-full absolute"
-                        style={{
-                          left: `${10 + (i % 5) * 15}%`,
-                          top: `${10 + Math.floor(i / 5) * 30}%`,
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <p className="mt-2 font-semibold text-gray-800">エアゾール</p>
-                  <p className="text-gray-600 text-[11px]">液体/固体粒子 in 気体</p>
-                </div>
-
-                {/* フォーム：気体 in 液体 */}
-                <div className="flex flex-col items-center">
-                  <div className="w-24 h-24 rounded-lg bg-purple-50 border border-purple-200 relative overflow-hidden">
-                    {[...Array(7)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="border border-purple-400 bg-white/70 rounded-full absolute"
-                        style={{
-                          width: `${14 + (i % 3) * 4}px`,
-                          height: `${14 + (i % 3) * 4}px`,
-                          left: `${15 + (i % 3) * 18}%`,
-                          top: `${15 + Math.floor(i / 3) * 20}%`,
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <p className="mt-2 font-semibold text-gray-800">フォーム</p>
-                  <p className="text-gray-600 text-[11px]">気体 in 液体（泡）</p>
-                </div>
-              </div>
-            </div>
           </div>
         );
 
@@ -285,6 +204,87 @@ const Q107_49 = ({ onBack }) => {
                     <br />
                     <span className="font-semibold">フォーム</span>：気体 in 液体（泡状）。
                   </p>
+                </div>
+              </div>
+            </div>
+            {/* 分散系のイメージ図（模式図） */}
+            <div className="mt-6 bg-white rounded-xl border border-gray-200 p-4">
+              <p className="font-bold text-gray-800 mb-2 text-sm md:text-base">
+                分散系のイメージ（模式図）
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs md:text-sm">
+                {/* サスペンション：固体 in 液体 */}
+                <div className="flex flex-col items-center">
+                  <div className="w-24 h-24 rounded-lg bg-blue-50 border border-blue-200 relative overflow-hidden">
+                    {[...Array(8)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="w-2 h-2 bg-gray-700 rounded-sm absolute"
+                        style={{
+                          left: `${15 + (i % 4) * 15}%`,
+                          top: `${15 + Math.floor(i / 4) * 25}%`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <p className="mt-2 font-semibold text-gray-800">サスペンション</p>
+                  <p className="text-gray-600 text-[11px]">固体粒子 in 液体</p>
+                </div>
+
+                {/* エマルション：液体 in 液体 */}
+                <div className="flex flex-col items-center">
+                  <div className="w-24 h-24 rounded-lg bg-orange-50 border border-orange-200 relative overflow-hidden">
+                    {[...Array(6)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="w-4 h-4 bg-white rounded-full border border-orange-400 absolute"
+                        style={{
+                          left: `${20 + (i % 3) * 20}%`,
+                          top: `${20 + Math.floor(i / 3) * 25}%`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <p className="mt-2 font-semibold text-gray-800">エマルション</p>
+                  <p className="text-gray-600 text-[11px]">液滴 in 液体</p>
+                </div>
+
+                {/* エアゾール：液体/固体 in 気体 */}
+                <div className="flex flex-col items-center">
+                  <div className="w-24 h-24 rounded-lg bg-sky-50 border border-sky-200 relative overflow-hidden">
+                    {[...Array(10)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="w-2 h-2 bg-sky-500 rounded-full absolute"
+                        style={{
+                          left: `${10 + (i % 5) * 15}%`,
+                          top: `${10 + Math.floor(i / 5) * 30}%`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <p className="mt-2 font-semibold text-gray-800">エアゾール</p>
+                  <p className="text-gray-600 text-[11px]">液体/固体粒子 in 気体</p>
+                </div>
+
+                {/* フォーム：気体 in 液体 */}
+                <div className="flex flex-col items-center">
+                  <div className="w-24 h-24 rounded-lg bg-purple-50 border border-purple-200 relative overflow-hidden">
+                    {[...Array(7)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="border border-purple-400 bg-white/70 rounded-full absolute"
+                        style={{
+                          width: `${14 + (i % 3) * 4}px`,
+                          height: `${14 + (i % 3) * 4}px`,
+                          left: `${15 + (i % 3) * 18}%`,
+                          top: `${15 + Math.floor(i / 3) * 20}%`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <p className="mt-2 font-semibold text-gray-800">フォーム</p>
+                  <p className="text-gray-600 text-[11px]">気体 in 液体（泡）</p>
                 </div>
               </div>
             </div>

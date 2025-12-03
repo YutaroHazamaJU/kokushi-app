@@ -112,6 +112,54 @@ const Q107_49 = ({ onBack }) => {
       case 1:
         return (
           <div className="space-y-6">
+            {/* 分散相と分散媒の「いちばんシンプルな」イメージ */}
+            <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-5 text-xs md:text-sm text-gray-800">
+              <p className="font-bold text-gray-800 mb-2">
+                まずは「分散相」と「分散媒」のイメージをつかもう
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                {/* 図：分散媒の中に分散相の粒子が浮かぶイメージ */}
+                <div className="flex justify-center">
+                  <div className="relative w-40 h-24 md:w-48 md:h-28 rounded-xl border-2 border-blue-300 bg-blue-50 overflow-hidden">
+                    <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[11px] md:text-xs font-semibold text-blue-700">
+                      分散媒（外側に広がっている相）
+                    </span>
+                    {[...Array(6)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="w-3 h-3 md:w-3.5 md:h-3.5 rounded-full bg-orange-400 border border-white shadow-sm absolute"
+                        style={{
+                          left: `${15 + (i % 3) * 22}%`,
+                          top: `${20 + Math.floor(i / 3) * 30}%`,
+                        }}
+                      />
+                    ))}
+                    <span className="absolute bottom-1 right-1 text-[10px] md:text-[11px] text-orange-600 bg-white/70 px-1.5 py-0.5 rounded-full border border-orange-200">
+                      分散相（中の粒子）
+                    </span>
+                  </div>
+                </div>
+
+                {/* 説明文 */}
+                <div className="space-y-1 leading-relaxed">
+                  <p>
+                    ・
+                    <span className="font-semibold">分散相</span>：
+                    中に細かく浮かんでいる側（粒子・液滴・気泡など）
+                  </p>
+                  <p>
+                    ・
+                    <span className="font-semibold">分散媒</span>：
+                    それらを包んでいる側（外側に連続して広がっている相）
+                  </p>
+                  <p className="text-[11px] md:text-xs text-gray-600 mt-1">
+                    「コップの中の水 &amp; その中に浮かぶ粒子」をイメージすると，
+                    水が分散媒，中の粒が分散相になります。
+                    サスペンションなら「水中の固体」，エマルションなら「水中の油滴」などに置き換えて考えられます。
+                  </p>
+                </div>
+              </div>
+            </div>
             <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-xl">
               <h4 className="font-bold text-blue-800 mb-2 flex items-center">
                 <Lightbulb className="w-5 h-5 mr-2" />

@@ -317,13 +317,21 @@ const Q110_49 = ({ onBack }) => {
             トップへ戻る
           </button>
         )}
-        {step < titles.length - 1 && (
+        {step < titles.length - 1 ? (
           <button
             onClick={() => setStep(step + 1)}
             className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors inline-flex items-center"
           >
             次へ
             <ChevronRight className="w-5 h-5 ml-1" />
+          </button>
+        ) : (
+          <button
+            onClick={onBack}
+            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors inline-flex items-center"
+          >
+            <Home className="w-5 h-5 mr-1" />
+            問題一覧に戻る
           </button>
         )}
       </div>

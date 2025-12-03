@@ -136,6 +136,37 @@ const Q108_49 = ({ onBack }) => {
                   </p>
                 </div>
               </div>
+              {/* イラスト：同じ質量を入れたときのイメージ図 */}
+              <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm text-gray-700">
+                <div className="bg-emerald-50 rounded-lg p-3 flex flex-col items-center">
+                  <p className="font-bold mb-1">かさ密度が大きい（よく詰まる）</p>
+                  <div className="w-24 h-20 border border-emerald-400 bg-white rounded flex flex-wrap items-center justify-center gap-1">
+                    {Array.from({ length: 14 }).map((_, i) => (
+                      <span
+                        key={i}
+                        className="w-2 h-2 rounded-full bg-emerald-500 inline-block"
+                      />
+                    ))}
+                  </div>
+                  <p className="mt-1 text-center">
+                    小さな体積 V<sub>b</sub> にぎゅっと入っている
+                  </p>
+                </div>
+                <div className="bg-amber-50 rounded-lg p-3 flex flex-col items-center">
+                  <p className="font-bold mb-1">かさ密度が小さい（すかすか）</p>
+                  <div className="w-24 h-20 border border-amber-400 bg-white rounded flex flex-wrap items-center justify-center gap-2">
+                    {Array.from({ length: 8 }).map((_, i) => (
+                      <span
+                        key={i}
+                        className="w-2 h-2 rounded-full bg-amber-500 inline-block"
+                      />
+                    ))}
+                  </div>
+                  <p className="mt-1 text-center">
+                    大きな体積 V<sub>b</sub> にまばらに入っている
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* 2) 安息角 */}
@@ -185,6 +216,34 @@ const Q108_49 = ({ onBack }) => {
                   流動性が悪くなることが多い。
                 </li>
               </ul>
+              {/* イラスト：内部摩擦と空隙のイメージ */}
+              <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm text-gray-700">
+                <div className="bg-slate-50 rounded-lg p-3 flex flex-col items-center">
+                  <p className="font-bold mb-1">内部摩擦が大きい（ざらざら・ひっかかる）</p>
+                  <div className="w-28 h-16 border border-slate-400 rounded relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,#cbd5f5, #cbd5f5_4px,#e5e7eb_4px,#e5e7eb_8px)]" />
+                    <div className="relative w-full h-full flex items-center justify-center">
+                      <span className="px-2 py-1 bg-white/80 text-[10px] rounded">
+                        すべりにくい
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-sky-50 rounded-lg p-3 flex flex-col items-center">
+                  <p className="font-bold mb-1">空隙率が大きい（スカスカ）</p>
+                  <div className="w-28 h-16 border border-sky-400 bg-white rounded flex flex-wrap items-center justify-center gap-3">
+                    {Array.from({ length: 6 }).map((_, i) => (
+                      <span
+                        key={i}
+                        className="w-2.5 h-2.5 rounded-full bg-sky-500 inline-block"
+                      />
+                    ))}
+                  </div>
+                  <p className="mt-1 text-center">
+                    空気が多くて不安定 → 流れにくいことも
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         );

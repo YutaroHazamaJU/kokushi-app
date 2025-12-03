@@ -10,6 +10,7 @@ import Q109_48 from './Q109_48';
 import Q109_49 from './Q109_49';
 import Q109_50 from './Q109_50';
 import Q106_51 from './Q106_51';
+import Q110_49 from './Q110_49';
 
 // 今後ここに問題をどんどん追加していく想定
 export const questionList = [
@@ -120,5 +121,17 @@ export const questionList = [
     icon: Thermometer,
     color: 'bg-rose-50 border-rose-200 text-rose-700',
     component: Q109_50,
+  },
+  {
+    id: '110-49',
+    year: 110,
+    num: 49,
+    title: '第110回 問49',
+    desc: '薬剤：陽イオン性界面活性剤',
+    field: '物理薬剤',
+    tags: ['界面活性剤', '陽イオン性', '陰イオン性', '非イオン性', '両性', '薬剤'],
+    icon: Beaker,
+    color: 'bg-yellow-50 border-yellow-200 text-yellow-800',
+    component: Q110_49,
   },
 ];

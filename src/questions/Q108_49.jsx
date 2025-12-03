@@ -153,7 +153,9 @@ const Q108_49 = ({ onBack }) => {
                   </p>
                 </div>
                 <div className="bg-amber-50 rounded-lg p-3 flex flex-col items-center">
-                  <p className="font-bold mb-1">かさ密度が小さい（すかすか）</p>
+                  <p className="font-bold mb-1">
+                    かさ比容積 v<sub>b</sub> が大きい（すかすか）
+                  </p>
                   <div className="w-24 h-20 border border-amber-400 bg-white rounded flex flex-wrap items-center justify-center gap-2">
                     {Array.from({ length: 8 }).map((_, i) => (
                       <span
@@ -164,6 +166,8 @@ const Q108_49 = ({ onBack }) => {
                   </div>
                   <p className="mt-1 text-center">
                     大きな体積 V<sub>b</sub> にまばらに入っている
+                    <br />
+                    （= ρ<sub>b</sub> が小さい → v<sub>b</sub> が大きい）
                   </p>
                 </div>
               </div>
@@ -425,7 +429,7 @@ const Q108_49 = ({ onBack }) => {
       </div>
 
       {/* 本文スライドエリア */}
-      <Slide className="relative">
+      <Slide key={step} className="relative">
         <SectionTitle>{titles[step]}</SectionTitle>
         <div className="flex-1">
           <AnimatePresence mode="wait">

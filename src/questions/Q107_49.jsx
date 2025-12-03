@@ -119,11 +119,15 @@ const Q107_49 = ({ onBack }) => {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
                 {/* 図：分散媒の中に分散相の粒子が浮かぶイメージ */}
-                <div className="flex justify-center">
-                  <div className="relative w-40 h-24 md:w-48 md:h-28 rounded-xl border-2 border-blue-300 bg-blue-50 overflow-hidden">
-                    <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[11px] md:text-xs font-semibold text-blue-700">
-                      分散媒（外側に広がっている相）
-                    </span>
+              <div className="flex justify-center">
+                <div className="flex flex-col items-center">
+                  {/* 分散媒ラベル（箱の上に表示） */}
+                  <span className="mb-1 text-[11px] md:text-xs font-semibold text-blue-700">
+                    分散媒（外側に広がっている相）
+                  </span>
+
+                  {/* 分散媒の中に分散相の粒子が浮かんでいる箱 */}
+                    <div className="relative w-40 h-24 md:w-48 md:h-28 rounded-xl border-2 border-blue-300 bg-blue-50 overflow-hidden">
                     {[...Array(6)].map((_, i) => (
                       <div
                         key={i}
@@ -139,7 +143,7 @@ const Q107_49 = ({ onBack }) => {
                     </span>
                   </div>
                 </div>
-
+            </div>
                 {/* 説明文 */}
                 <div className="space-y-1 leading-relaxed">
                   <p>

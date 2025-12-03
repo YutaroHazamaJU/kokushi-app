@@ -166,6 +166,10 @@ const Q107_49 = ({ onBack }) => {
               <p className="mt-2 text-xs md:text-sm text-gray-600">
                 ※ キセロゲルは「ゲルから分散媒（液体）が抜けて乾燥したもの」で、
                 多孔質な固体（固体中に気体）として扱う。
+                <br />
+                また、固体エアゾールの代表例として
+                <span className="font-semibold">ドライパウダー吸入剤（DPI）</span>
+                などの吸入粉末剤が挙げられる。
               </p>
             </div>
 
@@ -219,13 +223,20 @@ const Q107_49 = ({ onBack }) => {
                 <p className="text-gray-700">
                   正しくは <span className="font-semibold">固体 in 液体</span>。
                   本問の表では「分散媒：気体」となっており誤り。
+                  <br />
+                  代表例：抗生物質ドライシロップを水で懸濁した経口懸濁剤、
+                  懸濁性点眼剤など。
                 </p>
               </div>
 
               <div>
                 <p className="font-bold text-gray-800 mb-1">2) エマルション</p>
                 <p className="text-gray-700">
-                  <span className="font-semibold">液体 in 液体</span> が定義そのもの。したがって組合せは正しい。
+                  <span className="font-semibold">液体 in 液体</span> が定義そのもの。
+                  したがって組合せは正しい。
+                  <br />
+                  代表例：脂肪乳剤やプロポフォール静注剤、
+                  O/Wクリーム・W/Oクリームなどの外用乳剤。
                 </p>
               </div>
 
@@ -234,6 +245,9 @@ const Q107_49 = ({ onBack }) => {
                 <p className="text-gray-700">
                   正しくは <span className="font-semibold">液体 or 固体 in 気体</span>。
                   表では逆に「分散相：気体、分散媒：液体または固体」となっており逆転している。
+                  <br />
+                  代表例：pMDI などの定量噴霧式吸入剤（液体エアゾール）、
+                  外用スプレー剤、吸入粉末剤（固体エアゾール）など。
                 </p>
               </div>
 
@@ -242,6 +256,8 @@ const Q107_49 = ({ onBack }) => {
                 <p className="text-gray-700">
                   正しくは <span className="font-semibold">気体 in 液体</span>。
                   本問では「分散相：液体、分散媒：気体」と逆になっている。
+                  <br />
+                  代表例：ステロイドフォーム製剤、泡状の外用消毒剤や泡ハンドソープなど。
                 </p>
               </div>
 
@@ -251,6 +267,9 @@ const Q107_49 = ({ onBack }) => {
                   ゲルから分散媒（液体）がほぼ抜けた乾燥ゲル。
                   実際には「固体中に気体（多孔質固体）」とみなされるので、
                   「固体 in 液体」ではない。
+                  <br />
+                  代表例：乾燥した創傷被覆用ハイドロゲルマトリックスや、
+                  再含水して用いる乾燥ゲル状ポリマー製剤など。
                 </p>
               </div>
             </div>

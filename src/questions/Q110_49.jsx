@@ -318,7 +318,7 @@ const Q110_49 = ({ onBack }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
+    <div className="max-w-4xl mx-auto p-4 h-screen overflow-y-auto">
       <SectionTitle title={titles[step]} />
       <AnimatePresence mode="wait">
         <motion.div

@@ -139,7 +139,7 @@ const Q107_49 = ({ onBack }) => {
                       />
                     ))}
                     <span className="absolute bottom-1 right-1 text-[10px] md:text-[11px] text-orange-600 bg-white/70 px-1.5 py-0.5 rounded-full border border-orange-200">
-                      分散相（中の粒子）
+                      分散相（中に分かれている側）
                     </span>
                   </div>
                 </div>

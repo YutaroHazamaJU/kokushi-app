@@ -6,6 +6,7 @@ import Q101_176 from './Q101_176';
 import Q107_49 from './Q107_49';
 import Q104_170 from './Q104_170';
 import Q108_49 from './Q108_49';
+import Q108_50 from './Q108_50';
 import Q108_175 from './Q108_175';
 import Q109_48 from './Q109_48';
 import Q109_49 from './Q109_49';
@@ -86,6 +87,18 @@ export const questionList = [
     icon: Package,
     color: 'bg-amber-50 border-amber-200 text-amber-800',
     component: Q108_49,
+  },
+  {
+    id: '108-50',
+    year: 108,
+    num: 50,
+    title: '第108回 問50',
+    desc: 'ダイラタント流動とレオロジーの基礎',
+    field: '物理薬剤',
+    tags: ['レオロジー', 'ダイラタント流動', '製剤学'],
+    icon: Activity,
+    color: 'bg-amber-50 border-amber-200 text-amber-800',
+    component: Q108_50,
   },
   {
     id: '108-175',

@@ -13,6 +13,7 @@ import Q109_49 from './Q109_49';
 import Q109_50 from './Q109_50';
 import Q106_51 from './Q106_51';
 import Q110_49 from './Q110_49';
+import Q110_51 from './Q110_51';
 
 // 今後ここに問題をどんどん追加していく想定
 export const questionList = [
@@ -159,5 +160,17 @@ export const questionList = [
     icon: Beaker,
     color: 'bg-yellow-50 border-yellow-200 text-yellow-800',
     component: Q110_49,
+  },
+  {
+    id: '110-51',
+    year: 110,
+    num: 51,
+    title: '第110回 問51',
+    desc: '薬剤：構造粘性とチキソトロピー',
+    field: '物理薬剤',
+    tags: ['構造粘性', 'チキソトロピー', 'レオロジー', '製剤学'],
+    icon: Activity,
+    color: 'bg-amber-50 border-amber-200 text-amber-800',
+    component: Q110_51,
   },
 ];

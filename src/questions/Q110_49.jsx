@@ -245,23 +245,6 @@ const Q110_49 = ({ onBack }) => {
                 </p>
               </div>
             </div>
-
-            <div className="mt-6 flex justify-between">
-              <button
-                onClick={() => setStep(1)}
-                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition-colors"
-              >
-                <ChevronLeft className="inline w-5 h-5 mr-1" />
-                前へ
-              </button>
-              <button
-                onClick={() => setStep(3)}
-                className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors inline-flex items-center"
-              >
-                次へ
-                <ChevronRight className="w-5 h-5 ml-1" />
-              </button>
-            </div>
           </div>
         );
 
@@ -292,23 +275,6 @@ const Q110_49 = ({ onBack }) => {
                 問題の正解は<strong>5. ベンゼトニウム塩化物</strong>（陽イオン性界面活性剤）。
               </li>
             </ul>
-
-            <div className="mt-6 flex justify-between">
-              <button
-                onClick={() => setStep(2)}
-                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition-colors inline-flex items-center"
-              >
-                <ChevronLeft className="w-5 h-5 mr-1" />
-                前へ
-              </button>
-              <button
-                onClick={onBack}
-                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
-              >
-                <Home className="inline w-5 h-5 mr-1" />
-                トップへ戻る
-              </button>
-            </div>
           </div>
         );
 

@@ -136,39 +136,88 @@ const Q108_49 = ({ onBack }) => {
                   </p>
                 </div>
               </div>
-              {/* イラスト：同じ質量を入れたときのイメージ図 */}
+              {/* イラスト：かさ密度と かさ比容積の違い */}
               <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm text-gray-700">
-                <div className="bg-emerald-50 rounded-lg p-3 flex flex-col items-center">
-                  <p className="font-bold mb-1">かさ密度が大きい（よく詰まる）</p>
-                  <div className="w-24 h-20 border border-emerald-400 bg-white rounded flex flex-wrap items-center justify-center gap-1">
-                    {Array.from({ length: 14 }).map((_, i) => (
-                      <span
-                        key={i}
-                        className="w-2 h-2 rounded-full bg-emerald-500 inline-block"
-                      />
-                    ))}
-                  </div>
-                  <p className="mt-1 text-center">
-                    小さな体積 V<sub>b</sub> にぎゅっと入っている
+                {/* かさ密度：体積一定で粒子数が違うイメージ */}
+                <div className="bg-emerald-50 rounded-lg p-3 flex flex-col gap-3">
+                  <p className="font-bold mb-1 text-center">
+                    かさ密度 ρ<sub>b</sub>（体積 V<sub>b</sub> は同じ）
                   </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full justify-items-center">
+                    {/* ρb が大きい */}
+                    <div className="flex flex-col items-center">
+                      <p className="font-semibold mb-1">ρ<sub>b</sub> が大きい（よく詰まる）</p>
+                      <div className="w-24 h-20 border border-emerald-400 bg-white rounded flex flex-wrap items-center justify-center gap-1">
+                        {Array.from({ length: 14 }).map((_, i) => (
+                          <span
+                            key={i}
+                            className="w-2 h-2 rounded-full bg-emerald-500 inline-block"
+                          />
+                        ))}
+                      </div>
+                      <p className="mt-1 text-center">
+                        同じ V<sub>b</sub> に粒子がたくさん
+                      </p>
+                    </div>
+                    {/* ρb が小さい */}
+                    <div className="flex flex-col items-center">
+                      <p className="font-semibold mb-1">ρ<sub>b</sub> が小さい（すかすか）</p>
+                      <div className="w-24 h-20 border border-emerald-400 bg-white rounded flex flex-wrap items-center justify-center gap-3">
+                        {Array.from({ length: 6 }).map((_, i) => (
+                          <span
+                            key={i}
+                            className="w-2 h-2 rounded-full bg-emerald-500 inline-block"
+                          />
+                        ))}
+                      </div>
+                      <p className="mt-1 text-center">
+                        同じ V<sub>b</sub> に粒子が少ない
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div className="bg-amber-50 rounded-lg p-3 flex flex-col items-center">
-                  <p className="font-bold mb-1">
-                    かさ比容積 v<sub>b</sub> が大きい（すかすか）
+
+                {/* かさ比容積：質量一定で体積が違うイメージ */}
+                <div className="bg-amber-50 rounded-lg p-3 flex flex-col gap-3">
+                  <p className="font-bold mb-1 text-center">
+                    かさ比容積 v<sub>b</sub>（粒子数・質量 m は同じ）
                   </p>
-                  <div className="w-24 h-20 border border-amber-400 bg-white rounded flex flex-wrap items-center justify-center gap-2">
-                    {Array.from({ length: 8 }).map((_, i) => (
-                      <span
-                        key={i}
-                        className="w-2 h-2 rounded-full bg-amber-500 inline-block"
-                      />
-                    ))}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full justify-items-center">
+                    {/* vb が小さい（ρb が大きい） */}
+                    <div className="flex flex-col items-center">
+                      <p className="font-semibold mb-1">
+                        v<sub>b</sub> が小さい（詰まっている）
+                      </p>
+                      <div className="w-20 h-16 border border-amber-400 bg-white rounded flex flex-wrap items-center justify-center gap-1">
+                        {Array.from({ length: 10 }).map((_, i) => (
+                          <span
+                            key={i}
+                            className="w-2 h-2 rounded-full bg-amber-500 inline-block"
+                          />
+                        ))}
+                      </div>
+                      <p className="mt-1 text-center">
+                        同じ m が小さな V<sub>b</sub> にぎゅっと
+                      </p>
+                    </div>
+                    {/* vb が大きい（ρb が小さい） */}
+                    <div className="flex flex-col items-center">
+                      <p className="font-semibold mb-1">
+                        v<sub>b</sub> が大きい（すかすか）
+                      </p>
+                      <div className="w-28 h-20 border border-amber-400 bg-white rounded flex flex-wrap items-center justify-center gap-3">
+                        {Array.from({ length: 10 }).map((_, i) => (
+                          <span
+                            key={i}
+                            className="w-2 h-2 rounded-full bg-amber-500 inline-block"
+                          />
+                        ))}
+                      </div>
+                      <p className="mt-1 text-center">
+                        同じ m が大きな V<sub>b</sub> にまばらに
+                      </p>
+                    </div>
                   </div>
-                  <p className="mt-1 text-center">
-                    大きな体積 V<sub>b</sub> にまばらに入っている
-                    <br />
-                    （= ρ<sub>b</sub> が小さい → v<sub>b</sub> が大きい）
-                  </p>
                 </div>
               </div>
             </div>

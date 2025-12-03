@@ -79,8 +79,8 @@ const QuestionList = ({ questions, onSelect, initialIdFilter = '' }) => {
           <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
             薬剤師国家試験 解説アプリ
           </h1>
-          <p className="text-gray-500">
-            物理化学・製剤学をシミュレーターで攻略
+          <p className="text-xs md:text-sm text-gray-400 mt-1">
+            Developed by Yutaro Hazama
           </p>
         </header>
 

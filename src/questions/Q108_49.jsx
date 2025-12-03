@@ -265,8 +265,12 @@ const Q108_49 = ({ onBack }) => {
                 <li>
                   <strong>空隙率</strong>：
                   粉体層の中で<strong>空気が占める割合</strong>。
-                  大きいほどスカスカで、粒子間の接触が不安定になり
-                  流動性が悪くなることが多い。
+                  充填性（どれだけみっちり詰まっているか）を表す指標であり、
+                  空隙率が<strong>小さい</strong>ほどよく詰まった高密充填、
+                  <strong>大きい</strong>ほどふわっとした疎な充填となる。
+                  一般に、空隙率が大きい “ふわふわした微粉末” は凝集しやすく、
+                  結果として流動性が悪い場合が多いが、
+                  <strong>流動性は空隙率だけで一義的に決まるわけではない</strong>。
                 </li>
               </ul>
               {/* イラスト：内部摩擦と空隙のイメージ */}
@@ -283,7 +287,7 @@ const Q108_49 = ({ onBack }) => {
                   </div>
                 </div>
                 <div className="bg-sky-50 rounded-lg p-3 flex flex-col items-center">
-                  <p className="font-bold mb-1">空隙率が大きい（スカスカ）</p>
+                  <p className="font-bold mb-1">空隙率が大きい（疎な充填のイメージ）</p>
                   <div className="w-28 h-16 border border-sky-400 bg-white rounded flex flex-wrap items-center justify-center gap-3">
                     {Array.from({ length: 6 }).map((_, i) => (
                       <span
@@ -293,7 +297,7 @@ const Q108_49 = ({ onBack }) => {
                     ))}
                   </div>
                   <p className="mt-1 text-center">
-                    空気が多くて不安定 → 流れにくいことも
+                    空気が多く疎な充填 → 凝集しやすく流動性が悪くなる場合もある
                   </p>
                 </div>
               </div>

@@ -101,9 +101,9 @@ export const questionList = [
     id: '109-49',
     year: 109,
     num: 49,
+    title: '第109回 問49',
     field: '物理薬剤',
-    title: '液体の表面張力を測定する方法',
-    desc: '測定法の原理と「何を測るか」を整理する問題',
+    desc: '液体の表面張力を測定する方法',
     component: Q109_49,
     color: 'bg-orange-50 border-orange-200',
     // icon: お好みで

@@ -3,6 +3,7 @@ import { Calculator, TestTube, Activity, RotateCw, Thermometer } from 'lucide-re
 
 import Q99_174 from './Q99_174';
 import Q101_176 from './Q101_176';
+import Q107_49 from './Q107_49';
 import Q104_170 from './Q104_170';
 import Q108_175 from './Q108_175';
 import Q109_48 from './Q109_48';
@@ -35,6 +36,18 @@ export const questionList = [
     color: 'bg-teal-50 border-teal-200 text-teal-700',
     component: Q101_176,
   },
+  {
+  id: '107-49',
+  year: 107,
+  num: 49,
+  title: '第107回 問49',
+  desc: '分散系：分散相と分散媒の組合せ',
+  field: '物理薬剤',
+  tags: ['分散系', 'コロイド', 'エマルション', 'サスペンション', 'エアゾール', 'フォーム', 'キセロゲル'],
+  color: 'bg-orange-50 border-orange-200 text-orange-900',
+  icon: Beaker,     // index.js 側で Beaker を import している前提
+  component: Q107_49,
+},
   {
     id: '104-170',
     year: 104,

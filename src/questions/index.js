@@ -1,10 +1,11 @@
 // src/questions/index.js
-import { Calculator, TestTube, Activity, RotateCw, Thermometer, Beaker } from 'lucide-react';
+import { Calculator, TestTube, Activity, RotateCw, Thermometer, Beaker, Package } from 'lucide-react';
 
 import Q99_174 from './Q99_174';
 import Q101_176 from './Q101_176';
 import Q107_49 from './Q107_49';
 import Q104_170 from './Q104_170';
+import Q108_49 from './Q108_49';
 import Q108_175 from './Q108_175';
 import Q109_48 from './Q109_48';
 import Q109_49 from './Q109_49';
@@ -73,6 +74,18 @@ export const questionList = [
     icon: Activity,
     color: 'bg-purple-50 border-purple-200 text-purple-700',
     component: Q106_51,
+  },
+  {
+    id: '108-49',
+    year: 108,
+    num: 49,
+    title: '第108回 問49',
+    desc: '薬剤：粉体の流動性と物性値',
+    field: '物理薬剤',
+    tags: ['粉体', '流動性', 'かさ密度', '安息角'],
+    icon: Package,
+    color: 'bg-amber-50 border-amber-200 text-amber-800',
+    component: Q108_49,
   },
   {
     id: '108-175',

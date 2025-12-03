@@ -139,7 +139,7 @@ const Q107_49 = ({ onBack }) => {
                       />
                     ))}
                     <span className="absolute bottom-1 right-1 text-[10px] md:text-[11px] text-orange-600 bg-white/70 px-1.5 py-0.5 rounded-full border border-orange-200">
-                      分散相（中で細かく分かれて散らばっている相：不連続相）
+                      分散相（分散媒の内部で細かく分かれて散らばっている相：不連続相）
                     </span>
                   </div>
                 </div>
@@ -149,7 +149,7 @@ const Q107_49 = ({ onBack }) => {
                   <p>
                     ・
                     <span className="font-semibold">分散相</span>：
-                    中で細かく分かれて散らばっている側（不連続相、粒子・液滴・気泡など）
+                    分散媒の内部で細かく分かれて散らばっている側（不連続相、粒子・液滴・気泡など）
                   </p>
                   <p>
                     ・
@@ -187,7 +187,9 @@ const Q107_49 = ({ onBack }) => {
                   <tbody className="text-center">
                     <tr>
                       <td className="border border-gray-200 px-1 py-1 font-semibold">固体</td>
-                      <td className="border border-gray-200 px-1 py-1">固体分散系（色ガラスなど）</td>
+                      <td className="border border-gray-200 px-1 py-1">
+                        固体分散系（固体分散体：難溶性薬物を高分子担体中に分散させた製剤など）
+                      </td>
                       <td className="border border-gray-200 px-1 py-1 font-semibold text-orange-700">
                         サスペンション
                       </td>
@@ -219,7 +221,11 @@ const Q107_49 = ({ onBack }) => {
                 ※ キセロゲルは「ゲルから分散媒（液体）が抜けて乾燥したもの」で、
                 多孔質な固体（固体中に気体）として扱う。
                 <br />
-                また、固体エアゾールの代表例として
+                また、「固体 in 固体」の代表例として
+                <span className="font-semibold">固体分散体（難溶性薬物を高分子担体中に分散させた製剤）</span>
+                が挙げられる。
+                <br />
+                さらに、固体エアゾールの代表例として
                 <span className="font-semibold">ドライパウダー吸入剤（DPI）</span>
                 などの吸入粉末剤が挙げられる。
               </p>

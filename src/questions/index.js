@@ -7,6 +7,7 @@ import Q107_49 from './Q107_49';
 import Q104_170 from './Q104_170';
 import Q108_175 from './Q108_175';
 import Q109_48 from './Q109_48';
+import Q109_49 from './Q109_49';
 import Q109_50 from './Q109_50';
 import Q106_51 from './Q106_51';
 
@@ -95,6 +96,17 @@ export const questionList = [
     icon: RotateCw,
     color: 'bg-orange-50 border-orange-200 text-orange-700',
     component: Q109_48,
+  },
+  {
+    id: '109-49',
+    year: 109,
+    num: 49,
+    field: '物理薬剤',
+    title: '液体の表面張力を測定する方法',
+    desc: '測定法の原理と「何を測るか」を整理する問題',
+    component: Q109_49,
+    color: 'bg-orange-50 border-orange-200',
+    // icon: お好みで
   },
   {
     id: '109-50',

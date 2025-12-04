@@ -10,6 +10,7 @@ const QuestionList = ({ questions, onSelect, initialIdFilter = '' }) => {
   const [fieldFilter, setFieldFilter] = useState('all');
   const [keyword, setKeyword] = useState('');
   const [idFilter, setIdFilter] = useState(initialIdFilter);
+  const [typeFilter, setTypeFilter] = useState('all');
 
   // 年度リスト（プルダウン用）
   const yearOptions = useMemo(() => {
@@ -36,6 +37,10 @@ const QuestionList = ({ questions, onSelect, initialIdFilter = '' }) => {
       // 分野フィルタ
       if (fieldFilter !== 'all' && q.field !== fieldFilter) return false;
 
+      // 問題種別フィルタ（必須＝2桁、理論＝3桁）
+      if (typeFilter === '必須' && String(q.num).toString().length !== 2) return false;
+      if (typeFilter === '理論' && String(q.num).toString().length !== 3) return false;
+
       // ID群フィルタ（カンマ or 改行区切り）
       if (idFilter.trim() !== '') {
         const wanted = idFilter
@@ -56,13 +61,14 @@ const QuestionList = ({ questions, onSelect, initialIdFilter = '' }) => {
 
       return true;
     });
-  }, [questions, yearFilter, fieldFilter, keyword, idFilter]);
+  }, [questions, yearFilter, fieldFilter, keyword, idFilter, typeFilter]);
 
   const resetFilters = () => {
     setYearFilter('all');
     setFieldFilter('all');
     setKeyword('');
     setIdFilter('');
+    setTypeFilter('all');
   };
 
   return (
@@ -146,6 +152,43 @@ const QuestionList = ({ questions, onSelect, initialIdFilter = '' }) => {
                 />
               </div>
             </div>
+          </div>
+
+          <div className="text-xs space-x-2 mb-2">
+            <label className="block text-xs text-gray-500 mb-1">問題種別フィルタ</label>
+            <button
+              type="button"
+              onClick={() => setTypeFilter('all')}
+              className={`px-3 py-1 rounded-full border text-xs ${
+                typeFilter === 'all'
+                  ? 'bg-blue-600 text-white border-blue-600'
+                  : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+              }`}
+            >
+              すべて
+            </button>
+            <button
+              type="button"
+              onClick={() => setTypeFilter('必須')}
+              className={`px-3 py-1 rounded-full border text-xs ${
+                typeFilter === '必須'
+                  ? 'bg-blue-600 text-white border-blue-600'
+                  : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+              }`}
+            >
+              必須問題（2桁）
+            </button>
+            <button
+              type="button"
+              onClick={() => setTypeFilter('理論')}
+              className={`px-3 py-1 rounded-full border text-xs ${
+                typeFilter === '理論'
+                  ? 'bg-blue-600 text-white border-blue-600'
+                  : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+              }`}
+            >
+              理論問題（3桁）
+            </button>
           </div>
 
           {/* ID群フィルタ */}

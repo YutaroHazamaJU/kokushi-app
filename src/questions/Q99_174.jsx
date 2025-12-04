@@ -127,6 +127,27 @@ const Q99_174 = ({ onBack }) => {
                 <span className="font-bold border-b-2 border-yellow-400">pKa = 5.2</span> の1価の弱酸性薬物水溶液に関する記述のうち、正しいのはどれか。1つ選べ。<br/>
                 ただし、イオン形薬物はすべて溶解するものとする。
               </p>
+
+              {/* この問題の学習ポイント */}
+              <div className="mb-6 bg-indigo-50 border border-indigo-200 rounded-xl p-4">
+                <h4 className="font-bold text-indigo-800 mb-2 text-sm">
+                  この問題のポイント
+                </h4>
+                <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+                  <li>
+                    ヘンダーソン・ハッセルバルヒの式から
+                    <span className="font-bold">分子形 [HA] とイオン形 [A⁻] の存在比・分率</span>
+                    を計算できるか。
+                  </li>
+                  <li>
+                    弱酸の総溶解度式
+                    <span className="font-mono"> S = S₀(1 + 10<sup>pH - pKa</sup>) </span>
+                    を用いて、
+                    <span className="font-bold">pH の変化による溶解度とその倍率</span>
+                    を求められるか。
+                  </li>
+                </ul>
+              </div>
               
               <div className="space-y-3">
                 {options.map((opt, index) => (

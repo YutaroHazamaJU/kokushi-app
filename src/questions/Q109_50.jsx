@@ -16,6 +16,7 @@ import { Slide, SectionTitle, pageVariants } from '../components/Layout';
 const Q109_50 = ({ onBack }) => {
   const [step, setStep] = useState(0);
   const [openOption, setOpenOption] = useState(null);
+  const imageBasePath = import.meta.env.BASE_URL + 'image/';
 
   const toggleOption = (index) => {
     setOpenOption(openOption === index ? null : index);
@@ -141,7 +142,7 @@ const Q109_50 = ({ onBack }) => {
               <div className="my-4 flex flex-col md:flex-row items-center justify-center gap-4">
                 {/* アルプロスタジル構造式 */}
                 <img
-                  src="/image/109-50-fig.png"
+                  src={`${imageBasePath}109-50-fig.png`}
                   alt="アルプロスタジルの構造式"
                   className="max-w-full md:max-w-md h-auto object-contain border rounded-lg bg-white"
                 />
@@ -198,7 +199,7 @@ const Q109_50 = ({ onBack }) => {
               <div className="flex flex-col md:flex-row items-center justify中心 gap-6">
                 {/* アルプロスタジル-CyD 包接の模式図 */}
                 <img
-                  src="/image/109-50-cyd.png"
+                  src={`${imageBasePath}109-50-cyd.png`}
                   alt="アルプロスタジルとシクロデキストリンの包接複合体の模式図"
                   className="max-w-full md:max-w-lg h-auto object-contain border rounded-lg bg-white"
                 />

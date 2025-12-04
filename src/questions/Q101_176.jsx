@@ -50,6 +50,21 @@ const Q101_176 = ({ onBack }) => {
     return data;
   }, []);
 
+  // グラフの縦軸（濃度）の最大値を自動で決める
+  const maxSolubilityAxis = useMemo(() => {
+    if (solubilityData.length === 0) return 1000;
+    const maxValue = solubilityData.reduce((max, d) => (d.S > max ? d.S : max), 0);
+    // 桁をそろえた「きれいな」上限値（1, 2, 5, 10 × 10^n）を作る
+    const magnitude = Math.pow(10, Math.floor(Math.log10(maxValue)));
+    const normalized = maxValue / magnitude;
+    let nice;
+    if (normalized <= 1) nice = 1;
+    else if (normalized <= 2) nice = 2;
+    else if (normalized <= 5) nice = 5;
+    else nice = 10;
+    return nice * magnitude;
+  }, [solubilityData]);
+
   const choices = [2, 5, 7, 10, 12];
 
   const titles = [
@@ -232,7 +247,7 @@ const Q101_176 = ({ onBack }) => {
                     className="absolute bottom-0 left-0 w-full bg-teal-500 opacity-50"
                     initial={{ height: 0 }}
                     animate={{
-                      height: `${Math.min((solubility / 1000) * 100, 100)}%`,
+                      height: `${Math.min((solubility / maxSolubilityAxis) * 100, 100)}%`,
                     }}
                     transition={{ type: 'spring', stiffness: 100 }}
                   />
@@ -272,7 +287,7 @@ const Q101_176 = ({ onBack }) => {
                         label={{ value: 'pH', position: 'insideBottomRight', offset: -10 }}
                       />
                       <YAxis
-                        domain={[0, 10000]}
+                        domain={[0, maxSolubilityAxis]}
                         tickFormatter={(v) => v.toFixed(0)}
                         tickMargin={8}
                         label={{

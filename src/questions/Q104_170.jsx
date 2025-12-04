@@ -18,6 +18,8 @@ const Q104_170 = ({ onBack }) => {
   const [step, setStep] = useState(0);
   const [openOption, setOpenOption] = useState(null);
 
+  const imageBasePath = import.meta.env.BASE_URL + 'image/';
+
   const toggleOption = (index) => {
     setOpenOption(openOption === index ? null : index);
   };
@@ -194,7 +196,7 @@ const Q104_170 = ({ onBack }) => {
               {/* 図の表示 */}
               <div className="my-4 flex justify-center">
                 <img
-                  src="/image/104-170-graph.png"
+                  src={`${imageBasePath}104-170-graph.png`}
                   alt="第104回問170：pHと分子形・イオン形濃度の関係グラフ"
                   className="max-w-full max-h-[60vh] object-contain h-auto border rounded-lg shadow-sm"
                 />

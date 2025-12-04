@@ -176,7 +176,7 @@ const QuestionList = ({ questions, onSelect, initialIdFilter = '' }) => {
                   : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
               }`}
             >
-              必須問題（2桁）
+              必須問題
             </button>
             <button
               type="button"
@@ -187,7 +187,7 @@ const QuestionList = ({ questions, onSelect, initialIdFilter = '' }) => {
                   : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
               }`}
             >
-              理論問題（3桁）
+              理論問題
             </button>
           </div>
 

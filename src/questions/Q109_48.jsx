@@ -139,7 +139,7 @@ const Q109_48 = ({ onBack }) => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <label className="block text-gray-700 font-bold mb-2 flex items-center">
+                  <label className="flex items-center text-gray-700 font-bold mb-2">
                     <ArrowRight className="mr-2" />
                     薬物の粒子径（小さいほど表面積↑）
                   </label>
@@ -217,7 +217,7 @@ const Q109_48 = ({ onBack }) => {
                   </p>                  
                 </div>
                 <div>
-                  <label className="block text-gray-700 font-bold mb-2 flex items-center">
+                  <label className="flex items-center text-gray-700 font-bold mb-2">
                     <RotateCw className="mr-2" />
                     溶液の粘度（高いほど拡散しにくい）
                   </label>

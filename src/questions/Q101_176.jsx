@@ -13,6 +13,7 @@ import {
   Tooltip,
   ResponsiveContainer,
   ReferenceLine,
+  ReferenceDot,
 } from 'recharts';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -50,11 +51,12 @@ const Q101_176 = ({ onBack }) => {
     return data;
   }, []);
 
-  // 現在の溶解度が縦軸上限の 90% の位置にくるように動的にスケーリング
+  // 現在の溶解度が縦軸上限の 90% 付近にくるように動的にスケーリング
   const maxSolubilityAxis = useMemo(() => {
     const s = solubility && solubility > 0 ? solubility : 1;
-    // s が常に Ymax の 90% になるように設定
-    return s / 0.9;
+    // s が常に Ymax の 90% になるように設定（極端に小さいスケールは避ける）
+    const yMax = s / 0.9;
+    return Math.max(yMax, 1);
   }, [solubility]);
 
   const choices = [2, 5, 7, 10, 12];
@@ -308,6 +310,14 @@ const Q101_176 = ({ onBack }) => {
                           position: 'top',
                           fill: '#f97316',
                         }}
+                      />
+                      {/* 現在の pH における溶解度 S を示す点（常に縦軸上限の約 90% 位置にくる） */}
+                      <ReferenceDot
+                        x={ph}
+                        y={solubility}
+                        r={4}
+                        fill="#0f766e"
+                        stroke="#0f766e"
                       />
                       <Line
                         type="monotone"

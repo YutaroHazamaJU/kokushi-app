@@ -1,6 +1,15 @@
 // src/questions/index.js
 import { Calculator, TestTube, Activity, RotateCw, Thermometer, Beaker, Package } from 'lucide-react';
 
+// 問題種別ごとのカラースタイル
+const typeStyles = {
+  required: 'bg-amber-50 border-amber-200 text-amber-900', // 必須問題（2桁番号）
+  theory: 'bg-sky-50 border-sky-200 text-sky-800',         // 理論問題（3桁番号）
+};
+
+// 問題番号から必須／理論を判定（2桁＝必須、3桁＝理論）
+const getQuestionType = (num) => (num < 100 ? 'required' : 'theory');
+
 import Q99_174 from './Q99_174';
 import Q101_176 from './Q101_176';
 import Q107_49 from './Q107_49';
@@ -175,7 +184,12 @@ const questionListBase = [
   },
 ];
 
-export const questionList = [...questionListBase].sort((a, b) => {
-  if (a.year !== b.year) return a.year - b.year;
-  return a.num - b.num;
-});
+export const questionList = [...questionListBase]
+  .map((q) => ({
+    ...q,
+    color: typeStyles[getQuestionType(q.num)],
+  }))
+  .sort((a, b) => {
+    if (a.year !== b.year) return a.year - b.year;
+    return a.num - b.num;
+  });

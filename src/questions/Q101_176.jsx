@@ -269,7 +269,7 @@ const Q101_176 = ({ onBack }) => {
                       <YAxis
                         tickFormatter={(v) => v.toFixed(0)}
                         label={{
-                          value: 'S (μg/mL, 相対値)',
+                          value: '溶解度 S (μg/mL)',
                           angle: -90,
                           position: 'insideLeft',
                         }}
@@ -308,7 +308,7 @@ const Q101_176 = ({ onBack }) => {
                   </ResponsiveContainer>
                 </div>
                 <p className="text-xs text-gray-500 mt-2">
-                  ※ 実際の数値に基づいた模式グラフ。pH が pKa を超えると S が急増することが視覚的にわかる。
+                  ※ 実際の数値に基づいた溶解度グラフ。pH が pKa を超えると溶解度 S が急増することが視覚的にわかる。
                 </p>
               </div>
             </div>

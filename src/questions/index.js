@@ -16,7 +16,7 @@ import Q110_49 from './Q110_49';
 import Q110_51 from './Q110_51';
 
 // 今後ここに問題をどんどん追加していく想定
-export const questionList = [
+const questionListBase = [
   {
     id: '99-174',
     year: 99,
@@ -174,3 +174,8 @@ export const questionList = [
     component: Q110_51,
   },
 ];
+
+export const questionList = [...questionListBase].sort((a, b) => {
+  if (a.year !== b.year) return a.year - b.year;
+  return a.num - b.num;
+});

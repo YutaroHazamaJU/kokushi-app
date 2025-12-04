@@ -1,9 +1,19 @@
 // src/questions/Q101_176.jsx
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { 
   ChevronRight, ChevronLeft, Home, CheckCircle,
   // Q101_176 内で使っているアイコンをここに列挙（Calculator, Lightbulb など必要なもの）
 } from 'lucide-react';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  ReferenceLine,
+} from 'recharts';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // ★ パスに注意：questions フォルダから見た相対パス
@@ -14,11 +24,32 @@ import { Slide, SectionTitle, pageVariants } from '../components/Layout';
 // ==========================================
 const Q101_176 = ({ onBack }) => {
   const [step, setStep] = useState(0);
-  const [ph, setPh] = useState(1.0);
 
+  // ▼ pH–溶解度グラフ用の状態とパラメータ
+  const [ph, setPh] = useState(1.0);
   const pka = 6.1;
   const s0 = 0.1; // pH=1での溶解度≈固有溶解度（µg/mL）
-  const solubility = s0 * (1 + Math.pow(10, ph - pka));
+
+  // 総溶解度の計算関数
+  const calcSolubility = (pHValue) =>
+    s0 * (1 + Math.pow(10, pHValue - pka));
+
+  // スライダーで表示する現在の溶解度
+  const solubility = calcSolubility(ph);
+
+  // グラフ描画用データ（pH 1〜12を0.5刻み）
+  const solubilityData = useMemo(() => {
+    const data = [];
+    for (let x = 1; x <= 12.0001; x += 0.5) {
+      const pHValue = Number(x.toFixed(1));
+      data.push({
+        pH: pHValue,
+        S: calcSolubility(pHValue),
+      });
+    }
+    return data;
+  }, []);
+
   const choices = [2, 5, 7, 10, 12];
 
   const titles = [
@@ -170,50 +201,116 @@ const Q101_176 = ({ onBack }) => {
         return (
           <div className="space-y-6">
             <h3 className="text-xl font-bold text-gray-800 border-b pb-2 mb-4">
-              Step 3：スライダーでイメージを掴む
+              Step 3：pH–溶解度グラフでイメージする
             </h3>
 
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-              <label
-                htmlFor="ph-slider-101-176"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                pH を変えて溶解度を確認：
-                <span className="text-3xl text-teal-600 font-mono ml-2">
-                  {ph.toFixed(1)}
-                </span>
-              </label>
-              <input
-                id="ph-slider-101-176"
-                type="range"
-                min="1.0"
-                max="12.0"
-                step="0.1"
-                value={ph}
-                onChange={(e) => setPh(parseFloat(e.target.value))}
-                className="w-full h-4 bg-gray-200 rounded-lg cursor-pointer accent-teal-600 mb-6"
-              />
-
-              <div className="relative h-24 bg-gray-100 rounded-xl overflow-hidden border border-gray-300 flex items-center justify-center">
-                <motion.div
-                  className="absolute bottom-0 left-0 w-full bg-teal-500 opacity-50"
-                  initial={{ height: 0 }}
-                  animate={{
-                    height: `${Math.min((solubility / 1000) * 100, 100)}%`
-                  }}
-                  transition={{ type: "spring", stiffness: 100 }}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* 左：pH スライダーと現在値 */}
+              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                <label
+                  htmlFor="ph-slider-101-176"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  pH を変えて溶解度を確認：
+                  <span className="text-3xl text-teal-600 font-mono ml-2">
+                    {ph.toFixed(1)}
+                  </span>
+                </label>
+                <input
+                  id="ph-slider-101-176"
+                  type="range"
+                  min="1.0"
+                  max="12.0"
+                  step="0.1"
+                  value={ph}
+                  onChange={(e) => setPh(parseFloat(e.target.value))}
+                  className="w-full h-4 bg-gray-200 rounded-lg cursor-pointer accent-teal-600 mb-4"
                 />
-                <div className="z-10 text-2xl font-bold text-gray-800">
-                  {solubility < 1000
-                    ? solubility.toFixed(1)
-                    : Math.round(solubility).toLocaleString()}{" "}
-                  μg/mL
+
+                <div className="relative h-24 bg-gray-100 rounded-xl overflow-hidden border border-gray-300 flex items-center justify-center mb-3">
+                  <motion.div
+                    className="absolute bottom-0 left-0 w-full bg-teal-500 opacity-50"
+                    initial={{ height: 0 }}
+                    animate={{
+                      height: `${Math.min((solubility / 1000) * 100, 100)}%`,
+                    }}
+                    transition={{ type: 'spring', stiffness: 100 }}
+                  />
+                  <div className="z-10 text-2xl font-bold text-gray-800">
+                    {solubility < 1000
+                      ? solubility.toFixed(1)
+                      : Math.round(solubility).toLocaleString()}{' '}
+                    μg/mL
+                  </div>
                 </div>
+
+                <p className="text-sm text-gray-600">
+                  pH を上げていくとイオン形が増え、総溶解度 S が急激に増加する。
+                  おおよそ pH ≒ 10 付近で 1,000 μg/mL に達することがわかる。
+                </p>
               </div>
 
-              <p className="text-sm text-gray-600 mt-3 text-center">
-                おおよそ pH = 10 付近で、溶解度が 1,000 μg/mL に近づくことを体感できます。
-              </p>
+              {/* 右：pH–溶解度ラインチャート */}
+              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                <p className="font-bold text-gray-800 mb-2">
+                  pH と総溶解度 S の関係（模式図）
+                </p>
+                <div className="w-full h-64">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={solubilityData} margin={{ left: 0, right: 8, top: 10, bottom: 0 }}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis
+                        dataKey="pH"
+                        type="number"
+                        domain={[1, 12]}
+                        tickCount={12}
+                        label={{ value: 'pH', position: 'insideBottomRight', offset: -5 }}
+                      />
+                      <YAxis
+                        tickFormatter={(v) => v.toFixed(0)}
+                        label={{
+                          value: 'S (μg/mL, 相対値)',
+                          angle: -90,
+                          position: 'insideLeft',
+                        }}
+                      />
+                      <Tooltip
+                        formatter={(value) => [`${Number(value).toFixed(1)} μg/mL`, 'S']}
+                        labelFormatter={(label) => `pH ${label}`}
+                      />
+                      {/* pKa位置の縦線 */}
+                      <ReferenceLine
+                        x={pka}
+                        stroke="#ef4444"
+                        strokeDasharray="4 4"
+                        label={{ value: 'pKa', position: 'top', fill: '#ef4444' }}
+                      />
+                      {/* 現在の pH 位置の縦線 */}
+                      <ReferenceLine
+                        x={ph}
+                        stroke="#f97316"
+                        strokeDasharray="3 3"
+                        label={{
+                          value: `pH=${ph.toFixed(1)}`,
+                          position: 'top',
+                          fill: '#f97316',
+                        }}
+                      />
+                      <Line
+                        type="monotone"
+                        dataKey="S"
+                        stroke="#0f766e"
+                        strokeWidth={2}
+                        dot={false}
+                        isAnimationActive={false}
+                      />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+                <p className="text-xs text-gray-500 mt-2">
+                  ※ 実際の数値に基づいた模式グラフ。pH が pKa を超えると S が急増することが視覚的にわかる。
+                </p>
+              </div>
             </div>
           </div>
         );

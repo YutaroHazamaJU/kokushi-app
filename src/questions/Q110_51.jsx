@@ -70,7 +70,7 @@ const Q110_51 = ({ onBack }) => {
                 </h5>
                 <div className="bg-gray-50 rounded-lg border border-gray-300 overflow-hidden flex flex-col items-center justify-center p-3">
                   <img
-                    src="image/110-51_hysteresis_loop.png"
+                    src="/image/110-51_hysteresis_loop.png"
                     alt="第110回 問51 に示されたヒステリシスループのレオグラム"
                     className="max-h-60 w-auto object-contain"
                   />

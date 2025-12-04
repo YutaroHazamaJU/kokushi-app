@@ -18,6 +18,7 @@ import { Slide, SectionTitle, pageVariants } from '../components/Layout';
 const Q108_175 = ({ onBack }) => {
   const [step, setStep] = useState(0);
   const [openOption, setOpenOption] = useState(null);
+  const imageBasePath = import.meta.env.BASE_URL + 'image/';
 
   const toggleOption = (index) => {
     setOpenOption(openOption === index ? null : index);
@@ -185,7 +186,7 @@ const Q108_175 = ({ onBack }) => {
                 </h5>
                 <div className="w-full flex justify-center">
                   <img
-                    src="/image/108-175-graph.png"
+                    src={`${imageBasePath}108-175-graph.png`}
                     alt="第108回問175：薬物の総濃度と分子形濃度のグラフ"
                     className="w-full max-w-3xl h-auto object-contain border border-gray-200 rounded-md bg-white"
                   />
@@ -253,7 +254,7 @@ const Q108_175 = ({ onBack }) => {
                     薬物の総濃度
                   </p>
                   <img
-                    src="/image/108-175-graph_total.png"
+                    src={`${imageBasePath}108-175-graph_total.png`}
                     alt="第108回問175：薬物の総濃度のグラフ"
                     className="w-full max-w-md h-auto object-contain border border-gray-200 rounded-md bg-white"
                   />
@@ -263,7 +264,7 @@ const Q108_175 = ({ onBack }) => {
                     分子形薬物濃度
                   </p>
                   <img
-                    src="/image/108-175-graph_unionized.png"
+                    src={`${imageBasePath}108-175-graph_unionized.png`}
                     alt="第108回問175：分子形薬物濃度のグラフ"
                     className="w-full max-w-md h-auto object-contain border border-gray-200 rounded-md bg-white"
                   />

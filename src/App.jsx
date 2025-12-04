@@ -26,7 +26,7 @@ const App = () => {
 
   return (
     <PasswordGate
-      correctPassword="kokushi2025"          // ★ 任意のパスワードに変更OK
+      correctPassword="1208"          // ★ 任意のパスワードに変更OK
       storageKey="kokushi-app-unlocked"     // kokushi-app 用のlocalStorageキー
     >
       <div className="font-sans text-gray-800 overflow-hidden">

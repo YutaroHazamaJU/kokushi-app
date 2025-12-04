@@ -51,12 +51,40 @@ const Q101_176 = ({ onBack }) => {
     return data;
   }, []);
 
-  // 現在の溶解度が縦軸上限の 90% 付近にくるように動的にスケーリング
-  const maxSolubilityAxis = useMemo(() => {
+  // グラフY軸: 2段階で上限値を決める（まず90%高さ、次に見やすい端数に丸める）
+  const { niceMaxSolubilityAxis, yTicks } = useMemo(() => {
+    // ステージ1: 現在の溶解度が90%にくるようなraw上限
     const s = solubility && solubility > 0 ? solubility : 1;
-    // s が常に Ymax の 90% になるように設定（現在値を常にグラフ上部付近に表示）
-    const yMax = s / 0.9;
-    return yMax;
+    const rawMax = s / 0.9;
+    // ステージ2: 端数を「1×10^n」,「2×10^n」,「5×10^n」などに丸める
+    const pow10 = Math.floor(Math.log10(rawMax));
+    const base = Math.pow(10, pow10);
+    let nice;
+    if (rawMax <= base) {
+      nice = base;
+    } else if (rawMax <= 2 * base) {
+      nice = 2 * base;
+    } else if (rawMax <= 5 * base) {
+      nice = 5 * base;
+    } else {
+      nice = 10 * base;
+    }
+    // yTicks: 5分割または4分割で端数で刻む
+    let numTicks = 5;
+    let step = nice / (numTicks - 1);
+    // 端数が大きすぎる場合は6分割
+    if (step < 1) {
+      numTicks = 6;
+      step = nice / (numTicks - 1);
+    }
+    const ticks = [];
+    for (let i = 0; i < numTicks; ++i) {
+      ticks.push(Math.round((step * i + Number.EPSILON) * 100) / 100);
+    }
+    return {
+      niceMaxSolubilityAxis: nice,
+      yTicks: ticks,
+    };
   }, [solubility]);
 
   const choices = [2, 5, 7, 10, 12];
@@ -241,7 +269,7 @@ const Q101_176 = ({ onBack }) => {
                     className="absolute bottom-0 left-0 w-full bg-teal-500 opacity-50"
                     initial={{ height: 0 }}
                     animate={{
-                      height: `${Math.min((solubility / maxSolubilityAxis) * 100, 100)}%`,
+                      height: `${Math.min((solubility / niceMaxSolubilityAxis) * 100, 100)}%`,
                     }}
                     transition={{ type: 'spring', stiffness: 100 }}
                   />
@@ -278,10 +306,12 @@ const Q101_176 = ({ onBack }) => {
                         tickCount={11}
                         tickMargin={8}
                         padding={{ left: 5, right: 5 }}
-                        label={{ value: 'pH', position: 'insideBottomRight', offset: -10 }}
+                        label={{ value: 'pH', position: 'insideBottomRight', offset: -10, fontSize: 14 }}
+                        tick={{ fontSize: 12 }}
                       />
                       <YAxis
-                        domain={[0, maxSolubilityAxis]}
+                        domain={[0, niceMaxSolubilityAxis]}
+                        ticks={yTicks}
                         tickFormatter={(v) => v.toFixed(0)}
                         tickMargin={8}
                         label={{
@@ -289,7 +319,9 @@ const Q101_176 = ({ onBack }) => {
                           angle: -90,
                           position: 'insideLeft',
                           offset: 10,
+                          fontSize: 14,
                         }}
+                        tick={{ fontSize: 12 }}
                         allowDataOverflow
                       />
                       <Tooltip

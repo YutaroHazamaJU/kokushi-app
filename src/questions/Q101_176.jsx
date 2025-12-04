@@ -37,10 +37,10 @@ const Q101_176 = ({ onBack }) => {
   // スライダーで表示する現在の溶解度
   const solubility = calcSolubility(ph);
 
-  // グラフ描画用データ（pH 1〜12を0.5刻み）
+  // グラフ描画用データ（pH 1〜11を0.5刻み）
   const solubilityData = useMemo(() => {
     const data = [];
-    for (let x = 1; x <= 12.0001; x += 0.5) {
+    for (let x = 1; x <= 11.0001; x += 0.5) {
       const pHValue = Number(x.toFixed(1));
       data.push({
         pH: pHValue,
@@ -257,35 +257,41 @@ const Q101_176 = ({ onBack }) => {
                 </p>
                 <div className="w-full h-64">
                   <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={solubilityData} margin={{ left: 0, right: 8, top: 10, bottom: 0 }}>
+                    <LineChart
+                      data={solubilityData}
+                      margin={{ left: 50, right: 24, top: 24, bottom: 40 }}
+                    >
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis
                         dataKey="pH"
                         type="number"
-                        domain={[1, 12]}
-                        tickCount={12}
-                        label={{ value: 'pH', position: 'insideBottomRight', offset: -5 }}
+                        domain={[1, 11]}
+                        tickCount={11}
+                        tickMargin={8}
+                        padding={{ left: 5, right: 5 }}
+                        label={{ value: 'pH', position: 'insideBottomRight', offset: -10 }}
                       />
                       <YAxis
+                        domain={[0, 10000]}
                         tickFormatter={(v) => v.toFixed(0)}
+                        tickMargin={8}
                         label={{
                           value: '溶解度 S (μg/mL)',
                           angle: -90,
                           position: 'insideLeft',
+                          offset: 10,
                         }}
                       />
                       <Tooltip
                         formatter={(value) => [`${Number(value).toFixed(1)} μg/mL`, 'S']}
                         labelFormatter={(label) => `pH ${label}`}
                       />
-                      {/* pKa位置の縦線 */}
                       <ReferenceLine
                         x={pka}
                         stroke="#ef4444"
                         strokeDasharray="4 4"
                         label={{ value: 'pKa', position: 'top', fill: '#ef4444' }}
                       />
-                      {/* 現在の pH 位置の縦線 */}
                       <ReferenceLine
                         x={ph}
                         stroke="#f97316"

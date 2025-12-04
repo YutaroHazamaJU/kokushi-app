@@ -264,21 +264,14 @@ const Q101_176 = ({ onBack }) => {
                   className="w-full h-4 bg-gray-200 rounded-lg cursor-pointer accent-teal-600 mb-4"
                 />
 
-                <div className="relative h-24 bg-gray-100 rounded-xl overflow-hidden border border-gray-300 flex items-center justify-center mb-3">
-                  <motion.div
-                    className="absolute bottom-0 left-0 w-full bg-teal-500 opacity-50"
-                    initial={{ height: 0 }}
-                    animate={{
-                      height: `${Math.min((solubility / niceMaxSolubilityAxis) * 100, 100)}%`,
-                    }}
-                    transition={{ type: 'spring', stiffness: 100 }}
-                  />
-                  <div className="z-10 text-2xl font-bold text-gray-800">
+                <div className="my-4 text-center">
+                  <p className="text-sm text-gray-500 mb-1">現在の総溶解度 S</p>
+                  <p className="text-2xl font-bold text-gray-800">
                     {solubility < 1000
                       ? solubility.toFixed(1)
                       : Math.round(solubility).toLocaleString()}{' '}
                     μg/mL
-                  </div>
+                  </p>
                 </div>
 
                 <p className="text-sm text-gray-600">

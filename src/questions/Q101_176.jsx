@@ -54,9 +54,9 @@ const Q101_176 = ({ onBack }) => {
   // 現在の溶解度が縦軸上限の 90% 付近にくるように動的にスケーリング
   const maxSolubilityAxis = useMemo(() => {
     const s = solubility && solubility > 0 ? solubility : 1;
-    // s が常に Ymax の 90% になるように設定（極端に小さいスケールは避ける）
+    // s が常に Ymax の 90% になるように設定（現在値を常にグラフ上部付近に表示）
     const yMax = s / 0.9;
-    return Math.max(yMax, 1);
+    return yMax;
   }, [solubility]);
 
   const choices = [2, 5, 7, 10, 12];

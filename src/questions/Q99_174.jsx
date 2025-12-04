@@ -1,5 +1,5 @@
 // src/questions/Q99_174.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ChevronRight, ChevronLeft, Home, ChevronDown, ChevronUp,
   Calculator, Lightbulb, PenTool, CheckCircle
@@ -10,6 +10,15 @@ import { Slide, SectionTitle, pageVariants } from '../components/Layout';
 const Q99_174 = ({ onBack }) => {
   const [step, setStep] = useState(0);
   const [openOption, setOpenOption] = useState(null);
+
+  useEffect(() => {
+    // Stepが切り替わるたびに画面の先頭へスクロール
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto', // 必要なら 'smooth' に変更してもOK
+    });
+  }, [step]);
 
   const toggleOption = (index) => {
     setOpenOption(openOption === index ? null : index);
@@ -160,7 +169,7 @@ const Q99_174 = ({ onBack }) => {
                   </div>
                 ))}
               </div>
-              <p className="text-center text-sm text-gray-400 mt-4">選択肢をクリックすると詳細な解説が表示されます</p>
+              <p className="text-center text-sm text-gray-400 mt-4">選択肢をクリックすると簡単な解説が表示されます</p>
 
               {/* この問題の学習ポイント */}
               <div className="mb-6 bg-indigo-50 border border-indigo-200 rounded-xl p-4">
@@ -181,15 +190,6 @@ const Q99_174 = ({ onBack }) => {
                     を求められるか。
                   </li>
                 </ul>
-              </div>
-
-              <div className="mt-6 text-center">
-                <button 
-                  onClick={() => setStep(1)} 
-                  className="px-6 py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors shadow-md flex items-center justify-center mx-auto"
-                >
-                  論理的解法ステップを開始 <ChevronRight className="w-5 h-5 ml-2" />
-                </button>
               </div>
             </div>
           </div>
@@ -511,7 +511,7 @@ const Q99_174 = ({ onBack }) => {
           disabled={step === titles.length - 1}
           className={`px-6 py-3 rounded-lg font-bold flex items-center ${step === titles.length - 1 ? 'text-gray-300 cursor-not-allowed' : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-md'}`}
         >
-          {step === 0 ? '解法ステップへ' : '次へ'} <ChevronRight className="w-5 h-5 ml-2" />
+          次へ <ChevronRight className="w-5 h-5 ml-2" />
         </button>
       </div>
     </motion.div>

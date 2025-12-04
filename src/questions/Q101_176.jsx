@@ -290,6 +290,7 @@ const Q101_176 = ({ onBack }) => {
                           position: 'insideLeft',
                           offset: 10,
                         }}
+                        allowDataOverflow
                       />
                       <Tooltip
                         formatter={(value) => [`${Number(value).toFixed(1)} μg/mL`, 'S']}

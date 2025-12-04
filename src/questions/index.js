@@ -1,7 +1,7 @@
 // src/questions/index.js
-import { Calculator, TestTube, Activity, RotateCw, Thermometer, Beaker, Package } from 'lucide-react';
+import { Calculator, Activity, Beaker } from 'lucide-react';
 
-// 問題種別ごとのカラースタイル
+// 問題種別ごとのカラースタイル（必須 / 理論）
 const typeStyles = {
   required: 'bg-amber-50 border-amber-200 text-amber-900', // 必須問題（2桁番号）
   theory: 'bg-sky-50 border-sky-200 text-sky-800',         // 理論問題（3桁番号）
@@ -9,6 +9,13 @@ const typeStyles = {
 
 // 問題番号から必須／理論を判定（2桁＝必須、3桁＝理論）
 const getQuestionType = (num) => (num < 100 ? 'required' : 'theory');
+
+// 問題の「種類」（計算 / グラフ / 知識）ごとのアイコン
+const iconByKind = {
+  calc: Calculator,    // 計算問題
+  graph: Activity,     // グラフ問題・レオロジーなど線グラフ系
+  knowledge: Beaker,   // 知識問題・用語整理
+};
 
 import Q99_174 from './Q99_174';
 import Q101_176 from './Q101_176';
@@ -37,6 +44,7 @@ const questionListBase = [
     icon: Calculator,
     color: 'bg-indigo-50 border-indigo-200 text-indigo-700',
     component: Q99_174,
+    kind: 'calc',
   },
   {
     id: '101-176',
@@ -49,18 +57,20 @@ const questionListBase = [
     icon: TestTube,
     color: 'bg-teal-50 border-teal-200 text-teal-700',
     component: Q101_176,
+    kind: 'calc',
   },
   {
-  id: '107-49',
-  year: 107,
-  num: 49,
-  title: '第107回 問49',
-  desc: '分散系：分散相と分散媒の組合せ',
-  field: '物理薬剤',
-  tags: ['分散系', 'コロイド', 'エマルション', 'サスペンション', 'エアゾール', 'フォーム', 'キセロゲル'],
-  color: 'bg-orange-50 border-orange-200 text-orange-900',
-  icon: Beaker,     // index.js 側で Beaker を import している前提
-  component: Q107_49,
+    id: '107-49',
+    year: 107,
+    num: 49,
+    title: '第107回 問49',
+    desc: '分散系：分散相と分散媒の組合せ',
+    field: '物理薬剤',
+    tags: ['分散系', 'コロイド', 'エマルション', 'サスペンション', 'エアゾール', 'フォーム', 'キセロゲル'],
+    color: 'bg-orange-50 border-orange-200 text-orange-900',
+    icon: Beaker,     // index.js 側で Beaker を import している前提
+    component: Q107_49,
+    kind: 'knowledge',
   },
   {
     id: '104-170',
@@ -73,6 +83,7 @@ const questionListBase = [
     icon: Activity,
     color: 'bg-white border-gray-200 text-gray-700',
     component: Q104_170,
+    kind: 'graph',
   },
   {
     id: '106-51',
@@ -85,6 +96,7 @@ const questionListBase = [
     icon: Activity,
     color: 'bg-purple-50 border-purple-200 text-purple-700',
     component: Q106_51,
+    kind: 'knowledge',
   },
   {
     id: '108-49',
@@ -97,6 +109,7 @@ const questionListBase = [
     icon: Package,
     color: 'bg-amber-50 border-amber-200 text-amber-800',
     component: Q108_49,
+    kind: 'knowledge',
   },
   {
     id: '108-50',
@@ -109,6 +122,7 @@ const questionListBase = [
     icon: Activity,
     color: 'bg-amber-50 border-amber-200 text-amber-800',
     component: Q108_50,
+    kind: 'knowledge',
   },
   {
     id: '108-175',
@@ -121,6 +135,7 @@ const questionListBase = [
     icon: Activity,
     color: 'bg-white border-gray-200 text-gray-700',
     component: Q108_175,
+    kind: 'graph',
   },
   {
     id: '109-48',
@@ -133,6 +148,7 @@ const questionListBase = [
     icon: RotateCw,
     color: 'bg-orange-50 border-orange-200 text-orange-700',
     component: Q109_48,
+    kind: 'calc',
   },
   {
     id: '109-49',
@@ -145,6 +161,7 @@ const questionListBase = [
     icon: Thermometer,
     color: 'bg-orange-50 border-orange-200',
     component: Q109_49,
+    kind: 'knowledge',
   },
   {
     id: '109-50',
@@ -157,6 +174,7 @@ const questionListBase = [
     icon: Thermometer,
     color: 'bg-rose-50 border-rose-200 text-rose-700',
     component: Q109_50,
+    kind: 'graph',
   },
   {
     id: '110-49',
@@ -169,6 +187,7 @@ const questionListBase = [
     icon: Beaker,
     color: 'bg-yellow-50 border-yellow-200 text-yellow-800',
     component: Q110_49,
+    kind: 'knowledge',
   },
   {
     id: '110-51',
@@ -181,12 +200,16 @@ const questionListBase = [
     icon: Activity,
     color: 'bg-amber-50 border-amber-200 text-amber-800',
     component: Q110_51,
+    kind: 'graph',
   },
 ];
 
 export const questionList = [...questionListBase]
   .map((q) => ({
     ...q,
+    // kind に応じてアイコンを自動付与（未指定なら既存 icon を使用）
+    icon: iconByKind[q.kind] || q.icon || Beaker,
+    // 問番号（2桁 / 3桁）に応じて必須 / 理論カラーを自動付与
     color: typeStyles[getQuestionType(q.num)],
   }))
   .sort((a, b) => {

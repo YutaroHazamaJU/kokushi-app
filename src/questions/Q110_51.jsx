@@ -62,91 +62,25 @@ const Q110_51 = ({ onBack }) => {
                 </ol>
               </div>
 
-              {/* レオグラム（イメージ図：ヒステリシスループ） */}
+              {/* レオグラム（国家試験の図：ヒステリシスループ） */}
               <div className="bg-white border border-amber-200 rounded-lg p-4 mb-4">
                 <h5 className="font-bold text-amber-700 mb-2 flex items-center">
                   <Activity className="w-5 h-5 mr-2" />
-                  構造粘性を有する製剤のレオグラム（イメージ）
+                  構造粘性を有する製剤のレオグラム（国家試験の実際の図）
                 </h5>
-                <div className="relative bg-gray-50 rounded-lg h-52 border border-gray-300 overflow-hidden">
-                  <svg
-                    viewBox="0 0 220 170"
-                    className="w-full h-full text-gray-500"
-                  >
-                    {/* 座標軸 */}
-                    <line
-                      x1="40"
-                      y1="20"
-                      x2="40"
-                      y2="145"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                    />
-                    <line
-                      x1="40"
-                      y1="145"
-                      x2="200"
-                      y2="145"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                    />
-                    <text x="10" y="20" fontSize="10" fill="currentColor">
-                      τ
-                    </text>
-                    <text x="195" y="160" fontSize="10" fill="currentColor">
-                      γ̇
-                    </text>
-
-                    {/* 上昇曲線（剪断速度↑）：やや上側のカーブ */}
-                    <path
-                      d="M40 140 Q 80 100 130 70 T 200 40"
-                      fill="none"
-                      stroke="#f97316"
-                      strokeWidth="2"
-                    />
-                    <text
-                      x="130"
-                      y="80"
-                      fontSize="9"
-                      fill="#f97316"
-                    >
-                      せん断速度↑
-                    </text>
-
-                    {/* 下降曲線（剪断速度↓）：下側を通るカーブ（ヒステリシスループ） */}
-                    <path
-                      d="M200 45 Q 150 75 105 95 T 40 120"
-                      fill="none"
-                      stroke="#0ea5e9"
-                      strokeWidth="2"
-                    />
-                    <text
-                      x="105"
-                      y="110"
-                      fontSize="9"
-                      fill="#0ea5e9"
-                    >
-                      せん断速度↓
-                    </text>
-
-                    {/* ループ領域 */}
-                    <text x="90" y="55" fontSize="9" fill="#6b21a8">
-                      ヒステリシスループ
-                    </text>
-                  </svg>
-                  <p className="absolute bottom-1 left-2 text-[10px] text-gray-500">
-                    ※ せん断速度を増減させたときの応力の経路が
+                <div className="bg-gray-50 rounded-lg border border-gray-300 overflow-hidden flex flex-col items-center justify-center p-3">
+                  <img
+                    src="/image/110-51_hysteresis_loop.png"
+                    alt="第110回 問51 に示されたヒステリシスループのレオグラム"
+                    className="max-h-60 w-auto object-contain"
+                  />
+                  <p className="mt-2 text-[11px] text-gray-500 text-center">
+                    ※ 第110回国家試験 問51 に示されたレオグラム（ヒステリシスループ）の図を使用。
                     <br />
-                    異なり「ループ」を描く → 構造変化と時間依存性
+                    せん断速度を増減させたときの応力の経路が異なり，ループを描くことが
+                    構造変化と時間依存性を表している。
                   </p>
                 </div>
-
-                <p className="mt-2 text-xs text-gray-600">
-                  「構造粘性を有する製剤」＝内部に<span className="font-bold">
-                    三次元ネットワーク（構造）
-                  </span>
-                  を持ち、せん断によっていったん壊れ、時間とともに回復するような懸濁剤・ゲルなどをイメージします。
-                </p>
               </div>
 
               <div className="mt-4 text-center">

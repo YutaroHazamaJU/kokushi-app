@@ -312,7 +312,9 @@ const Q101_176 = ({ onBack }) => {
                       <YAxis
                         domain={[0, niceMaxSolubilityAxis]}
                         ticks={yTicks}
-                        tickFormatter={(v) => v.toFixed(0)}
+                        tickFormatter={(v) =>
+                          niceMaxSolubilityAxis < 10 ? v.toFixed(2) : v.toFixed(0)
+                        }
                         tickMargin={8}
                         label={{
                           value: '溶解度 S (μg/mL)',

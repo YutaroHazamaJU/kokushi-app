@@ -241,127 +241,132 @@ const Q101_176 = ({ onBack }) => {
               Step 3：pH–溶解度グラフでイメージする
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* 左：pH スライダーと現在値 */}
-              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-                <label
-                  htmlFor="ph-slider-101-176"
-                  className="block text-gray-700 font-bold mb-2"
-                >
-                  pH を変えて溶解度を確認：
-                  <span className="text-3xl text-teal-600 font-mono ml-2">
-                    {ph.toFixed(1)}
-                  </span>
-                </label>
-                <input
-                  id="ph-slider-101-176"
-                  type="range"
-                  min="1.0"
-                  max="12.0"
-                  step="0.1"
-                  value={ph}
-                  onChange={(e) => setPh(parseFloat(e.target.value))}
-                  className="w-full h-4 bg-gray-200 rounded-lg cursor-pointer accent-teal-600 mb-4"
-                />
+            {/* 上：pH スライダーと現在値（1カラム表示） */}
+            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+              <label
+                htmlFor="ph-slider-101-176"
+                className="block text-gray-700 font-bold mb-2"
+              >
+                pH を変えて溶解度を確認：
+                <span className="text-3xl text-teal-600 font-mono ml-2">
+                  {ph.toFixed(1)}
+                </span>
+              </label>
+              <input
+                id="ph-slider-101-176"
+                type="range"
+                min="1.0"
+                max="12.0"
+                step="0.1"
+                value={ph}
+                onChange={(e) => setPh(parseFloat(e.target.value))}
+                className="w-full h-4 bg-gray-200 rounded-lg cursor-pointer accent-teal-600 mb-4"
+              />
 
-                <div className="my-4 text-center">
-                  <p className="text-sm text-gray-500 mb-1">現在の総溶解度 S</p>
-                  <p className="text-2xl font-bold text-gray-800">
-                    {solubility < 1000
-                      ? solubility.toFixed(1)
-                      : Math.round(solubility).toLocaleString()}{' '}
-                    μg/mL
-                  </p>
-                </div>
-
-                <p className="text-sm text-gray-600">
-                  pH を上げていくとイオン形が増え、総溶解度 S が急激に増加する。
-                  おおよそ pH ≒ 10 付近で 1,000 μg/mL に達することがわかる。
+              <div className="my-4 text-center">
+                <p className="text-sm text-gray-500 mb-1">現在の総溶解度 S</p>
+                <p className="text-2xl font-bold text-gray-800">
+                  {solubility < 1000
+                    ? solubility.toFixed(1)
+                    : Math.round(solubility).toLocaleString()}{' '}
+                  μg/mL
                 </p>
               </div>
 
-              {/* 右：pH–溶解度ラインチャート */}
-              <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-                <p className="font-bold text-gray-800 mb-2">
-                  pH と総溶解度 S の関係（模式図）
-                </p>
-                <div className="w-full h-64">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart
-                      data={solubilityData}
-                      margin={{ left: 50, right: 24, top: 24, bottom: 40 }}
-                    >
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis
-                        dataKey="pH"
-                        type="number"
-                        domain={[1, 11]}
-                        tickCount={11}
-                        tickMargin={8}
-                        padding={{ left: 5, right: 5 }}
-                        label={{ value: 'pH', position: 'insideBottomRight', offset: -10, fontSize: 14 }}
-                        tick={{ fontSize: 12 }}
-                      />
-                      <YAxis
-                        domain={[0, niceMaxSolubilityAxis]}
-                        ticks={yTicks}
-                        tickFormatter={(v) =>
-                          niceMaxSolubilityAxis < 10 ? v.toFixed(2) : v.toFixed(0)
-                        }
-                        tickMargin={8}
-                        label={{
-                          value: '溶解度 S (μg/mL)',
-                          angle: -90,
-                          position: 'insideLeft',
-                          offset: 10,
-                          fontSize: 14,
-                        }}
-                        tick={{ fontSize: 12 }}
-                        allowDataOverflow
-                      />
-                      <Tooltip
-                        formatter={(value) => [`${Number(value).toFixed(1)} μg/mL`, 'S']}
-                        labelFormatter={(label) => `pH ${label}`}
-                      />
-                      <ReferenceLine
-                        x={pka}
-                        stroke="#ef4444"
-                        strokeDasharray="4 4"
-                        label={{ value: 'pKa', position: 'top', fill: '#ef4444' }}
-                      />
-                      <ReferenceLine
-                        x={ph}
-                        stroke="#f97316"
-                        strokeDasharray="3 3"
-                        label={{
-                          value: `pH=${ph.toFixed(1)}`,
-                          position: 'top',
-                          fill: '#f97316',
-                        }}
-                      />
-                      {/* 現在の pH における溶解度 S を示す点（常に縦軸上限の約 90% 位置にくる） */}
-                      <ReferenceDot
-                        x={ph}
-                        y={solubility}
-                        r={4}
-                        fill="#0f766e"
-                        stroke="#0f766e"
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="S"
-                        stroke="#0f766e"
-                        strokeWidth={2}
-                        dot={false}
-                        isAnimationActive={false}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </div>
-                <p className="text-xs text-gray-500 mt-2">
-                  ※ 実際の数値に基づいた溶解度グラフ。pH が pKa を超えると溶解度 S が急増することが視覚的にわかる。
-                </p>
+              <p className="text-sm text-gray-600">
+                pH を上げていくとイオン形が増え、総溶解度 S が急激に増加する。
+                おおよそ pH ≒ 10 付近で 1,000 μg/mL に達することがわかる。
+              </p>
+            </div>
+
+            {/* 下：pH–溶解度ラインチャート（全幅で大きく表示） */}
+            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+              <p className="font-bold text-gray-800 mb-2">
+                pH と総溶解度 S の関係（模式図）
+              </p>
+              <div className="w-full h-80">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart
+                    data={solubilityData}
+                    margin={{ left: 64, right: 24, top: 24, bottom: 40 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis
+                      dataKey="pH"
+                      type="number"
+                      domain={[1, 11]}
+                      tickCount={11}
+                      tickMargin={8}
+                      padding={{ left: 5, right: 5 }}
+                      label={{
+                        value: 'pH',
+                        position: 'insideBottomRight',
+                        offset: -10,
+                        fontSize: 14,
+                      }}
+                      tick={{ fontSize: 12 }}
+                    />
+                    <YAxis
+                      domain={[0, niceMaxSolubilityAxis]}
+                      ticks={yTicks}
+                      tickFormatter={(v) =>
+                        niceMaxSolubilityAxis < 10 ? v.toFixed(2) : v.toFixed(0)
+                      }
+                      tickMargin={8}
+                      label={{
+                        value: '溶解度 S (μg/mL)',
+                        angle: -90,
+                        position: 'insideLeft',
+                        offset: 10,
+                        fontSize: 14,
+                      }}
+                      tick={{ fontSize: 12 }}
+                      allowDataOverflow
+                    />
+                    <Tooltip
+                      formatter={(value) => [
+                        `${Number(value).toFixed(2)} μg/mL`,
+                        'S',
+                      ]}
+                      labelFormatter={(label) => `pH ${label}`}
+                    />
+                    <ReferenceLine
+                      x={pka}
+                      stroke="#ef4444"
+                      strokeDasharray="4 4"
+                      label={{ value: 'pKa', position: 'top', fill: '#ef4444' }}
+                    />
+                    <ReferenceLine
+                      x={ph}
+                      stroke="#f97316"
+                      strokeDasharray="3 3"
+                      label={{
+                        value: `pH=${ph.toFixed(1)}`,
+                        position: 'top',
+                        fill: '#f97316',
+                      }}
+                    />
+                    <ReferenceDot
+                      x={ph}
+                      y={solubility}
+                      r={5}
+                      fill="#0f766e"
+                      stroke="#0f766e"
+                    />
+                    <Line
+                      type="monotone"
+                      dataKey="S"
+                      stroke="#0f766e"
+                      strokeWidth={2}
+                      dot={false}
+                      isAnimationActive={false}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
               </div>
+              <p className="text-xs text-gray-500 mt-2">
+                ※ 実際の数値に基づいた溶解度グラフ。pH が pKa を超えると溶解度 S が急増することが視覚的にわかる。
+              </p>
             </div>
           </div>
         );

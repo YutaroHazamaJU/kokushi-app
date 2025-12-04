@@ -50,20 +50,21 @@ const Q101_176 = ({ onBack }) => {
     return data;
   }, []);
 
-  // グラフの縦軸（濃度）の最大値を自動で決める
+  // 現在の溶解度に応じて、グラフの縦軸（濃度）の最大値を自動で決める
   const maxSolubilityAxis = useMemo(() => {
-    if (solubilityData.length === 0) return 1000;
-    const maxValue = solubilityData.reduce((max, d) => (d.S > max ? d.S : max), 0);
-    // 桁をそろえた「きれいな」上限値（1, 2, 5, 10 × 10^n）を作る
-    const magnitude = Math.pow(10, Math.floor(Math.log10(maxValue)));
-    const normalized = maxValue / magnitude;
+    // 極端に小さい値を避けるための安全策
+    const s = solubility && solubility > 0 ? solubility : 1;
+    // 現在値の 1.5 倍を目安にして、少し余裕を持たせる
+    const base = s * 1.5;
+    const magnitude = Math.pow(10, Math.floor(Math.log10(base)));
+    const normalized = base / magnitude;
     let nice;
     if (normalized <= 1) nice = 1;
     else if (normalized <= 2) nice = 2;
     else if (normalized <= 5) nice = 5;
     else nice = 10;
     return nice * magnitude;
-  }, [solubilityData]);
+  }, [solubility]);
 
   const choices = [2, 5, 7, 10, 12];
 

@@ -122,7 +122,6 @@ const Q99_174 = ({ onBack }) => {
             <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
               <div className="flex items-center mb-4 border-b pb-2">
                 <span className="bg-indigo-600 text-white px-3 py-1 rounded text-sm font-bold mr-3">第99回 問174</span>
-                <h4 className="font-bold text-gray-800 text-lg">物理・化学・生物</h4>
               </div>
               <p className="text-lg text-gray-800 leading-relaxed mb-6 font-serif">
                 <span className="font-bold border-b-2 border-yellow-400">pKa = 5.2</span> の1価の弱酸性薬物水溶液に関する記述のうち、正しいのはどれか。1つ選べ。<br/>

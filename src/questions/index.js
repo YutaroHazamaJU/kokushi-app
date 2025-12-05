@@ -1,5 +1,5 @@
 // src/questions/index.js
-import { Calculator, Activity, Beaker } from 'lucide-react';
+import { Calculator, Activity, Beaker, TestTube, Package, RotateCw, Thermometer } from 'lucide-react';
 
 // 問題種別ごとのカラースタイル（必須 / 理論）
 const typeStyles = {

@@ -256,6 +256,15 @@ const Q104_170 = ({ onBack }) => {
               </ul>
             </div>
 
+            {/* 図の再掲：Step1でもグラフと照合できるように表示 */}
+            <div className="my-4 flex justify-center">
+              <img
+                src={`${imageBasePath}104-170-graph.png`}
+                alt="第104回問170：pHと分子形・イオン形濃度の関係グラフ"
+                className="max-w-full max-h-[50vh] object-contain h-auto border rounded-lg shadow-sm"
+              />
+            </div>
+
             <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
               <h4 className="font-bold text-gray-800 mb-3">
                 Henderson–Hasselbalch の式で確認
@@ -335,6 +344,15 @@ const Q104_170 = ({ onBack }) => {
             <h3 className="text-xl font-bold text-gray-800 border-b pb-2 mb-4">
               Step 3：選択肢ごとの検討
             </h3>
+
+            {/* 図の再掲：Step3でも元のグラフを参照できるように表示 */}
+            <div className="my-4 flex justify-center">
+              <img
+                src={`${imageBasePath}104-170-graph.png`}
+                alt="第104回問170：pHと分子形・イオン形濃度の関係グラフ"
+                className="max-w-full max-h-[50vh] object-contain h-auto border rounded-lg shadow-sm"
+              />
+            </div>
 
             <div className="space-y-3">
               {options.map((opt, index) => (

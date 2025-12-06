@@ -18,9 +18,11 @@ const Q106_51 = ({ onBack }) => {
 
   const titles = [
     '問題の確認',
-    'Step 1：ぬれとは何か？３つの分類',
-    'Step 2：接触角とヤングの式',
-    'Step 3：ヤングの式で解く & まとめ',
+    'Step 1：『ぬれ』とは何か？',
+    'Step 2：ぬれの3種類と接触角',
+    'Step 3：接触角 θ のイメージ',
+    'Step 4：ヤングの式と力のつり合い',
+    'Step 5：ヤングの式で国試問題を解く',
   ];
 
   const solidGamma = 585; // 固体表面張力 (mN/m)
@@ -29,6 +31,9 @@ const Q106_51 = ({ onBack }) => {
 
   const renderStepContent = (currentStep) => {
     switch (currentStep) {
+      // -----------------------------
+      // 0：問題の確認
+      // -----------------------------
       case 0:
         return (
           <div className="space-y-6">
@@ -71,51 +76,89 @@ const Q106_51 = ({ onBack }) => {
               <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-sm md:text-base flex items-start">
                 <Lightbulb className="w-5 h-5 text-yellow-600 mr-2 mt-0.5" />
                 <p className="text-gray-800">
-                  <span className="font-bold">ポイント：</span>
-                  「拡張ぬれが成立する」とは、液滴ではなく
-                  <span className="font-bold">固体表面に液が薄い膜として広がる状態</span>
-                  のことです。
-                  このとき接触角は <span className="font-mono">θ = 0°</span> となり、
-                  <span className="font-bold mx-1">ヤングの式</span>
-                  で
-                  <span className="font-mono mx-1">cos θ = 1</span>
-                  とおけるのが解法のカギになります。
+                  <span className="font-bold">この解説の流れ：</span>
+                  まず「ぬれ」とは何かを押さえ、
+                  3 種類のぬれと接触角 θ の関係を整理します。
+                  そのうえでヤングの式から固液界面張力を求めます。
                 </p>
               </div>
             </div>
           </div>
         );
 
-      case 1: {
-        const thetaDeg = 40; // 接触角のイメージ用（40°程度）
-        const theta = (Math.PI / 180) * thetaDeg;
-        const contactX = 70; // 接触線の位置 (x)
-        const contactY = 120; // 接触線の位置 (y)
-        const arcR = 26; // 接触角を描く弧の半径
-        const arcEndX = contactX + arcR * Math.cos(theta);
-        const arcEndY = contactY - arcR * Math.sin(theta);
-        const gammaVecLen = 60; // γ_L ベクトルの長さ
-        const gammaLX = contactX + gammaVecLen * Math.cos(theta);
-        const gammaLY = contactY - gammaVecLen * Math.sin(theta);
+      // -----------------------------
+      // 1：『ぬれ』とは何か？
+      // -----------------------------
+      case 1:
         return (
           <div className="space-y-6">
             <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
-              「ぬれ」とは？3種類のぬれと接触角
+              Step 1：『ぬれ』とは何か？
+            </h3>
+
+            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
+              <p className="text-sm md:text-base text-gray-800">
+                日常生活でも「よく濡れる」「水をはじく」という表現を使いますが、
+                薬剤学ではこれを定量的に扱います。
+              </p>
+              <ul className="list-disc list-inside text-sm md:text-base text-gray-800 space-y-1">
+                <li>
+                  固体表面（錠剤の表面、皮膚、ガラスなど）の上に液体（水、懸濁液など）が
+                  置かれたときの広がり方を「ぬれ」と呼ぶ。
+                </li>
+                <li>
+                  懸濁剤・乳剤・コーティング・皮膚塗布剤など、多くの製剤において
+                  「どれだけよく濡れるか」が製剤の性能に直結する。
+                </li>
+                <li>
+                  物理的には「固体・液体・気体（通常は空気）」の
+                  <span className="font-bold mx-1">3 相が接する界面の状態</span>
+                  を扱っている。
+                </li>
+              </ul>
+
+              <div className="mt-3 bg-blue-50 rounded-lg p-4 text-xs md:text-sm text-gray-800">
+                <p className="font-bold text-blue-800 mb-1">国試での見方</p>
+                <p>
+                  「ぬれ」は見た目だけでなく、
+                  このあと出てくる
+                  <span className="font-bold mx-1">接触角 θ</span>
+                  と
+                  <span className="font-bold mx-1">界面張力 γ</span>
+                  を組み合わせて定量的に議論します。
+                  まずは「固体表面上における液の広がり」のことだと
+                  イメージできれば OK です。
+                </p>
+              </div>
+            </div>
+          </div>
+        );
+
+      // -----------------------------
+      // 2：ぬれの3種類と接触角
+      // -----------------------------
+      case 2:
+        return (
+          <div className="space-y-6">
+            <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
+              Step 2：ぬれの3種類と接触角 θ
             </h3>
 
             <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
               <p className="text-sm md:text-base font-bold text-gray-900 mb-1">
-                「ぬれ」とは？
+                接触角 θ による「ぬれ」の評価
               </p>
               <p className="text-sm md:text-base text-gray-800">
-                固体表面上の液体の「ぬれ」は、
+                固体表面上の液滴の「ぬれ具合」は、
                 <span className="font-bold mx-1">接触角 θ</span>
-                で評価するのが薬学では一般的です。
-                θ の大きさによって、液がどの程度広がるかが決まります。
+                （固体表面と液滴の接線がなす角）で表すのが一般的です。
+                θ が小さいほどよく濡れ、大きいほど水をはじきます。
               </p>
 
               <div className="bg-blue-50 rounded-lg p-4 text-xs md:text-sm text-gray-800">
-                <p className="font-bold text-blue-800 mb-2">接触角による 3 つのぬれ</p>
+                <p className="font-bold text-blue-800 mb-2">
+                  接触角による 3 つのぬれ
+                </p>
                 <ul className="list-disc list-inside space-y-1">
                   <li>
                     <span className="font-bold">拡張ぬれ</span>：θ = 0°
@@ -149,7 +192,7 @@ const Q106_51 = ({ onBack }) => {
                   {/* θ = 0° 完全なぬれ */}
                   <rect x="25" y="58" width="60" height="4" fill="#bfdbfe" />
                   <text x="30" y="50" fontSize="10" fill="#374151">
-                    θ = 0°
+                    θ = 0°（拡張ぬれ）
                   </text>
 
                   {/* 0 < θ < 90° 浸漬ぬれ */}
@@ -160,7 +203,7 @@ const Q106_51 = ({ onBack }) => {
                     strokeWidth="1.5"
                   />
                   <text x="135" y="50" fontSize="10" fill="#374151">
-                    0° &lt; θ &lt; 90°
+                    0° &lt; θ &lt; 90°（浸漬ぬれ）
                   </text>
 
                   {/* θ > 90° 付着ぬれ */}
@@ -171,47 +214,40 @@ const Q106_51 = ({ onBack }) => {
                     strokeWidth="1.5"
                   />
                   <text x="235" y="50" fontSize="10" fill="#374151">
-                    θ &gt; 90°
+                    θ &gt; 90°（付着ぬれ）
                   </text>
                 </svg>
               </div>
-            </div>
 
-            {/* ★ ここから追加：ヤングの式の解説とベクトル図 */}
+              <p className="text-xs md:text-sm text-gray-700 mt-2">
+                国試では、「拡張ぬれ＝θ = 0°」という対応をしっかり覚えておくと、
+                後で出てくるヤングの式に
+                <span className="font-mono mx-1">cos θ = 1</span>
+                を代入するステップがスムーズになります。
+              </p>
+            </div>
+          </div>
+        );
+
+      // -----------------------------
+      // 3：接触角 θ と cosθ のイメージ
+      // -----------------------------
+      case 3:
+        return (
+          <div className="space-y-6">
+            <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
+              Step 3：接触角 θ と cosθ のイメージ
+            </h3>
+
             <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
-              <h4 className="font-bold text-gray-800 mb-2">
-                ヤングの式：接触角と界面張力ベクトル
-              </h4>
               <p className="text-sm md:text-base text-gray-800 mb-2">
-                固体表面上の液滴を考えると、接触線まわりで
-                <span className="font-bold mx-1">力のつり合い</span>
-                をとることで、接触角
-                <span className="font-mono mx-1">θ</span>
-                を表す
-                <span className="font-bold mx-1">ヤングの式</span>
-                が得られます。
+                接触角 θ は、固体表面と液滴表面（接触点での接線）がなす角でした。
+                ヤングの式では、そのうち
+                <span className="font-mono mx-1">cos θ</span>
+                が登場します。
               </p>
-              <div className="bg-gray-50 rounded-lg p-4 text-center">
-                <p className="text-sm text-gray-700 mb-1">
-                  ヤングの式（固体表面に平行な方向の力のつり合い）
-                </p>
-                <p className="text-xl md:text-2xl font-mono font-bold text-indigo-700">
-                  γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ
-                </p>
-                <p className="mt-2 text-xs md:text-sm text-gray-600">
-                  ⇔ cos θ = (γ<sub>S</sub> − γ<sub>SL</sub>) / γ<sub>L</sub>
-                </p>
-              </div>
-              <p className="text-xs md:text-sm text-gray-700">
-                ここでも
-                γ<sub>S</sub>：固体表面張力、
-                γ<sub>L</sub>：液体（ここでは水）の表面張力、
-                γ<sub>SL</sub>：固液界面張力です。
-                θ は固体表面と液滴の接線で測る
-                <span className="font-bold mx-1">接触角</span>
-                です。
-              </p>
-              <div className="mt-3 bg-yellow-50 rounded-lg p-4 text-xs md:text-sm text-gray-800 border border-yellow-100">
+
+              <div className="mt-2 bg-yellow-50 rounded-lg p-4 text-xs md:text-sm text-gray-800 border border-yellow-100">
                 <p className="font-bold text-yellow-800 mb-1">
                   三角関数が苦手な人向けミニ復習：cosθ は何を表している？
                 </p>
@@ -224,12 +260,15 @@ const Q106_51 = ({ onBack }) => {
                 </p>
                 <p className="mb-2">
                   さらに、原点を中心とする半径 1 の円（単位円）を考えると、円周上の点 P の座標は
-                  <span className="font-mono mx-1">
-                    P(cosθ, sinθ)
-                  </span>
+                  <span className="font-mono mx-1">P(cosθ, sinθ)</span>
                   と書けます。つまり、
-                  <span className="font-bold mx-1">cosθ は P の x 座標（横方向）</span>
-                  、<span className="font-bold mx-1">sinθ は y 座標（縦方向）</span>
+                  <span className="font-bold mx-1">
+                    cosθ は P の x 座標（横方向）
+                  </span>
+                  、
+                  <span className="font-bold mx-1">
+                    sinθ は y 座標（縦方向）
+                  </span>
                   を表しています。
                 </p>
                 <div className="mt-3 overflow-x-auto">
@@ -240,9 +279,30 @@ const Q106_51 = ({ onBack }) => {
                       aria-label="cosθ の直角三角形と単位円の図"
                     >
                       {/* 左側：直角三角形 */}
-                      <line x1="20" y1="95" x2="110" y2="95" stroke="#9ca3af" strokeWidth="1.5" />
-                      <line x1="20" y1="95" x2="20" y2="35" stroke="#9ca3af" strokeWidth="1.5" />
-                      <line x1="20" y1="35" x2="110" y2="95" stroke="#9ca3af" strokeWidth="1.5" />
+                      <line
+                        x1="20"
+                        y1="95"
+                        x2="110"
+                        y2="95"
+                        stroke="#9ca3af"
+                        strokeWidth="1.5"
+                      />
+                      <line
+                        x1="20"
+                        y1="95"
+                        x2="20"
+                        y2="35"
+                        stroke="#9ca3af"
+                        strokeWidth="1.5"
+                      />
+                      <line
+                        x1="20"
+                        y1="35"
+                        x2="110"
+                        y2="95"
+                        stroke="#9ca3af"
+                        strokeWidth="1.5"
+                      />
                       {/* 角 θ */}
                       <path
                         d="M32 95 A 15 15 0 0 1 40 80"
@@ -266,15 +326,15 @@ const Q106_51 = ({ onBack }) => {
 
                       {/* 右側：単位円 */}
                       {(() => {
-                        const cx = 260; // 円の中心 x
-                        const cy = 85; // 円の中心 y
-                        const r = 28; // 円の半径
-                        const theta = (30 * Math.PI) / 180; // 例として θ = 30°
+                        const cx = 260;
+                        const cy = 85;
+                        const r = 28;
+                        const theta = (30 * Math.PI) / 180;
 
-                        const px = cx + r * Math.cos(theta); // 点Pのx座標
-                        const py = cy - r * Math.sin(theta); // 点Pのy座標
+                        const px = cx + r * Math.cos(theta);
+                        const py = cy - r * Math.sin(theta);
 
-                        const arcR = 16; // 角度表示用の小さい半径
+                        const arcR = 16;
                         const arcStartX = cx + arcR;
                         const arcStartY = cy;
                         const arcEndX = cx + arcR * Math.cos(theta);
@@ -320,24 +380,34 @@ const Q106_51 = ({ onBack }) => {
                               strokeWidth="1.8"
                             />
 
-                            {/* 角 θ の弧（原点まわり） */}
+                            {/* 角 θ の弧 */}
                             <path
                               d={`M ${arcStartX} ${arcStartY} A ${arcR} ${arcR} 0 0 1 ${arcEndX} ${arcEndY}`}
                               fill="none"
                               stroke="#f97316"
                               strokeWidth="1.5"
                             />
-                            <text x={cx + arcR + 4} y={cy - 4} fontSize="10" fill="#f97316">
+                            <text
+                              x={cx + arcR + 4}
+                              y={cy - 4}
+                              fontSize="10"
+                              fill="#f97316"
+                            >
                               θ
                             </text>
 
                             {/* 点P と座標ラベル */}
                             <circle cx={px} cy={py} r={3} fill="#1d4ed8" />
-                            <text x={px + 4} y={py - 4} fontSize="10" fill="#1d4ed8">
+                            <text
+                              x={px + 4}
+                              y={py - 4}
+                              fontSize="10"
+                              fill="#1d4ed8"
+                            >
                               P(cosθ, sinθ)
                             </text>
 
-                            {/* cosθ, sinθ の成分（補助線） */}
+                            {/* cosθ, sinθ の成分 */}
                             <line
                               x1={px}
                               y1={py}
@@ -356,10 +426,20 @@ const Q106_51 = ({ onBack }) => {
                               strokeDasharray="4 3"
                               strokeWidth="1.3"
                             />
-                            <text x={px + 4} y={cy + 10} fontSize="9" fill="#374151">
+                            <text
+                              x={px + 4}
+                              y={cy + 10}
+                              fontSize="9"
+                              fill="#374151"
+                            >
                               cosθ
                             </text>
-                            <text x={cx - 18} y={py - 2} fontSize="9" fill="#374151">
+                            <text
+                              x={cx - 18}
+                              y={py - 2}
+                              fontSize="9"
+                              fill="#374151"
+                            >
                               sinθ
                             </text>
                           </g>
@@ -371,27 +451,23 @@ const Q106_51 = ({ onBack }) => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-2 text-center">
                   <div className="bg-white rounded-md p-2 border border-gray-200">
                     <p className="font-mono text-xs">θ = 0°</p>
-                    <p className="text-xs">
-                      P = (1, 0) → cos0° = 1
-                    </p>
+                    <p className="text-xs">P = (1, 0) → cos0° = 1</p>
                     <p className="text-[11px] text-gray-500">
                       100% 右向き（横成分が最大）
                     </p>
                   </div>
                   <div className="bg-white rounded-md p-2 border border-gray-200">
                     <p className="font-mono text-xs">θ = 90°</p>
-                    <p className="text-xs">
-                      P = (0, 1) → cos90° = 0
-                    </p>
+                    <p className="text-xs">P = (0, 1) → cos90° = 0</p>
                     <p className="text-[11px] text-gray-500">
                       真上向きなので横成分は 0
                     </p>
                   </div>
                   <div className="bg-white rounded-md p-2 border border-gray-200">
-                    <p className="font-mono text-xs">θ が大きくなるほど…</p>
-                    <p className="text-xs">
-                      cosθ は 1 → 0 → −1 と変化
+                    <p className="font-mono text-xs">
+                      θ が大きくなるほど…
                     </p>
+                    <p className="text-xs">cosθ は 1 → 0 → −1 と変化</p>
                     <p className="text-[11px] text-gray-500">
                       横成分がだんだん減り、向きも反転する
                     </p>
@@ -400,14 +476,66 @@ const Q106_51 = ({ onBack }) => {
                 <p className="mt-2">
                   本問の<strong>拡張ぬれ</strong>では
                   <span className="font-mono mx-1">θ = 0°</span>
-                  とみなせるので、ヤングの式
-                  <span className="font-mono mx-1">
-                    γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ
-                  </span>
-                  に <span className="font-mono mx-1">cos θ = 1</span> を代入できます。
-                  cosθ を「横方向成分」としてイメージしておくと、力のつり合いとの対応が分かりやすくなります。
+                  とみなせるので、ヤングの式に
+                  <span className="font-mono mx-1">cos θ = 1</span>
+                  を代入できる、というのがポイントになります。
                 </p>
               </div>
+            </div>
+          </div>
+        );
+
+      // -----------------------------
+      // 4：ヤングの式と力のつり合い
+      // -----------------------------
+      case 4: {
+        const thetaDeg = 40;
+        const theta = (Math.PI / 180) * thetaDeg;
+        const contactX = 70;
+        const contactY = 120;
+        const arcR = 26;
+        const arcEndX = contactX + arcR * Math.cos(theta);
+        const arcEndY = contactY - arcR * Math.sin(theta);
+        const gammaVecLen = 60;
+        const gammaLX = contactX + gammaVecLen * Math.cos(theta);
+        const gammaLY = contactY - gammaVecLen * Math.sin(theta);
+
+        return (
+          <div className="space-y-6">
+            <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
+              Step 4：ヤングの式と力のつり合い
+            </h3>
+
+            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
+              <p className="text-sm md:text-base text-gray-800 mb-2">
+                固体表面上の液滴を考えると、接触線まわりで
+                <span className="font-bold mx-1">力のつり合い</span>
+                をとることで、接触角
+                <span className="font-mono mx-1">θ</span>
+                を表す
+                <span className="font-bold mx-1">ヤングの式</span>
+                が得られます。
+              </p>
+              <div className="bg-gray-50 rounded-lg p-4 text-center">
+                <p className="text-sm text-gray-700 mb-1">
+                  ヤングの式（固体表面に平行な方向の力のつり合い）
+                </p>
+                <p className="text-xl md:text-2xl font-mono font-bold text-indigo-700">
+                  γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ
+                </p>
+                <p className="mt-2 text-xs md:text-sm text-gray-600">
+                  ⇔ cos θ = (γ<sub>S</sub> − γ<sub>SL</sub>) / γ<sub>L</sub>
+                </p>
+              </div>
+              <p className="text-xs md:text-sm text-gray-700">
+                ここで
+                γ<sub>S</sub>：固体表面張力、
+                γ<sub>L</sub>：液体（ここでは水）の表面張力、
+                γ<sub>SL</sub>：固液界面張力です。
+                θ は固体表面と液滴の接線で測る
+                <span className="font-bold mx-1">接触角</span>
+                です。
+              </p>
 
               <div className="mt-4 flex flex-col md:flex-row items-center md:items-start gap-4">
                 <div className="flex-1 flex items-center justify-center">
@@ -419,7 +547,7 @@ const Q106_51 = ({ onBack }) => {
                     {/* 固体表面 */}
                     <rect x="20" y="120" width="280" height="18" fill="#e5e7eb" />
 
-                    {/* 液滴（円弧で表現：イメージ図なのでここは固定パスでOK） */}
+                    {/* 液滴（模式的な円弧） */}
                     <path
                       d="M40 120 Q 160 40 280 120 Z"
                       fill="#dbeafe"
@@ -427,7 +555,7 @@ const Q106_51 = ({ onBack }) => {
                       strokeWidth="2"
                     />
 
-                    {/* 接触角 θ の弧（contactX, contactY を中心に θ を三角関数で描画） */}
+                    {/* 接触角 θ の弧 */}
                     <path
                       d={`M ${contactX + arcR} ${contactY} A ${arcR} ${arcR} 0 0 1 ${arcEndX} ${arcEndY}`}
                       fill="none"
@@ -443,7 +571,7 @@ const Q106_51 = ({ onBack }) => {
                       θ
                     </text>
 
-                    {/* γ_L ベクトル（液体-気体，θ 方向）*/}
+                    {/* γ_L ベクトル（液体-気体） */}
                     <line
                       x1={contactX}
                       y1={contactY}
@@ -452,16 +580,11 @@ const Q106_51 = ({ onBack }) => {
                       stroke="#2563eb"
                       strokeWidth="2.5"
                     />
-                    <text
-                      x={gammaLX + 4}
-                      y={gammaLY}
-                      fontSize="11"
-                      fill="#2563eb"
-                    >
+                    <text x={gammaLX + 4} y={gammaLY} fontSize="11" fill="#2563eb">
                       γ_L
                     </text>
 
-                    {/* γ_L cosθ の水平方向成分（横向き成分） */}
+                    {/* γ_L cosθ の水平方向成分 */}
                     <line
                       x1={contactX}
                       y1={contactY}
@@ -523,64 +646,36 @@ const Q106_51 = ({ onBack }) => {
                   ベクトルを模式的に示しています。
                   ヤングの式は、固体表面に平行な方向での
                   力のつり合いを表していることに注意しましょう。
+                  本問では、この式に
+                  <span className="font-mono mx-1">θ = 0°（拡張ぬれ）</span>
+                  を代入して、未知の固液界面張力 γ<sub>SL</sub> を計算します。
                 </p>
               </div>
-            </div>
-
-            {/* ★ ここから追加：接触角によるぬれの分類 */}
-            <div className="bg-green-50 rounded-xl p-4 text-sm md:text-base text-gray-800">
-              <h4 className="font-bold text-green-800 mb-2">
-                接触角による 3 つの「ぬれ」の分類
-              </h4>
-              <ul className="list-disc list-inside space-y-1">
-                <li>
-                  <span className="font-bold">拡張ぬれ</span>：
-                  θ = 0°（液が全面に薄膜となって広がる）
-                </li>
-                <li>
-                  <span className="font-bold">浸漬ぬれ</span>：
-                  0° &lt; θ ≦ 90°（よく濡れている状態）
-                </li>
-                <li>
-                  <span className="font-bold">付着ぬれ</span>：
-                  90° &lt; θ &lt; 180°（あまり濡れず、液滴に近い）
-                </li>
-              </ul>
-              <p className="mt-2 text-xs md:text-sm text-gray-700">
-                薬剤学では、固体表面への液の広がりや、懸濁剤・乳剤・
-                コーティングなどでの「ぬれ」の良し悪しを評価するときに、
-                接触角 θ と界面張力 γ を組み合わせて考えます。
-                本問の「拡張ぬれ」は θ → 0° の典型例です。
-              </p>
             </div>
           </div>
         );
       }
 
-      case 2:
+      // -----------------------------
+      // 5：ヤングの式で国試問題を解く
+      // -----------------------------
+      case 5:
         return (
-          <div className="space-y-6">
-            <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
-              数値を代入して γ
-              <sub>SL</sub>
-              を求める
-            </h3>
+          <div className="space-y-8 text-center h-full flex flex-col justify-center">
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 10 }}
+              className="bg-white p-8 rounded-2xl shadow-xl border-2 border-purple-100 max-w-xl mx-auto"
+            >
+              <CheckCircle className="w-16 h-16 mx-auto text-green-500 mb-4" />
+              <h2 className="text-3xl font-bold text-gray-800 mb-4">
+                解説終了：正解は「3　512 mN/m」
+              </h2>
 
-            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
-              <p className="text-sm md:text-base text-gray-800">
-                本問で与えられている値：
-              </p>
-              <div className="bg-gray-50 rounded-lg p-4 font-mono text-sm md:text-base text-center leading-relaxed">
-                γ<sub>S</sub>（固体の表面張力） = {solidGamma} mN/m
-                <br />
-                γ<sub>L</sub>（水の表面張力） = {waterGamma} mN/m
-                <br />
-                求めたいもの： γ<sub>SL</sub>（固液界面張力）
-              </div>
-
-              <div className="bg-yellow-50 rounded-lg p-4 text-sm md:text-base text-gray-800">
-                <p className="font-bold text-yellow-800 mb-2">
-                  ヤングの式に θ = 0° を代入して γ<sub>SL</sub> を解く
+              <div className="bg-gray-50 p-4 rounded-lg mb-4 text-sm md:text-base text-gray-800 text-left">
+                <p className="font-bold mb-2">
+                  1）ヤングの式に θ = 0°（拡張ぬれ）を代入
                 </p>
                 <p className="font-mono mb-2 text-center">
                   γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ
@@ -595,58 +690,29 @@ const Q106_51 = ({ onBack }) => {
                 <p className="text-center mb-2 font-mono">
                   ⇒ γ<sub>SL</sub> = γ<sub>S</sub> − γ<sub>L</sub>
                 </p>
+
+                <p className="font-bold mb-2 mt-4">
+                  2）与えられた値を代入
+                </p>
+                <p className="font-mono text-center leading-relaxed">
+                  γ<sub>S</sub>（固体の表面張力） = {solidGamma} mN/m
+                  <br />
+                  γ<sub>L</sub>（水の表面張力） = {waterGamma} mN/m
+                  <br />
+                  γ<sub>SL</sub> = {solidGamma} − {waterGamma} ={' '}
+                  <span className="text-2xl font-bold text-indigo-700 ml-1">
+                    {solidLiquidGamma}
+                  </span>{' '}
+                  mN/m
+                </p>
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-4 font-mono text-sm md:text-base text-center leading-relaxed">
-                γ<sub>SL</sub> = {solidGamma} − {waterGamma} ={' '}
-                <span className="text-2xl font-bold text-indigo-700">
-                  {solidLiquidGamma}
-                </span>{' '}
-                mN/m
-              </div>
-
-              <p className="text-sm md:text-base text-gray-700 text-center mt-2">
-                よって、固液界面張力は
+              <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                したがって、固液界面張力は
                 <span className="font-bold mx-1">
                   {solidLiquidGamma} mN/m
                 </span>
-                と求まります。
-              </p>
-            </div>
-          </div>
-        );
-
-      case 3:
-        return (
-          <div className="space-y-8 text-center h-full flex flex-col justify-center">
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: 'spring', stiffness: 200, damping: 10 }}
-              className="bg-white p-8 rounded-2xl shadow-xl border-2 border-purple-100 max-w-xl mx-auto"
-            >
-              <CheckCircle className="w-16 h-16 mx-auto text-green-500 mb-4" />
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                解説終了：正解は「3　512 mN/m」
-              </h2>
-              <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                拡張ぬれが成立するとき、接触角は
-                <span className="font-mono mx-1">θ = 0°</span>
-                となります。
-                ヤングの式
-                <span className="font-mono mx-1">
-                  γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ
-                </span>
-                に θ = 0° を代入すると
-                <span className="font-mono mx-1">
-                  γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub>
-                </span>
-                となり、
-                <span className="font-mono mx-1">
-                  γ<sub>SL</sub> = γ<sub>S</sub> − γ<sub>L</sub>
-                </span>
-                が得られます。
-                数値を代入すると γ<sub>SL</sub> = 585 − 73 = 512 mN/m となります。
+                となり、選択肢「3」が正解です。
               </p>
 
               <div className="bg-gray-50 p-4 rounded-lg text-left text-sm text-gray-700">
@@ -657,25 +723,24 @@ const Q106_51 = ({ onBack }) => {
                     <span className="font-mono mx-1">θ = 0°</span> とみなせる。
                   </li>
                   <li>
+                    接触角 θ による 3 種類の「ぬれ」
+                    （拡張・浸漬・付着）を区別しておく。
+                  </li>
+                  <li>
                     ヤングの式
                     <span className="font-mono mx-1">
                       γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ
                     </span>
-                    から、θ = 0° では
+                    は、固体表面に平行な方向の力のつり合いから導かれる。
+                  </li>
+                  <li>
+                    θ = 0° では
                     <span className="font-mono mx-1">
                       γ<sub>SL</sub> = γ<sub>S</sub> − γ<sub>L</sub>
                     </span>
-                    が導ける。
+                    と単純な差し算になる。
                   </li>
-                  <li>
-                    与えられた
-                    <span className="font-mono mx-1">γ<sub>S</sub> = 585</span>,
-                    <span className="font-mono mx-1">γ<sub>L</sub> = 73</span>
-                    から、固液界面張力は 512 mN/m となる。
-                  </li>
-                  <li>
-                    単位（mN/m）をそろえて計算することも確認ポイント。
-                  </li>
+                  <li>単位（mN/m）をそろえて計算することも確認ポイント。</li>
                 </ul>
               </div>
             </motion.div>

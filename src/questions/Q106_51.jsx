@@ -18,9 +18,9 @@ const Q106_51 = ({ onBack }) => {
 
   const titles = [
     '問題の確認',
-    'Step 1：ヤングの式と拡張ぬれ',
-    'Step 2：式に代入して固液界面張力を求める',
-    'Step 3：選択肢の確認とまとめ',
+    'Step 1：ぬれとは何か？３つの分類',
+    'Step 2：接触角とヤングの式',
+    'Step 3：ヤングの式で解く & まとめ',
   ];
 
   const solidGamma = 585; // 固体表面張力 (mN/m)
@@ -100,10 +100,13 @@ const Q106_51 = ({ onBack }) => {
         return (
           <div className="space-y-6">
             <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
-              ヤングの式と拡張ぬれのイメージ
+              「ぬれ」とは？3種類のぬれと接触角
             </h3>
 
             <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
+              <p className="text-sm md:text-base font-bold text-gray-900 mb-1">
+                「ぬれ」とは？
+              </p>
               <p className="text-sm md:text-base text-gray-800">
                 固体表面上の液体の「ぬれ」は、
                 <span className="font-bold mx-1">接触角 θ</span>

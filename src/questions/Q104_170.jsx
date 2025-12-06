@@ -292,6 +292,15 @@ const Q104_170 = ({ onBack }) => {
               で表されます。
             </p>
 
+            {/* グラフ：式と見比べられるよう再掲 */}
+            <div className="my-4 flex justify-center">
+              <img
+                src={`${imageBasePath}104-170-graph.png`}
+                alt="第104回問170：pHと分子形・イオン形濃度の関係グラフ"
+                className="max-w-full max-h-[50vh] object-contain h-auto border rounded-lg shadow-sm"
+              />
+            </div>
+
             <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
               <h4 className="font-bold text-gray-800">
                 1. pH 6 と pH 7 の溶解度の比
@@ -395,6 +404,16 @@ const Q104_170 = ({ onBack }) => {
               <h2 className="text-3xl font-bold text-gray-800 mb-4">
                 解説終了：正解は「1」と「3」
               </h2>
+
+              {/* グラフ：まとめ時にも図と照合できるよう再掲 */}
+              <div className="my-4 flex justify-center">
+                <img
+                  src={`${imageBasePath}104-170-graph.png`}
+                  alt="第104回問170：pHと分子形・イオン形濃度の関係グラフ"
+                  className="max-w-full max-h-[50vh] object-contain h-auto border rounded-lg shadow-sm"
+                />
+              </div>
+
               <div className="bg-gray-50 p-4 rounded-lg text-left text-sm text-gray-600">
                 <p className="font-bold mb-2">【重要ポイントのまとめ】</p>
                 <ul className="list-disc list-inside space-y-2">

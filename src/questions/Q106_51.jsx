@@ -135,6 +135,13 @@ const Q106_51 = ({ onBack }) => {
                 <span className="font-bold mx-1">崩壊・分散・溶解</span>
                 などと深く関係するため、ぬれは製剤学的にたいへん重要な物性です。
               </p>
+              <div className="mt-4 flex justify-center">
+                <img
+                  src="/image/106-51-contact_angle.png"
+                  alt="接触角とぬれやすさの関係の模式図"
+                  className="w-full max-w-3xl"
+                />
+              </div>
               <div className="mt-3 bg-blue-50 rounded-lg p-4 text-xs md:text-sm text-gray-800">
                 <p className="font-bold text-blue-800 mb-1">国試での見方</p>
                 <p>

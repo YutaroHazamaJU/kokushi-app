@@ -323,14 +323,14 @@ const Q106_51 = ({ onBack }) => {
                     <path
                       d={`M ${leftX + arcR} ${baseY} A ${arcR} ${arcR} 0 0 1 ${arcEndX} ${arcEndY}`}
                       fill="none"
-                      stroke="#f97316"
+                      stroke="#000000"
                       strokeWidth="2"
                     />
                     <text
                       x={leftX + arcR + 6}
                       y={baseY - 6}
                       fontSize="11"
-                      fill="#f97316"
+                      fill="#000000"
                     >
                       θ
                     </text>
@@ -345,7 +345,7 @@ const Q106_51 = ({ onBack }) => {
                       strokeWidth="2.5"
                     />
                     <text x={gammaLX + 4} y={gammaLY} fontSize="11" fill="#2563eb">
-                      γ_L
+                      γL
                     </text>
 
                     {/* γ_L cosθ の水平方向成分 */}
@@ -364,7 +364,7 @@ const Q106_51 = ({ onBack }) => {
                       fontSize="10"
                       fill="#60a5fa"
                     >
-                      γ_L cosθ
+                      γL cosθ
                     </text>
 
                     {/* γ_S ベクトル（固体-気体，右向き）*/}
@@ -382,7 +382,7 @@ const Q106_51 = ({ onBack }) => {
                       fontSize="11"
                       fill="#16a34a"
                     >
-                      γ_S
+                      γS
                     </text>
 
                     {/* γ_SL ベクトル（固体-液体，左向き）*/}
@@ -400,7 +400,7 @@ const Q106_51 = ({ onBack }) => {
                       fontSize="11"
                       fill="#f97316"
                     >
-                      γ_SL
+                      γSL
                     </text>
                   </svg>
                 </div>

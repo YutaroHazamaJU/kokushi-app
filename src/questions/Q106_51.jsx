@@ -367,17 +367,17 @@ const Q106_51 = ({ onBack }) => {
                       γL cosθ
                     </text>
 
-                    {/* γ_S ベクトル（固体-気体，右向き）*/}
+                    {/* γS ベクトル（固体-気体，左向き）*/}
                     <line
                       x1={leftX}
                       y1={baseY}
-                      x2={leftX + 80}
+                      x2={leftX - 80}
                       y2={baseY}
                       stroke="#16a34a"
                       strokeWidth="2.5"
                     />
                     <text
-                      x={leftX + 84}
+                      x={leftX - 92}
                       y={baseY + 12}
                       fontSize="11"
                       fill="#16a34a"
@@ -385,17 +385,17 @@ const Q106_51 = ({ onBack }) => {
                       γS
                     </text>
 
-                    {/* γ_SL ベクトル（固体-液体，左向き）*/}
+                    {/* γSL ベクトル（固体-液体，右向き）*/}
                     <line
                       x1={leftX}
                       y1={baseY}
-                      x2={leftX - 60}
+                      x2={leftX + 60}
                       y2={baseY}
                       stroke="#f97316"
                       strokeWidth="2.5"
                     />
                     <text
-                      x={leftX - 72}
+                      x={leftX + 64}
                       y={baseY + 12}
                       fontSize="11"
                       fill="#f97316"

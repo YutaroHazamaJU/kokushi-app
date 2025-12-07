@@ -309,7 +309,7 @@ const Q106_51 = ({ onBack }) => {
 
                     {/* 接触角 θ の弧（固体表面と液滴表面の接線の間の角）*/}
                     <path
-                      d={`M ${leftX + arcR} ${baseY} A ${arcR} ${arcR} 0 0 1 ${arcEndX} ${arcEndY}`}
+                      d={`M ${leftX + arcR} ${baseY} A ${arcR} ${arcR} 0 0 0 ${arcEndX} ${arcEndY}`}
                       fill="none"
                       stroke="#000000"
                       strokeWidth="2"
@@ -562,7 +562,7 @@ const Q106_51 = ({ onBack }) => {
 
                             {/* 角 θ の弧 */}
                             <path
-                              d={`M ${arcStartX} ${arcStartY} A ${arcR} ${arcR} 0 0 1 ${arcEndX} ${arcEndY}`}
+                              d={`M ${arcStartX} ${arcStartY} A ${arcR} ${arcR} 0 0 0 ${arcEndX} ${arcEndY}`}
                               fill="none"
                               stroke="#f97316"
                               strokeWidth="1.5"

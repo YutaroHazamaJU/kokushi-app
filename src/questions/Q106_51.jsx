@@ -348,19 +348,19 @@ const Q106_51 = ({ onBack }) => {
                       γL
                     </text>
 
-                    {/* γ_L cosθ の水平方向成分 */}
+                    {/* γL cosθ の水平方向成分（見やすいように固体表面から少し下にオフセット）*/}
                     <line
                       x1={leftX}
-                      y1={baseY}
-                      x2={gammaLX}
-                      y2={baseY}
+                      y1={baseY + 8}
+                      x2={leftX + gammaVecLen * Math.cos(theta)}
+                      y2={baseY + 8}
                       stroke="#93c5fd"
                       strokeDasharray="4 3"
                       strokeWidth="2"
                     />
                     <text
-                      x={gammaLX + 4}
-                      y={baseY + 4}
+                      x={leftX + gammaVecLen * Math.cos(theta) + 4}
+                      y={baseY + 20}
                       fontSize="10"
                       fill="#60a5fa"
                     >

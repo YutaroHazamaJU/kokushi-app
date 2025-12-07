@@ -10,15 +10,8 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Slide, SectionTitle, pageVariants } from '../components/Layout';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  ResponsiveContainer,
-} from 'recharts';
 import { MathJax } from 'better-react-mathjax';
+
 import newtonRheoImg from '../assets/108−50-rheology_newtonian.png';
 import binghamRheoImg from '../assets/108−50-rheology_bingham.png';
 import pseudoplasticRheoImg from '../assets/108−50-rheology_pseudoplastic.png';
@@ -28,74 +21,7 @@ import dilatantRheoImg from '../assets/108−50-rheology_dilatant.png';
 // ==========================================
 // 第108回 問50：ダイラタント流動
 // ==========================================
-// レオグラム用のデータ（横軸：ずり応力 S，縦軸：ずり速度 D）
-// 共通の「ずり速度 D」の刻みを用意して，各流動様式ごとに τ(D) を計算してプロットします。
-const shearRates = [0, 0.5, 1, 1.5, 2, 2.5];
 
-// ニュートン流動：τ = η · D （ここでは η = 1 として直線）
-const newtonianData = shearRates.map((D) => ({
-  tau: D, // η = 1 のとき τ = D
-  D,
-}));
-
-// 準粘性流動（擬塑性流動）：τ = k · D^n （n < 1 で shear-thinning）
-const kPseudoplastic = 0.8;
-const nPseudoplastic = 0.7;
-const pseudoplasticData = shearRates.map((D) => ({
-  tau: D === 0 ? 0 : kPseudoplastic * Math.pow(D, nPseudoplastic),
-  D,
-}));
-
-// 塑性流動（Bingham 流動）：τ = τ0 + ηp · D （D > 0），D = 0 のときは流れない領域
-const tau0Bingham = 0.4; // 降伏値 τ0
-const etaPlastic = 0.6;  // 降伏後の見かけ粘度
-const binghamData = shearRates.map((D) => ({
-  tau: D === 0 ? 0 : tau0Bingham + etaPlastic * D,
-  D,
-}));
-
-// 準塑性流動：τ = τy + k · D^n （n < 1，降伏値＋shear-thinning）
-const tauYieldQuasi = 0.4; // 降伏値 τy
-const kQuasi = 0.6;
-const nQuasi = 0.7;
-const quasiPlasticData = shearRates.map((D) => ({
-  tau: D === 0 ? 0 : tauYieldQuasi + kQuasi * Math.pow(D, nQuasi),
-  D,
-}));
-
-// ダイラタント流動（せん断増粘）：τ = k · D^n （n > 1 で shear-thickening）
-const kDilatant = 0.25;
-const nDilatant = 1.6;
-const dilatantData = shearRates.map((D) => ({
-  tau: D === 0 ? 0 : kDilatant * Math.pow(D, nDilatant),
-  D,
-}));
-
-// 各流動様式の「粘度 η vs ずり応力 S」グラフ用データ
-const newtonianViscData = newtonianData.map(({ tau, D }) => ({
-  tau,
-  eta: D === 0 ? null : tau / D,
-}));
-
-const pseudoplasticViscData = pseudoplasticData.map(({ tau, D }) => ({
-  tau,
-  eta: D === 0 ? null : tau / D,
-}));
-
-const binghamViscData = binghamData.map(({ tau, D }) => ({
-  tau,
-  eta: D === 0 ? null : tau / D,
-}));
-
-const quasiPlasticViscData = quasiPlasticData.map(({ tau, D }) => ({
-  tau,
-  eta: D === 0 ? null : tau / D,
-}));
-
-const dilatantViscData = dilatantData.map(({ tau, D }) => ({
-  tau,
-  eta: D === 0 ? null : tau / D,
-}));
 const Q108_50 = ({ onBack }) => {
   const [step, setStep] = useState(0);
 
@@ -157,12 +83,18 @@ const Q108_50 = ({ onBack }) => {
                     挙動。
                   </li>
                   <li>
-                    代表例：<span className="font-bold text-amber-700">デンプン濃厚懸濁液</span>
+                    代表例：
+                    <span className="font-bold text-amber-700">
+                      デンプン濃厚懸濁液
+                    </span>
                     （水＋片栗粉 → いわゆる「ウーブレック」）。
                   </li>
                   <li>
                     逆に「かき混ぜるほどサラサラになる」のは
-                    <span className="font-bold text-indigo-700">準粘性流動（擬塑性流動）</span>。
+                    <span className="font-bold text-indigo-700">
+                      準粘性流動（擬塑性流動）
+                    </span>
+                    。
                   </li>
                 </ul>
               </div>
@@ -195,8 +127,13 @@ const Q108_50 = ({ onBack }) => {
                 レオロジーの教科書に出てくる
                 <span className="font-bold mx-1">レオグラム</span>
                 では，
-                <span className="font-bold mx-1">横軸にずり応力（せん断応力） S</span>，
-                <span className="font-bold mx-1">縦軸にずり速度（せん断速度） D</span>
+                <span className="font-bold mx-1">
+                  横軸にずり応力（せん断応力） S
+                </span>
+                ，
+                <span className="font-bold mx-1">
+                  縦軸にずり速度（せん断速度） D
+                </span>
                 をとり，その傾き
                 <span className="font-mono mx-1">ΔD/ΔS</span>
                 が「流動率（fluidity）」＝粘度（η）の逆数を表します。
@@ -223,20 +160,18 @@ const Q108_50 = ({ onBack }) => {
                   <span className="font-bold">純粋な液体・低分子溶液</span>
                 </p>
                 <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
-                  <MathJax dynamic>
-                    {'\\(D = \\dfrac{1}{\\eta} S\\)'}
-                  </MathJax>
+                  <MathJax dynamic>{'\\(D = \\dfrac{1}{\\eta} S\\)'}</MathJax>
                 </p>
-              <div className="mt-3">
-                <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
-                  教科書風レオグラムのイメージ
-                </p>
-                <img
-                  src={newtonRheoImg}
-                  alt="ニュートン流動のレオグラムと粘度-せん断応力グラフ"
-                  className="w-full rounded-lg border border-gray-200"
-                />
-              </div>
+                <div className="mt-3">
+                  <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
+                    教科書風レオグラムのイメージ
+                  </p>
+                  <img
+                    src={newtonRheoImg}
+                    alt="ニュートン流動のレオグラムと粘度-せん断応力グラフ"
+                    className="w-full rounded-lg border border-gray-200"
+                  />
+                </div>
               </div>
 
               {/* 準粘性流動（擬塑性，shear-thinning，降伏値なし） */}
@@ -247,7 +182,9 @@ const Q108_50 = ({ onBack }) => {
                 </h5>
                 <p className="text-sm md:text-base text-gray-800 mb-2">
                   降伏値はなく，
-                  <span className="font-bold">かき混ぜるほどサラサラになる（粘度↓）</span>
+                  <span className="font-bold">
+                    かき混ぜるほどサラサラになる（粘度↓）
+                  </span>
                   流れ。
                 </p>
                 <p className="text-xs text-gray-600 mb-2">
@@ -259,16 +196,16 @@ const Q108_50 = ({ onBack }) => {
                     {'\\(D = \\dfrac{1}{\\eta_{\\mathrm{a}}} S^{n},\\; (n < 1)\\)'}
                   </MathJax>
                 </p>
-              <div className="mt-3">
-                <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
-                  教科書風レオグラムのイメージ
-                </p>
-                <img
-                  src={pseudoplasticRheoImg}
-                  alt="準粘性流動（擬塑性流動）のレオグラムと粘度-せん断応力グラフ"
-                  className="w-full rounded-lg border border-gray-200"
-                />
-              </div>
+                <div className="mt-3">
+                  <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
+                    教科書風レオグラムのイメージ
+                  </p>
+                  <img
+                    src={pseudoplasticRheoImg}
+                    alt="準粘性流動（擬塑性流動）のレオグラムと粘度-せん断応力グラフ"
+                    className="w-full rounded-lg border border-gray-200"
+                  />
+                </div>
               </div>
 
               {/* 塑性流動（ビンガム流動） */}
@@ -286,20 +223,20 @@ const Q108_50 = ({ onBack }) => {
                 </p>
                 <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
                   <MathJax dynamic>
-                    {"\\(D = \\dfrac{1}{\\eta'} (S - S_{0})\\)"}
+                    {'\\(D = \\dfrac{1}{\\eta\'} (S - S_{0})\\)'}
                   </MathJax>
                 </p>
-              <div className="mt-3">
-                <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
-                  教科書風レオグラムのイメージ
-                </p>
-                <img
-                  src={binghamRheoImg}
-                  alt="塑性流動（ビンガム流動）のレオグラムと粘度-せん断応力グラフ"
-                  className="w-full rounded-lg border border-gray-200"
-                />
+                <div className="mt-3">
+                  <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
+                    教科書風レオグラムのイメージ
+                  </p>
+                  <img
+                    src={binghamRheoImg}
+                    alt="塑性流動（ビンガム流動）のレオグラムと粘度-せん断応力グラフ"
+                    className="w-full rounded-lg border border-gray-200"
+                  />
+                </div>
               </div>
-            </div>
 
               {/* 準塑性流動（降伏値＋shear-thinning） */}
               <div className="bg-white p-4 rounded-xl border border-purple-200 shadow-sm">
@@ -319,19 +256,21 @@ const Q108_50 = ({ onBack }) => {
                 </p>
                 <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
                   <MathJax dynamic>
-                    {'\\(D = \\dfrac{1}{\\eta\'_{\\mathrm{a}}} (S - S_{0})^{n},\\; (n < 1)\\)'}
+                    {
+                      '\\(D = \\dfrac{1}{\\eta\'_{\\mathrm{a}}} (S - S_{0})^{n},\\; (n < 1)\\)'
+                    }
                   </MathJax>
                 </p>
-              <div className="mt-3">
-                <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
-                  教科書風レオグラムのイメージ
-                </p>
-                <img
-                  src={quasiPlasticRheoImg}
-                  alt="準塑性流動のレオグラムと粘度-せん断応力グラフ"
-                  className="w-full rounded-lg border border-gray-200"
-                />
-              </div>
+                <div className="mt-3">
+                  <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
+                    教科書風レオグラムのイメージ
+                  </p>
+                  <img
+                    src={quasiPlasticRheoImg}
+                    alt="準塑性流動のレオグラムと粘度-せん断応力グラフ"
+                    className="w-full rounded-lg border border-gray-200"
+                  />
+                </div>
               </div>
 
               {/* ダイラタント流動 */}
@@ -342,7 +281,8 @@ const Q108_50 = ({ onBack }) => {
                 </h5>
                 <p className="text-sm md:text-base text-gray-800 mb-2">
                   ゆっくり動かすと流れるが，強く・速くかき混ぜると
-                  <span className="font-bold">急に固くなる（粘度↑）</span>流れ。
+                  <span className="font-bold">急に固くなる（粘度↑）</span>
+                  流れ。
                 </p>
                 <p className="text-xs text-gray-600 mb-2">
                   例：高濃度デンプン懸濁液（50%以上）など
@@ -352,15 +292,16 @@ const Q108_50 = ({ onBack }) => {
                     {'\\(D = \\dfrac{1}{\\eta_{\\mathrm{a}}} S^{n},\\; (n > 1)\\)'}
                   </MathJax>
                 </p>
-              <div className="mt-3">
-                <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
-                  教科書風レオグラムのイメージ
-                </p>
-                <img
-                  src={dilatantRheoImg}
-                  alt="ダイラタント流動のレオグラムと粘度-せん断応力グラフ"
-                  className="w-full rounded-lg border border-gray-200"
-                />
+                <div className="mt-3">
+                  <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
+                    教科書風レオグラムのイメージ
+                  </p>
+                  <img
+                    src={dilatantRheoImg}
+                    alt="ダイラタント流動のレオグラムと粘度-せん断応力グラフ"
+                    className="w-full rounded-lg border border-gray-200"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -381,7 +322,9 @@ const Q108_50 = ({ onBack }) => {
                 粘度 η は
                 <span className="font-mono mx-1">η = τ / D</span>
                 と定義され，
-                <span className="font-bold mx-1">せん断速度 D を変えたときに見かけ粘度がどう変化するか</span>
+                <span className="font-bold mx-1">
+                  せん断速度 D を変えたときに見かけ粘度がどう変化するか
+                </span>
                 によって，ニュートン流動（一定），準粘性流動（shear-thinning），塑性流動（降伏値あり），準塑性流動（降伏値＋shear-thinning），ダイラタント流動（shear-thickening）に分類します。
               </p>
             </div>
@@ -413,7 +356,8 @@ const Q108_50 = ({ onBack }) => {
                 <h4 className="font-bold text-gray-800 mb-1">2. チンク油</h4>
                 <p className="text-sm md:text-base text-gray-800 mb-1">
                   酸化亜鉛などの粉体が油中に分散した高濃度懸濁製剤。
-                  一般に<span className="font-bold text-rose-700">塑性流動</span>
+                  一般に
+                  <span className="font-bold text-rose-700">塑性流動</span>
                   （降伏値を持つ）を示す。
                 </p>
                 <p className="text-xs text-gray-600">
@@ -427,7 +371,8 @@ const Q108_50 = ({ onBack }) => {
                 <h4 className="font-bold text-gray-800 mb-1">3. グリセリン</h4>
                 <p className="text-sm md:text-base text-gray-800 mb-1">
                   比較的粘度の高い単純な液体で，
-                  <span className="font-bold">ニュートン流動</span> を示す。
+                  <span className="font-bold">ニュートン流動</span>
+                  を示す。
                 </p>
                 <p className="text-xs text-gray-600">
                   せん断速度を変えても粘度はほぼ一定で，せん断増粘もしない。
@@ -457,7 +402,8 @@ const Q108_50 = ({ onBack }) => {
                 <h4 className="font-bold text-gray-800 mb-1">5. ヒマシ油</h4>
                 <p className="text-sm md:text-base text-gray-800 mb-1">
                   粘度は高いが，基本的には
-                  <span className="font-bold">ニュートン流動</span> に近い挙動を示す。
+                  <span className="font-bold">ニュートン流動</span>
+                  に近い挙動を示す。
                 </p>
                 <p className="text-xs text-gray-600">
                   粘度は高い＝ドロドロだが，せん断速度に対する粘度変化は小さい。
@@ -492,9 +438,7 @@ const Q108_50 = ({ onBack }) => {
                   </span>
                   挙動です。
                   高濃度のデンプン懸濁液のように，
-                  <span className="font-bold">
-                    強くかき混ぜると急に固くなる
-                  </span>
+                  <span className="font-bold">強くかき混ぜると急に固くなる</span>
                   系が代表例です。
                 </p>
               </div>
@@ -519,9 +463,7 @@ const Q108_50 = ({ onBack }) => {
                     降伏値＋準粘性（降伏値を超えると流れ，さらに shear-thinning）。
                   </li>
                   <li>
-                    <span className="font-bold text-amber-700">
-                      ダイラタント流動
-                    </span>
+                    <span className="font-bold text-amber-700">ダイラタント流動</span>
                     ：かき混ぜるほど固くなる（高濃度デンプン濃厚水性懸濁液）。
                   </li>
                 </ul>
@@ -546,7 +488,11 @@ const Q108_50 = ({ onBack }) => {
   };
 
   return (
-    <div
+    <motion.div
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={pageVariants}
       className="flex flex-col h-screen bg-white"
     >
       {/* ヘッダー */}
@@ -609,7 +555,7 @@ const Q108_50 = ({ onBack }) => {
           <ChevronRight className="w-5 h-5 ml-2" />
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

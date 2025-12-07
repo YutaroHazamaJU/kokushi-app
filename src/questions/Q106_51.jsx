@@ -20,8 +20,8 @@ const Q106_51 = ({ onBack }) => {
     '問題の確認',
     'Step 1：『ぬれ』とは何か？',
     'Step 2：ぬれの3種類と接触角',
-    'Step 3：接触角 θ のイメージ',
-    'Step 4：ヤングの式と力のつり合い',
+    'Step 3：ヤングの式と力のつり合い',
+    'Step 4：接触角 θ と cosθ のイメージ（補足）',
     'Step 5：ヤングの式で国試問題を解く',
   ];
   const contactAngleImgPath =
@@ -146,6 +146,9 @@ const Q106_51 = ({ onBack }) => {
                   className="w-full max-w-3xl"
                 />
               </div>
+              <p className="mt-1 text-[11px] text-gray-500 text-right">
+                図：製剤学・物理薬剤学通論 第2版（東邦大学薬学部 教授 野口修治 ほか）より転載
+              </p>
               <div className="mt-3 bg-blue-50 rounded-lg p-4 text-xs md:text-sm text-gray-800">
                 <p className="font-bold text-blue-800 mb-1">国試での見方</p>
                 <p>
@@ -224,6 +227,9 @@ const Q106_51 = ({ onBack }) => {
                   className="w-full max-w-3xl"
                 />
               </div>
+              <p className="mt-1 text-[11px] text-gray-500 text-right">
+                図：製剤学・物理薬剤学通論 第2版（東邦大学薬学部 教授 野口修治 ほか）より転載
+              </p>
 
               <p className="text-xs md:text-sm text-gray-700 mt-2">
                 国試では、「拡張ぬれ＝θ = 0°」という対応をしっかり覚えておくと、
@@ -236,21 +242,205 @@ const Q106_51 = ({ onBack }) => {
         );
 
       // -----------------------------
-      // 3：接触角 θ と cosθ のイメージ
+      // 3：ヤングの式と力のつり合い
       // -----------------------------
-      case 3:
+      case 3: {
+        // 幾何学的に「接線に沿った」接触角を表現するために、
+        // 円弧で液滴を描き、その接点で接線方向に γ_L を描画する
+        const baseY = 120; // 固体表面（水平）の y 座標
+        const leftX = 86; // 液滴が固体と接する左端（接触線）
+        const rightX = 234; // 右端（左右対称にとった例）
+
+        const thetaDeg = 70; // 接触角 θ の例（0° < θ < 90°）
+        const theta = (Math.PI / 180) * thetaDeg;
+
+        // γ_L ベクトル（液体-気体界面張力）
+        const gammaVecLen = 60;
+        const gammaLX = leftX + gammaVecLen * Math.cos(theta);
+        const gammaLY = baseY - gammaVecLen * Math.sin(theta);
+
+        // 接触角 θ を描くための小さな弧
+        const arcR = 26;
+        const arcEndX = leftX + arcR * Math.cos(theta);
+        const arcEndY = baseY - arcR * Math.sin(theta);
+
         return (
           <div className="space-y-6">
             <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
-              Step 3：接触角 θ と cosθ のイメージ
+              Step 3：ヤングの式と力のつり合い
             </h3>
 
             <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
               <p className="text-sm md:text-base text-gray-800 mb-2">
-                接触角 θ は、固体表面と液滴表面（接触点での接線）がなす角でした。
-                ヤングの式では、そのうち
+                固体表面上の液滴を考えると、接触線まわりで
+                <span className="font-bold mx-1">力のつり合い</span>
+                をとることで、接触角
+                <span className="font-mono mx-1">θ</span>
+                を表す
+                <span className="font-bold mx-1">ヤングの式</span>
+                が得られます。
+              </p>
+              <div className="bg-gray-50 rounded-lg p-4 text-center">
+                <p className="text-sm text-gray-700 mb-1">
+                  ヤングの式（固体表面に平行な方向の力のつり合い）
+                </p>
+                <p className="text-xl md:text-2xl font-mono font-bold text-indigo-700">
+                  γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ
+                </p>
+                <p className="mt-2 text-xs md:text-sm text-gray-600">
+                  ⇔ cos θ = (γ<sub>S</sub> − γ<sub>SL</sub>) / γ<sub>L</sub>
+                </p>
+              </div>
+              <p className="text-xs md:text-sm text-gray-700">
+                ここで
+                γ<sub>S</sub>：固体表面張力、
+                γ<sub>L</sub>：液体（ここでは水）の表面張力、
+                γ<sub>SL</sub>：固液界面張力です。
+                θ は固体表面と液滴の接線で測る
+                <span className="font-bold mx-1">接触角</span>
+                です。
+              </p>
+
+              <div className="mt-4 flex flex-col md:flex-row items-center md:items-start gap-4">
+                <div className="flex-1 flex items-center justify-center">
+                  <svg
+                    viewBox="0 0 320 180"
+                    className="w-full max-w-xs"
+                    aria-label="ヤングの式の模式図"
+                  >
+                    {/* 固体表面 */}
+                    <rect x="20" y={baseY} width="280" height="18" fill="#e5e7eb" />
+
+                    {/* 液滴（円弧で描いた模式図）*/}
+                    <path
+                      d={`M ${leftX} ${baseY} A 80 80 0 0 1 ${rightX} ${baseY} Z`}
+                      fill="#dbeafe"
+                      stroke="#60a5fa"
+                      strokeWidth="2"
+                    />
+
+                    {/* 接触角 θ の弧（固体表面と液滴表面の接線の間の角）*/}
+                    <path
+                      d={`M ${leftX + arcR} ${baseY} A ${arcR} ${arcR} 0 0 1 ${arcEndX} ${arcEndY}`}
+                      fill="none"
+                      stroke="#f97316"
+                      strokeWidth="2"
+                    />
+                    <text
+                      x={leftX + arcR + 6}
+                      y={baseY - 6}
+                      fontSize="11"
+                      fill="#f97316"
+                    >
+                      θ
+                    </text>
+
+                    {/* γ_L ベクトル（液体-気体，接線方向）*/}
+                    <line
+                      x1={leftX}
+                      y1={baseY}
+                      x2={gammaLX}
+                      y2={gammaLY}
+                      stroke="#2563eb"
+                      strokeWidth="2.5"
+                    />
+                    <text x={gammaLX + 4} y={gammaLY} fontSize="11" fill="#2563eb">
+                      γ_L
+                    </text>
+
+                    {/* γ_L cosθ の水平方向成分 */}
+                    <line
+                      x1={leftX}
+                      y1={baseY}
+                      x2={gammaLX}
+                      y2={baseY}
+                      stroke="#93c5fd"
+                      strokeDasharray="4 3"
+                      strokeWidth="2"
+                    />
+                    <text
+                      x={gammaLX + 4}
+                      y={baseY + 4}
+                      fontSize="10"
+                      fill="#60a5fa"
+                    >
+                      γ_L cosθ
+                    </text>
+
+                    {/* γ_S ベクトル（固体-気体，右向き）*/}
+                    <line
+                      x1={leftX}
+                      y1={baseY}
+                      x2={leftX + 80}
+                      y2={baseY}
+                      stroke="#16a34a"
+                      strokeWidth="2.5"
+                    />
+                    <text
+                      x={leftX + 84}
+                      y={baseY + 12}
+                      fontSize="11"
+                      fill="#16a34a"
+                    >
+                      γ_S
+                    </text>
+
+                    {/* γ_SL ベクトル（固体-液体，左向き）*/}
+                    <line
+                      x1={leftX}
+                      y1={baseY}
+                      x2={leftX - 60}
+                      y2={baseY}
+                      stroke="#f97316"
+                      strokeWidth="2.5"
+                    />
+                    <text
+                      x={leftX - 72}
+                      y={baseY + 12}
+                      fontSize="11"
+                      fill="#f97316"
+                    >
+                      γ_SL
+                    </text>
+                  </svg>
+                </div>
+                <p className="flex-1 text-xs md:text-sm text-gray-600">
+                  図では、固体表面上の液滴と、接触線まわりの
+                  γ<sub>S</sub>, γ<sub>SL</sub>, γ<sub>L</sub> の
+                  ベクトルを模式的に示しています。
+                  液体-気体界面張力 γ<sub>L</sub> は、
+                  <span className="font-bold mx-1">固体表面と接している点における液滴の接線方向</span>
+                  にとられており、その水平方向成分が
+                  <span className="font-mono mx-1">γ<sub>L</sub> cosθ</span>
+                  です。
+                  ヤングの式は、固体表面に平行な方向での
+                  力のつり合いを表していることに注意しましょう。
+                  本問では、この式に
+                  <span className="font-mono mx-1">θ = 0°（拡張ぬれ）</span>
+                  を代入して、未知の固液界面張力 γ<sub>SL</sub> を計算します。
+                </p>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      // -----------------------------
+      // 4：接触角 θ と cosθ のイメージ（補足）
+      // -----------------------------
+      case 4:
+        return (
+          <div className="space-y-6">
+            <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
+              Step 4：接触角 θ と cosθ のイメージ（補足）
+            </h3>
+
+            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
+              <p className="text-sm md:text-base text-gray-800 mb-2">
+                前のステップで見たヤングの式には
                 <span className="font-mono mx-1">cos θ</span>
-                が登場します。
+                が含まれていました。ここでは、「cosθ が何を表しているか」を
+                軽く復習しておきます（三角関数が苦手な人向けの補足です）。
               </p>
 
               <div className="mt-2 bg-yellow-50 rounded-lg p-4 text-xs md:text-sm text-gray-800 border border-yellow-100">
@@ -484,183 +674,14 @@ const Q106_51 = ({ onBack }) => {
                   <span className="font-mono mx-1">θ = 0°</span>
                   とみなせるので、ヤングの式に
                   <span className="font-mono mx-1">cos θ = 1</span>
-                  を代入できる、というのがポイントになります。
+                  を代入できます。
+                  このスライドの内容は、式の計算に自信がないときに見返す
+                  「お守り」のような復習だと考えてください。
                 </p>
               </div>
             </div>
           </div>
         );
-
-      // -----------------------------
-      // 4：ヤングの式と力のつり合い
-      // -----------------------------
-      case 4: {
-        const thetaDeg = 40;
-        const theta = (Math.PI / 180) * thetaDeg;
-        const contactX = 70;
-        const contactY = 120;
-        const arcR = 26;
-        const arcEndX = contactX + arcR * Math.cos(theta);
-        const arcEndY = contactY - arcR * Math.sin(theta);
-        const gammaVecLen = 60;
-        const gammaLX = contactX + gammaVecLen * Math.cos(theta);
-        const gammaLY = contactY - gammaVecLen * Math.sin(theta);
-
-        return (
-          <div className="space-y-6">
-            <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
-              Step 4：ヤングの式と力のつり合い
-            </h3>
-
-            <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
-              <p className="text-sm md:text-base text-gray-800 mb-2">
-                固体表面上の液滴を考えると、接触線まわりで
-                <span className="font-bold mx-1">力のつり合い</span>
-                をとることで、接触角
-                <span className="font-mono mx-1">θ</span>
-                を表す
-                <span className="font-bold mx-1">ヤングの式</span>
-                が得られます。
-              </p>
-              <div className="bg-gray-50 rounded-lg p-4 text-center">
-                <p className="text-sm text-gray-700 mb-1">
-                  ヤングの式（固体表面に平行な方向の力のつり合い）
-                </p>
-                <p className="text-xl md:text-2xl font-mono font-bold text-indigo-700">
-                  γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ
-                </p>
-                <p className="mt-2 text-xs md:text-sm text-gray-600">
-                  ⇔ cos θ = (γ<sub>S</sub> − γ<sub>SL</sub>) / γ<sub>L</sub>
-                </p>
-              </div>
-              <p className="text-xs md:text-sm text-gray-700">
-                ここで
-                γ<sub>S</sub>：固体表面張力、
-                γ<sub>L</sub>：液体（ここでは水）の表面張力、
-                γ<sub>SL</sub>：固液界面張力です。
-                θ は固体表面と液滴の接線で測る
-                <span className="font-bold mx-1">接触角</span>
-                です。
-              </p>
-
-              <div className="mt-4 flex flex-col md:flex-row items-center md:items-start gap-4">
-                <div className="flex-1 flex items-center justify-center">
-                  <svg
-                    viewBox="0 0 320 180"
-                    className="w-full max-w-xs"
-                    aria-label="ヤングの式の模式図"
-                  >
-                    {/* 固体表面 */}
-                    <rect x="20" y="120" width="280" height="18" fill="#e5e7eb" />
-
-                    {/* 液滴（模式的な円弧） */}
-                    <path
-                      d="M40 120 Q 160 40 280 120 Z"
-                      fill="#dbeafe"
-                      stroke="#60a5fa"
-                      strokeWidth="2"
-                    />
-
-                    {/* 接触角 θ の弧 */}
-                    <path
-                      d={`M ${contactX + arcR} ${contactY} A ${arcR} ${arcR} 0 0 1 ${arcEndX} ${arcEndY}`}
-                      fill="none"
-                      stroke="#f97316"
-                      strokeWidth="2"
-                    />
-                    <text
-                      x={contactX + arcR + 6}
-                      y={contactY - 6}
-                      fontSize="11"
-                      fill="#f97316"
-                    >
-                      θ
-                    </text>
-
-                    {/* γ_L ベクトル（液体-気体） */}
-                    <line
-                      x1={contactX}
-                      y1={contactY}
-                      x2={gammaLX}
-                      y2={gammaLY}
-                      stroke="#2563eb"
-                      strokeWidth="2.5"
-                    />
-                    <text x={gammaLX + 4} y={gammaLY} fontSize="11" fill="#2563eb">
-                      γ_L
-                    </text>
-
-                    {/* γ_L cosθ の水平方向成分 */}
-                    <line
-                      x1={contactX}
-                      y1={contactY}
-                      x2={contactX + gammaVecLen * Math.cos(theta)}
-                      y2={contactY}
-                      stroke="#93c5fd"
-                      strokeDasharray="4 3"
-                      strokeWidth="2"
-                    />
-                    <text
-                      x={contactX + gammaVecLen * Math.cos(theta) + 4}
-                      y={contactY + 4}
-                      fontSize="10"
-                      fill="#60a5fa"
-                    >
-                      γ_L cosθ
-                    </text>
-
-                    {/* γ_S ベクトル（固体-気体，右向き）*/}
-                    <line
-                      x1={contactX}
-                      y1={contactY}
-                      x2={contactX + 80}
-                      y2={contactY}
-                      stroke="#16a34a"
-                      strokeWidth="2.5"
-                    />
-                    <text
-                      x={contactX + 84}
-                      y={contactY + 12}
-                      fontSize="11"
-                      fill="#16a34a"
-                    >
-                      γ_S
-                    </text>
-
-                    {/* γ_SL ベクトル（固体-液体，左向き）*/}
-                    <line
-                      x1={contactX}
-                      y1={contactY}
-                      x2={contactX - 60}
-                      y2={contactY}
-                      stroke="#f97316"
-                      strokeWidth="2.5"
-                    />
-                    <text
-                      x={contactX - 72}
-                      y={contactY + 12}
-                      fontSize="11"
-                      fill="#f97316"
-                    >
-                      γ_SL
-                    </text>
-                  </svg>
-                </div>
-                <p className="flex-1 text-xs md:text-sm text-gray-600">
-                  図では、固体表面上の液滴と、接触線まわりの
-                  γ<sub>S</sub>, γ<sub>SL</sub>, γ<sub>L</sub> の
-                  ベクトルを模式的に示しています。
-                  ヤングの式は、固体表面に平行な方向での
-                  力のつり合いを表していることに注意しましょう。
-                  本問では、この式に
-                  <span className="font-mono mx-1">θ = 0°（拡張ぬれ）</span>
-                  を代入して、未知の固液界面張力 γ<sub>SL</sub> を計算します。
-                </p>
-              </div>
-            </div>
-          </div>
-        );
-      }
 
       // -----------------------------
       // 5：ヤングの式で国試問題を解く

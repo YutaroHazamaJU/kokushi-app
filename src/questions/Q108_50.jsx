@@ -18,11 +18,12 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from 'recharts';
+import { MathJax } from 'better-react-mathjax';
 
 // ==========================================
 // 第108回 問50：ダイラタント流動
 // ==========================================
-// レオグラム用のデータ（横軸：ずり応力 τ，縦軸：ずり速度 D）
+// レオグラム用のデータ（横軸：ずり応力 S，縦軸：ずり速度 D）
 // 共通の「ずり速度 D」の刻みを用意して，各流動様式ごとに τ(D) を計算してプロットします。
 const shearRates = [0, 0.5, 1, 1.5, 2, 2.5];
 
@@ -163,10 +164,10 @@ const Q108_50 = ({ onBack }) => {
                 レオロジーの教科書に出てくる
                 <span className="font-bold mx-1">レオグラム</span>
                 では，
-                <span className="font-bold mx-1">横軸にずり応力（せん断応力） τ = F / A</span>，
+                <span className="font-bold mx-1">横軸にずり応力（せん断応力） S = F / A</span>，
                 <span className="font-bold mx-1">縦軸にずり速度（せん断速度） D = dv / dy</span>
                 をとり，その傾き
-                <span className="font-mono mx-1">D / τ</span>
+                <span className="font-mono mx-1">D / S</span>
                 が「流動率（fluidity）」＝粘度の逆数を表します。
                 第108回 問50 では，このレオグラム上で
                 <span className="font-bold">
@@ -176,7 +177,7 @@ const Q108_50 = ({ onBack }) => {
               </p>
               <p className="mt-2 text-xs md:text-sm text-gray-800">
                 ここで，<span className="font-bold">ずり応力（せん断応力）</span>は
-                <span className="font-mono mx-1">τ = F / A</span>
+                <span className="font-mono mx-1">S = F / A</span>
                 （接触面積 A に力 F を加えたときの単位面積あたりの力）で
                 <span className="font-bold mx-1">レオグラムの横軸</span>にとり，
                 <span className="font-bold mx-1">ずり速度（せん断速度）</span>は
@@ -184,7 +185,7 @@ const Q108_50 = ({ onBack }) => {
                 （層ごとの速度差 dv を距離 dy で割ったもの）で
                 <span className="font-bold mx-1">縦軸</span>にとります。
                 ニュートン流動では
-                <span className="font-mono mx-1">τ = η · D</span>
+                <span className="font-mono mx-1">S = η · D</span>
                 が成り立ち，粘度 η が一定なので，レオグラム上では原点を通る直線になります。
               </p>
               <div className="mt-3 bg-white rounded-lg p-3 border border-blue-100">
@@ -355,9 +356,9 @@ const Q108_50 = ({ onBack }) => {
                       板の間の流体が少しずつ「ずれて」流れます。
                     </p>
                     <p>
-                      単位面積あたりの力が
-                      <span className="font-mono mx-1">τ = F / A</span>
-                      （ずり応力），
+                    単位面積あたりの力が
+                    <span className="font-mono mx-1">S = F / A</span>
+                    （ずり応力），
                       層ごとの速度差が
                       <span className="font-mono mx-1">dv</span>，
                       層間距離が
@@ -367,7 +368,7 @@ const Q108_50 = ({ onBack }) => {
                     <p>
                       ニュートン流動では，
                       <span className="font-mono mx-1">
-                        τ = η · (dv / dy)
+                        S = η · (dv / dy)
                       </span>
                       が成り立ち，
                       <span className="font-bold">η が「粘度」の定数</span>
@@ -433,9 +434,14 @@ const Q108_50 = ({ onBack }) => {
                       ずり速度 D
                     </span>
                     <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
-                      ずり応力 τ
+                      ずり応力 S
                     </span>
                   </div>
+                  <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
+                    <MathJax dynamic>
+                      {'\\(D = \\dfrac{1}{\\eta} S\\)'}
+                    </MathJax>
+                  </p>
                 </div>
               </div>
 
@@ -495,9 +501,14 @@ const Q108_50 = ({ onBack }) => {
                       ずり速度 D
                     </span>
                     <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
-                      ずり応力 τ
+                      ずり応力 S
                     </span>
                   </div>
+                  <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
+                    <MathJax dynamic>
+                      {'\\(D = \\dfrac{1}{\\eta_{\\mathrm{a}}} S^{n},\\; (n &gt; 1)\\)'}
+                    </MathJax>
+                  </p>
                 </div>
               </div>
 
@@ -561,6 +572,11 @@ const Q108_50 = ({ onBack }) => {
                       ずり応力 S
                     </span>
                   </div>
+                  <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
+                    <MathJax dynamic>
+                      {"\\(D = \\dfrac{1}{\\eta'} (S - S_{0})\\)"}
+                    </MathJax>
+                  </p>
                 </div>
               </div>
 
@@ -624,6 +640,11 @@ const Q108_50 = ({ onBack }) => {
                       ずり応力 S
                     </span>
                   </div>
+                  <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
+                    <MathJax dynamic>
+                      {'\\(D = \\dfrac{1}{\\eta\'_{\\mathrm{a}}} (S - S_{0})^{n},\\; (n &gt; 1)\\)'}
+                    </MathJax>
+                  </p>
                 </div>
               </div>
 
@@ -683,9 +704,14 @@ const Q108_50 = ({ onBack }) => {
                         ずり速度 D
                       </span>
                       <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
-                        ずり応力 τ
+                        ずり応力 S
                       </span>
                     </div>
+                    <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
+                      <MathJax dynamic>
+                        {'\\(D = \\dfrac{1}{\\eta_{\\mathrm{a}}} S^{n},\\; (n &lt; 1)\\)'}
+                      </MathJax>
+                    </p>
                   </div>
 
                   {/* イメージ図：ビーカー内のデンプン懸濁液 */}

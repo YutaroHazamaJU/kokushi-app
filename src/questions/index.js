@@ -25,7 +25,7 @@ import Q108_49 from './Q108_49';
 import Q108_50 from './Q108_50';
 import Q108_175 from './Q108_175';
 import Q109_48 from './Q109_48';
-import Q109_49 from './Q109_49';
+// import Q109_49 from './Q109_49';
 import Q109_50 from './Q109_50';
 import Q106_51 from './Q106_51';
 import Q110_49 from './Q110_49';
@@ -150,19 +150,19 @@ const questionListBase = [
     component: Q109_48,
     kind: 'calc',
   },
-  {
-    id: '109-49',
-    year: 109,
-    num: 49,
-    title: '第109回 問49',
-    desc: '薬剤：液体の表面張力を測定する方法',
-    field: '物理薬剤',
-    tags: ['表面張力', '測定法', '薬剤'],
-    icon: Thermometer,
-    color: 'bg-orange-50 border-orange-200',
-    component: Q109_49,
-    kind: 'knowledge',
-  },
+  // {
+  //   id: '109-49',
+  //   year: 109,
+  //   num: 49,
+  //   title: '第109回 問49',
+  //   desc: '薬剤：液体の表面張力を測定する方法',
+  //   field: '物理薬剤',
+  //   tags: ['表面張力', '測定法', '薬剤'],
+  //   icon: Thermometer,
+  //   color: 'bg-orange-50 border-orange-200',
+  //   component: Q109_49,
+  //   kind: 'knowledge',
+  // },
   {
     id: '109-50',
     year: 109,

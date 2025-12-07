@@ -157,7 +157,7 @@ const Q108_50 = ({ onBack }) => {
             <div className="bg-blue-50 p-4 rounded-xl border-l-4 border-blue-500">
               <h4 className="font-bold text-blue-700 mb-2 flex items-center">
                 <Lightbulb className="w-5 h-5 mr-2" />
-                「せん断速度」と「見かけ粘度」の関係で分類する
+                5種類の流動様式をレオグラムでイメージする
               </h4>
               <p className="text-sm md:text-base text-gray-800">
                 レオロジーの教科書に出てくる
@@ -721,6 +721,19 @@ const Q108_50 = ({ onBack }) => {
       case 2:
         return (
           <div className="space-y-6">
+            <div className="bg-blue-50 p-4 rounded-xl border-l-4 border-blue-500">
+              <h4 className="font-bold text-blue-700 mb-2 flex items-center">
+                <Lightbulb className="w-5 h-5 mr-2" />
+                「せん断速度」と「見かけ粘度」の関係で分類する
+              </h4>
+              <p className="text-xs md:text-sm text-gray-800">
+                粘度 η は
+                <span className="font-mono mx-1">η = τ / D</span>
+                と定義され，
+                <span className="font-bold mx-1">せん断速度 D を変えたときに見かけ粘度がどう変化するか</span>
+                によって，ニュートン流動（一定），準粘性流動（shear-thinning），塑性流動（降伏値あり），準塑性流動（降伏値＋shear-thinning），ダイラタント流動（shear-thickening）に分類します。
+              </p>
+            </div>
             <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
               各選択肢を「流動様式」と「製剤例」で確認
             </h3>

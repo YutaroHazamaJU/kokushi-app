@@ -501,12 +501,12 @@ const Q106_51 = ({ onBack }) => {
                       />
                       {/* 角 θ */}
                       <path
-                        d="M32 95 A 15 15 0 0 1 40 80"
+                        d="M100 95 A 10 10 0 0 1 101 89"
                         fill="none"
                         stroke="#f97316"
                         strokeWidth="1.5"
                       />
-                      <text x="42" y="82" fontSize="10" fill="#f97316">
+                      <text x="106" y="86" fontSize="10" fill="#f97316">
                         θ
                       </text>
                       {/* 辺のラベル */}

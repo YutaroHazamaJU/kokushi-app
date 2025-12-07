@@ -113,40 +113,41 @@ const Q108_50 = ({ onBack }) => {
         );
 
       // -----------------------------------
-      // 1. 流動様式の基本（5種類）
+      // 1. 流動様式の基本（5種類） 2×3 配置
       // -----------------------------------
       case 1:
         return (
           <div className="space-y-6">
-            <div className="bg-blue-50 p-4 rounded-xl border-l-4 border-blue-500">
-              <h4 className="font-bold text-blue-700 mb-2 flex items-center">
-                <Lightbulb className="w-5 h-5 mr-2" />
-                5種類の流動様式をレオグラムでイメージする
-              </h4>
-              <p className="text-sm md:text-base text-gray-800">
-                レオロジーの教科書に出てくる
-                <span className="font-bold mx-1">レオグラム</span>
-                では，
-                <span className="font-bold mx-1">
-                  横軸にずり応力（せん断応力） S
-                </span>
-                ，
-                <span className="font-bold mx-1">
-                  縦軸にずり速度（せん断速度） D
-                </span>
-                をとり，その傾き
-                <span className="font-mono mx-1">ΔD/ΔS</span>
-                が「流動率（fluidity）」＝粘度（η）の逆数を表します。
-                第108回 問50 では，このレオグラム上で
-                <span className="font-bold">
-                  ニュートン流動／準粘性流動／塑性流動／準塑性流動／ダイラタント流動
-                </span>
-                の5つのパターンをイメージできるようにしておきましょう。
-              </p>
-            </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* ニュートン流動 */}
+              {/* 1行目 左：レオグラムの説明ボックス */}
+              <div className="bg-blue-50 p-4 rounded-xl border-l-4 border-blue-500">
+                <h4 className="font-bold text-blue-700 mb-2 flex items-center">
+                  <Lightbulb className="w-5 h-5 mr-2" />
+                  5種類の流動様式をレオグラムでイメージする
+                </h4>
+                <p className="text-sm md:text-base text-gray-800">
+                  レオロジーの教科書に出てくる
+                  <span className="font-bold mx-1">レオグラム</span>
+                  では，
+                  <span className="font-bold mx-1">
+                    横軸にずり応力（せん断応力） S
+                  </span>
+                  ，
+                  <span className="font-bold mx-1">
+                    縦軸にずり速度（せん断速度） D
+                  </span>
+                  をとり，その傾き
+                  <span className="font-mono mx-1">ΔD/ΔS</span>
+                  が「流動率（fluidity）」＝粘度（η）の逆数を表します。
+                  第108回 問50 では，このレオグラム上で
+                  <span className="font-bold">
+                    ニュートン流動／準粘性流動／塑性流動／準塑性流動／ダイラタント流動
+                  </span>
+                  の5つのパターンをイメージできるようにしておきましょう。
+                </p>
+              </div>
+
+              {/* 1行目 右：ニュートン流動 */}
               <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
                 <h5 className="font-bold text-gray-800 mb-2 flex items-center">
                   <Droplet className="w-5 h-5 mr-2 text-sky-500" />
@@ -167,10 +168,9 @@ const Q108_50 = ({ onBack }) => {
                 </div>
               </div>
 
-              {/* 準粘性流動（擬塑性，shear-thinning，降伏値なし） */}
+              {/* 2行目 左：準粘性流動 */}
               <div className="bg-white p-4 rounded-xl border border-indigo-200 shadow-sm">
                 <h5 className="font-bold text-indigo-700 mb-2 flex items-center">
-                  <Activity className="w-5 h-5 mr-2" />
                   準粘性流動（擬塑性流動）
                 </h5>
                 <p className="text-sm md:text-base text-gray-800 mb-2">
@@ -194,7 +194,7 @@ const Q108_50 = ({ onBack }) => {
                 </div>
               </div>
 
-              {/* 塑性流動（ビンガム流動） */}
+              {/* 2行目 右：塑性流動 */}
               <div className="bg-white p-4 rounded-xl border border-rose-200 shadow-sm">
                 <h5 className="font-bold text-rose-700 mb-2">
                   塑性流動（Bingham 流動）
@@ -206,7 +206,7 @@ const Q108_50 = ({ onBack }) => {
                 </p>
                 <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
                   <MathJax dynamic>
-                    {'\\(D = \\dfrac{1}{\\eta\'} (S - S_{0})\\)'}
+                    {"\\(D = \\dfrac{1}{\\eta'} (S - S_{0})\\)"}
                   </MathJax>
                 </p>
                 <div className="mt-3">
@@ -218,7 +218,7 @@ const Q108_50 = ({ onBack }) => {
                 </div>
               </div>
 
-              {/* 準塑性流動（降伏値＋shear-thinning） */}
+              {/* 3行目 左：準塑性流動 */}
               <div className="bg-white p-4 rounded-xl border border-purple-200 shadow-sm">
                 <h5 className="font-bold text-purple-700 mb-2">
                   準塑性流動（降伏値＋準粘性）
@@ -232,9 +232,7 @@ const Q108_50 = ({ onBack }) => {
                 </p>
                 <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
                   <MathJax dynamic>
-                    {
-                      '\\(D = \\dfrac{1}{\\eta\'_{\\mathrm{a}}} (S - S_{0})^{n},\\; (n < 1)\\)'
-                    }
+                    {"\\(D = \\dfrac{1}{\\eta'_{\\mathrm{a}}} (S - S_{0})^{n},\\; (n < 1)\\)"}
                   </MathJax>
                 </p>
                 <div className="mt-3">
@@ -246,8 +244,8 @@ const Q108_50 = ({ onBack }) => {
                 </div>
               </div>
 
-              {/* ダイラタント流動 */}
-              <div className="bg-white p-4 rounded-xl border border-amber-200 shadow-sm md:col-span-2">
+              {/* 3行目 右：ダイラタント流動 */}
+              <div className="bg-white p-4 rounded-xl border border-amber-200 shadow-sm">
                 <h5 className="font-bold text-amber-700 mb-2 flex items-center">
                   <Activity className="w-5 h-5 mr-2" />
                   ダイラタント流動（Dilatant：せん断増粘）
@@ -280,21 +278,6 @@ const Q108_50 = ({ onBack }) => {
       case 2:
         return (
           <div className="space-y-6">
-            <div className="bg-blue-50 p-4 rounded-xl border-l-4 border-blue-500">
-              <h4 className="font-bold text-blue-700 mb-2 flex items-center">
-                <Lightbulb className="w-5 h-5 mr-2" />
-                「せん断速度」と「見かけ粘度」の関係で分類する
-              </h4>
-              <p className="text-xs md:text-sm text-gray-800">
-                粘度 η は
-                <span className="font-mono mx-1">η = τ / D</span>
-                と定義され，
-                <span className="font-bold mx-1">
-                  せん断速度 D を変えたときに見かけ粘度がどう変化するか
-                </span>
-                によって，ニュートン流動（一定），準粘性流動（shear-thinning），塑性流動（降伏値あり），準塑性流動（降伏値＋shear-thinning），ダイラタント流動（shear-thickening）に分類します。
-              </p>
-            </div>
             <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
               各選択肢を「流動様式」と「製剤例」で確認
             </h3>

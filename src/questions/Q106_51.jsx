@@ -98,36 +98,54 @@ const Q106_51 = ({ onBack }) => {
 
             <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
               <p className="text-sm md:text-base text-gray-800">
-                日常生活でも「よく濡れる」「水をはじく」という表現を使いますが、
-                薬剤学ではこれを定量的に扱います。
+                ぬれ（wetting）とは、
+                <span className="font-bold mx-1">
+                  固体と気体の境目にある界面が、固体と液体の界面に置き換わる現象
+                </span>
+                を指します。つまり、「もともと空気と接していた固体表面」が、
+                液体に置き換えられていく様子を表す言葉です。
+              </p>
+              <p className="text-sm md:text-base text-gray-800">
+                固体表面に液体を 1 滴落として静置すると、液体は図のように
+                <span className="font-bold mx-1">固体表面と角度 θ で接して</span>
+                留まります。このときの
+                <span className="font-bold mx-1">角度 θ を接触角（contact angle）</span>
+                といい、
+                <span className="font-bold mx-1">「どれくらいぬれているか」</span>
+                を評価する指標として利用されます。
               </p>
               <ul className="list-disc list-inside text-sm md:text-base text-gray-800 space-y-1">
                 <li>
-                  固体表面（錠剤の表面、皮膚、ガラスなど）の上に液体（水、懸濁液など）が
-                  置かれたときの広がり方を「ぬれ」と呼ぶ。
+                  接触角 θ が小さいほど液体が広く薄く広がり、
+                  「<span className="font-bold">ぬれやすい</span>」状態
+                  （ぬれている面積が広い）になる。
                 </li>
                 <li>
-                  懸濁剤・乳剤・コーティング・皮膚塗布剤など、多くの製剤において
-                  「どれだけよく濡れるか」が製剤の性能に直結する。
+                  接触角 θ が大きいほど液体が丸くなり、
+                  固体表面は「<span className="font-bold">ぬれにくい</span>」ことを意味する。
                 </li>
                 <li>
-                  物理的には「固体・液体・気体（通常は空気）」の
-                  <span className="font-bold mx-1">3 相が接する界面の状態</span>
-                  を扱っている。
+                  極限の
+                  <span className="font-mono mx-1">θ = 180°</span>
+                  ではまったくぬれておらず、液体は固体表面の上に球状に乗っているだけと考えられる。
                 </li>
               </ul>
-
+              <p className="text-sm md:text-base text-gray-800">
+                固体製剤では、錠剤の
+                <span className="font-bold mx-1">崩壊・分散・溶解</span>
+                などと深く関係するため、ぬれは製剤学的にたいへん重要な物性です。
+              </p>
               <div className="mt-3 bg-blue-50 rounded-lg p-4 text-xs md:text-sm text-gray-800">
                 <p className="font-bold text-blue-800 mb-1">国試での見方</p>
                 <p>
-                  「ぬれ」は見た目だけでなく、
-                  このあと出てくる
+                  まずは「
+                  <span className="font-bold mx-1">ぬれとは、固体表面上で液体がどれくらい広がっているか</span>
+                  を表す概念」であり、
+                  それを数量的に表すのが
                   <span className="font-bold mx-1">接触角 θ</span>
-                  と
-                  <span className="font-bold mx-1">界面張力 γ</span>
-                  を組み合わせて定量的に議論します。
-                  まずは「固体表面上における液の広がり」のことだと
-                  イメージできれば OK です。
+                  である、という対応をしっかり押さえましょう。
+                  次のステップでは、この接触角と界面張力 γ を結びつける
+                  「ヤングの式」につなげていきます。
                 </p>
               </div>
             </div>
@@ -182,40 +200,176 @@ const Q106_51 = ({ onBack }) => {
 
               <div className="mt-4 flex justify-center">
                 <svg
-                  viewBox="0 0 320 90"
-                  className="w-full max-w-md"
-                  aria-label="接触角によるぬれの模式図"
+                  viewBox="0 0 440 140"
+                  className="w-full max-w-2xl"
+                  aria-label="接触角とぬれやすさの模式図"
                 >
-                  {/* 固体表面 */}
-                  <rect x="10" y="60" width="300" height="8" fill="#e5e7eb" />
+                  {/* 1：θ = 0°（全面が薄膜状にぬれている） */}
+                  <g>
+                    {/* 固体表面 */}
+                    <rect x="20" y="70" width="60" height="6" fill="#e5e7eb" />
+                    {/* 液体薄膜 */}
+                    <rect x="22" y="68" width="56" height="4" fill="#9ca3af" />
+                    <text x="16" y="95" fontSize="10" fill="#374151">
+                      接触角 θ = 0°
+                    </text>
+                  </g>
 
-                  {/* θ = 0° 完全なぬれ */}
-                  <rect x="25" y="58" width="60" height="4" fill="#bfdbfe" />
-                  <text x="30" y="50" fontSize="10" fill="#374151">
-                    θ = 0°（拡張ぬれ）
-                  </text>
+                  {/* 2：0 < θ < 90°（よくぬれている） */}
+                  <g>
+                    {/* 固体表面 */}
+                    <rect x="110" y="70" width="60" height="6" fill="#e5e7eb" />
+                    {/* 液滴 */}
+                    <path
+                      d="M115 70 Q 140 45 165 70 Z"
+                      fill="#9ca3af"
+                      stroke="#6b7280"
+                      strokeWidth="1"
+                    />
+                    {/* 接触角を示す縦線と弧 */}
+                    <line
+                      x1="115"
+                      y1="40"
+                      x2="115"
+                      y2="70"
+                      stroke="#111827"
+                      strokeWidth="1"
+                    />
+                    <path
+                      d="M115 63 A 12 12 0 0 1 128 54"
+                      fill="none"
+                      stroke="#111827"
+                      strokeWidth="1"
+                    />
+                    <text x="118" y="52" fontSize="9" fill="#111827">
+                      θ
+                    </text>
+                    <text x="111" y="95" fontSize="10" fill="#374151">
+                      0° &lt; θ &lt; 90°
+                    </text>
+                  </g>
 
-                  {/* 0 < θ < 90° 浸漬ぬれ */}
-                  <path
-                    d="M140 60 Q 155 40 170 60 Z"
-                    fill="#bfdbfe"
-                    stroke="#60a5fa"
-                    strokeWidth="1.5"
+                  {/* 3：θ = 90° */}
+                  <g>
+                    {/* 固体表面 */}
+                    <rect x="200" y="70" width="60" height="6" fill="#e5e7eb" />
+                    {/* 半球状の液滴 */}
+                    <path
+                      d="M230 52
+                         A 18 18 0 0 1 248 70
+                         H 212
+                         A 18 18 0 0 1 230 52
+                         Z"
+                      fill="#9ca3af"
+                      stroke="#6b7280"
+                      strokeWidth="1"
+                    />
+                    {/* 接触角：ちょうど 90° を示す線と弧 */}
+                    <line
+                      x1="212"
+                      y1="40"
+                      x2="212"
+                      y2="70"
+                      stroke="#111827"
+                      strokeWidth="1"
+                    />
+                    <path
+                      d="M212 64 A 10 10 0 0 1 222 54"
+                      fill="none"
+                      stroke="#111827"
+                      strokeWidth="1"
+                    />
+                    <text x="216" y="53" fontSize="9" fill="#111827">
+                      θ
+                    </text>
+                    <text x="214" y="95" fontSize="10" fill="#374151">
+                      θ = 90°
+                    </text>
+                  </g>
+
+                  {/* 4：90° < θ < 180°（ぬれにくい） */}
+                  <g>
+                    {/* 固体表面 */}
+                    <rect x="290" y="70" width="60" height="6" fill="#e5e7eb" />
+                    {/* 液滴（より立った形） */}
+                    <path
+                      d="M295 70 Q 320 40 345 70 Z"
+                      fill="#9ca3af"
+                      stroke="#6b7280"
+                      strokeWidth="1"
+                    />
+                    {/* 接触角：鈍角 */}
+                    <line
+                      x1="345"
+                      y1="40"
+                      x2="345"
+                      y2="70"
+                      stroke="#111827"
+                      strokeWidth="1"
+                    />
+                    <path
+                      d="M332 54 A 12 12 0 0 1 345 63"
+                      fill="none"
+                      stroke="#111827"
+                      strokeWidth="1"
+                    />
+                    <text x="332" y="52" fontSize="9" fill="#111827">
+                      θ
+                    </text>
+                    <text x="292" y="95" fontSize="10" fill="#374151">
+                      90° &lt; θ &lt; 180°
+                    </text>
+                  </g>
+
+                  {/* 5：θ = 180°（まったくぬれない） */}
+                  <g>
+                    {/* 固体表面 */}
+                    <rect x="380" y="70" width="40" height="6" fill="#e5e7eb" />
+                    {/* 球状の液滴 */}
+                    <circle
+                      cx="400"
+                      cy="54"
+                      r="16"
+                      fill="#9ca3af"
+                      stroke="#6b7280"
+                      strokeWidth="1"
+                    />
+                    <text x="382" y="95" fontSize="10" fill="#374151">
+                      θ = 180°
+                    </text>
+                  </g>
+
+                  {/* 下部の「ぬれやすい ⇔ ぬれにくい」矢印 */}
+                  <line
+                    x1="60"
+                    y1="120"
+                    x2="380"
+                    y2="120"
+                    stroke="#111827"
+                    strokeWidth="1"
+                    markerEnd="url(#arrow-end)"
                   />
-                  <text x="135" y="50" fontSize="10" fill="#374151">
-                    0° &lt; θ &lt; 90°（浸漬ぬれ）
+                  <text x="55" y="135" fontSize="11" fill="#111827">
+                    ぬれやすい
+                  </text>
+                  <text x="350" y="135" fontSize="11" fill="#111827">
+                    ぬれにくい
                   </text>
 
-                  {/* θ > 90° 付着ぬれ */}
-                  <path
-                    d="M240 60 Q 250 35 260 60 Z"
-                    fill="#bfdbfe"
-                    stroke="#60a5fa"
-                    strokeWidth="1.5"
-                  />
-                  <text x="235" y="50" fontSize="10" fill="#374151">
-                    θ &gt; 90°（付着ぬれ）
-                  </text>
+                  {/* 矢印マーカー定義 */}
+                  <defs>
+                    <marker
+                      id="arrow-end"
+                      markerWidth="6"
+                      markerHeight="6"
+                      refX="5"
+                      refY="3"
+                      orient="auto"
+                      markerUnits="strokeWidth"
+                    >
+                      <path d="M0,0 L6,3 L0,6 z" fill="#111827" />
+                    </marker>
+                  </defs>
                 </svg>
               </div>
 

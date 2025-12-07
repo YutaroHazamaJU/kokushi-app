@@ -10,10 +10,60 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Slide, SectionTitle, pageVariants } from '../components/Layout';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  ResponsiveContainer,
+} from 'recharts';
 
 // ==========================================
 // 第108回 問50：ダイラタント流動
 // ==========================================
+// レオグラム用のデータ（横軸：ずり応力 τ，縦軸：ずり速度 D）
+// 共通の「ずり速度 D」の刻みを用意して，各流動様式ごとに τ(D) を計算してプロットします。
+const shearRates = [0, 0.5, 1, 1.5, 2, 2.5];
+
+// ニュートン流動：τ = η · D （ここでは η = 1 として直線）
+const newtonianData = shearRates.map((D) => ({
+  tau: D, // η = 1 のとき τ = D
+  D,
+}));
+
+// 準粘性流動（擬塑性流動）：τ = k · D^n （n < 1 で shear-thinning）
+const kPseudoplastic = 0.8;
+const nPseudoplastic = 0.7;
+const pseudoplasticData = shearRates.map((D) => ({
+  tau: D === 0 ? 0 : kPseudoplastic * Math.pow(D, nPseudoplastic),
+  D,
+}));
+
+// 塑性流動（Bingham 流動）：τ = τ0 + ηp · D （D > 0），D = 0 のときは流れない領域
+const tau0Bingham = 0.4; // 降伏値 τ0
+const etaPlastic = 0.6;  // 降伏後の見かけ粘度
+const binghamData = shearRates.map((D) => ({
+  tau: D === 0 ? 0 : tau0Bingham + etaPlastic * D,
+  D,
+}));
+
+// 準塑性流動：τ = τy + k · D^n （n < 1，降伏値＋shear-thinning）
+const tauYieldQuasi = 0.4; // 降伏値 τy
+const kQuasi = 0.6;
+const nQuasi = 0.7;
+const quasiPlasticData = shearRates.map((D) => ({
+  tau: D === 0 ? 0 : tauYieldQuasi + kQuasi * Math.pow(D, nQuasi),
+  D,
+}));
+
+// ダイラタント流動（せん断増粘）：τ = k · D^n （n > 1 で shear-thickening）
+const kDilatant = 0.25;
+const nDilatant = 1.6;
+const dilatantData = shearRates.map((D) => ({
+  tau: D === 0 ? 0 : kDilatant * Math.pow(D, nDilatant),
+  D,
+}));
 const Q108_50 = ({ onBack }) => {
   const [step, setStep] = useState(0);
 
@@ -347,21 +397,38 @@ const Q108_50 = ({ onBack }) => {
                     レオグラム（ニュートン流動）：D と τ が比例
                   </p>
                   <div className="relative h-20 border-l border-b border-gray-300 mx-4">
-                    <svg
-                      viewBox="0 0 100 60"
-                      className="absolute inset-0"
-                      preserveAspectRatio="none"
-                    >
-                      {/* 原点を通る直線：横軸 τ，縦軸 D */}
-                      <line
-                        x1="5"
-                        y1="55"
-                        x2="95"
-                        y2="5"
-                        stroke="#0ea5e9"
-                        strokeWidth="2"
-                      />
-                    </svg>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart
+                        data={newtonianData}
+                        margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
+                      >
+                        <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
+                        <XAxis
+                          dataKey="tau"
+                          type="number"
+                          domain={[0, 2.5]}
+                          tick={false}
+                          axisLine
+                          tickLine={false}
+                        />
+                        <YAxis
+                          dataKey="D"
+                          type="number"
+                          domain={[0, 2.5]}
+                          tick={false}
+                          axisLine
+                          tickLine={false}
+                        />
+                        <Line
+                          type="monotone"
+                          dataKey="D"
+                          stroke="#0ea5e9"
+                          strokeWidth={3}
+                          dot={false}
+                          isAnimationActive={false}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
                     <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
                       ずり速度 D
                     </span>
@@ -392,19 +459,38 @@ const Q108_50 = ({ onBack }) => {
                     レオグラム（準粘性流動：shear-thinning）
                   </p>
                   <div className="relative h-20 border-l border-b border-gray-300 mx-4">
-                    <svg
-                      viewBox="0 0 100 60"
-                      className="absolute inset-0"
-                      preserveAspectRatio="none"
-                    >
-                      {/* 原点を通り，τ が増えるほど D の増え方が大きくなる（上に凸） */}
-                      <path
-                        d="M5 55 Q 35 35 95 15"
-                        fill="none"
-                        stroke="#4f46e5"
-                        strokeWidth="2"
-                      />
-                    </svg>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart
+                        data={pseudoplasticData}
+                        margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
+                      >
+                        <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
+                        <XAxis
+                          dataKey="tau"
+                          type="number"
+                          domain={[0, 2.5]}
+                          tick={false}
+                          axisLine
+                          tickLine={false}
+                        />
+                        <YAxis
+                          dataKey="D"
+                          type="number"
+                          domain={[0, 3.5]}
+                          tick={false}
+                          axisLine
+                          tickLine={false}
+                        />
+                        <Line
+                          type="monotone"
+                          dataKey="D"
+                          stroke="#4f46e5"
+                          strokeWidth={3}
+                          dot={false}
+                          isAnimationActive={false}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
                     <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
                       ずり速度 D
                     </span>
@@ -433,27 +519,38 @@ const Q108_50 = ({ onBack }) => {
                     せん断応力 S と流動曲線（塑性流動）
                   </p>
                   <div className="relative h-20 border-l border-b border-gray-300 mx-4">
-                    <svg
-                      viewBox="0 0 100 60"
-                      className="absolute inset-0"
-                      preserveAspectRatio="none"
-                    >
-                      {/* 降伏値 S0 を持つ直線イメージ（横軸 S，縦軸 D） */}
-                      <line
-                        x1="25"
-                        y1="55"
-                        x2="25"
-                        y2="30"
-                        stroke="#fb7185"
-                        strokeWidth="2"
-                      />
-                      <path
-                        d="M25 40 L95 10"
-                        fill="none"
-                        stroke="#fb7185"
-                        strokeWidth="2"
-                      />
-                    </svg>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart
+                        data={binghamData}
+                        margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
+                      >
+                        <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
+                        <XAxis
+                          dataKey="tau"
+                          type="number"
+                          domain={[0, 2.5]}
+                          tick={false}
+                          axisLine
+                          tickLine={false}
+                        />
+                        <YAxis
+                          dataKey="D"
+                          type="number"
+                          domain={[0, 2.5]}
+                          tick={false}
+                          axisLine
+                          tickLine={false}
+                        />
+                        <Line
+                          type="monotone"
+                          dataKey="D"
+                          stroke="#fb7185"
+                          strokeWidth={3}
+                          dot={false}
+                          isAnimationActive={false}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
                     <span className="absolute left-4 top-8 text-[9px] text-gray-500">
                       S₀
                     </span>
@@ -488,19 +585,38 @@ const Q108_50 = ({ onBack }) => {
                     せん断応力 S と流動曲線（準塑性流動）
                   </p>
                   <div className="relative h-20 border-l border-b border-gray-300 mx-4">
-                    <svg
-                      viewBox="0 0 100 60"
-                      className="absolute inset-0"
-                      preserveAspectRatio="none"
-                    >
-                      {/* 降伏値付きで最初は急勾配→徐々に緩やか（shear-thinning） */}
-                      <path
-                        d="M20 50 Q 30 40 45 30 T 95 12"
-                        fill="none"
-                        stroke="#a855f7"
-                        strokeWidth="2"
-                      />
-                    </svg>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart
+                        data={quasiPlasticData}
+                        margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
+                      >
+                        <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
+                        <XAxis
+                          dataKey="tau"
+                          type="number"
+                          domain={[0, 2.5]}
+                          tick={false}
+                          axisLine
+                          tickLine={false}
+                        />
+                        <YAxis
+                          dataKey="D"
+                          type="number"
+                          domain={[0, 3.5]}
+                          tick={false}
+                          axisLine
+                          tickLine={false}
+                        />
+                        <Line
+                          type="monotone"
+                          dataKey="D"
+                          stroke="#a855f7"
+                          strokeWidth={3}
+                          dot={false}
+                          isAnimationActive={false}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
                     <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
                       ずり速度 D
                     </span>
@@ -531,19 +647,38 @@ const Q108_50 = ({ onBack }) => {
                       レオグラム（ダイラタント流動：shear-thickening）
                     </p>
                     <div className="relative h-20 border-l border-b border-gray-300 mx-4">
-                      <svg
-                        viewBox="0 0 100 60"
-                        className="absolute inset-0"
-                        preserveAspectRatio="none"
-                      >
-                        {/* 原点付近ではあまり流れず，τ が増えると急に D が増えるイメージ（下に凸） */}
-                        <path
-                          d="M5 50 Q 40 55 95 5"
-                          fill="none"
-                          stroke="#d97706"
-                          strokeWidth="2"
-                        />
-                      </svg>
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart
+                          data={dilatantData}
+                          margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
+                        >
+                          <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
+                          <XAxis
+                            dataKey="tau"
+                            type="number"
+                            domain={[0, 2.5]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <YAxis
+                            dataKey="D"
+                            type="number"
+                            domain={[0, 2.5]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="D"
+                            stroke="#d97706"
+                            strokeWidth={3}
+                            dot={false}
+                            isAnimationActive={false}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
                       <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
                         ずり速度 D
                       </span>

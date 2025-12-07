@@ -169,20 +169,20 @@ const Q110_51 = ({ onBack }) => {
               </div>
             </div>
 
-            {/* ソル⇄ゲル模式図 */}
+            {/* ゾル⇄ゲル模式図 */}
             <div className="bg-white p-4 rounded-xl border border-indigo-200 shadow-sm">
               <h5 className="font-bold text-indigo-700 mb-2">
-                網目構造の模式図：ソル ⇄ ゲル
+                網目構造の模式図：ゾル ⇄ ゲル
               </h5>
               <p className="text-sm md:text-base text-gray-800 mb-3">
                 構造粘性系では，内部に網目状の構造があり，
-                <span className="font-bold">網目が壊れるとソル（低粘度），再び組み直されるとゲル（高粘度）</span>
+                <span className="font-bold">網目が壊れるとゾル（低粘度），再び組み直されるとゲル（高粘度）</span>
                 になるとイメージすると理解しやすいです。
               </p>
               <div className="grid grid-cols-2 gap-4 text-xs md:text-sm text-gray-700">
                 <div className="flex flex-col items-center">
                   <div className="w-20 h-20 border-2 border-gray-300 rounded-md flex items-center justify-center text-[11px] leading-tight">
-                    ソル
+                    ゾル
                     <br />
                     （粘度 小）
                   </div>

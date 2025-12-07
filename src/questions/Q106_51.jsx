@@ -25,7 +25,9 @@ const Q106_51 = ({ onBack }) => {
     'Step 5：ヤングの式で国試問題を解く',
   ];
   const contactAngleImgPath =
-  `${import.meta.env.BASE_URL}image/106-51-contact_angle.png`;
+    `${import.meta.env.BASE_URL}image/106-51-contact_angle.png`;
+  const wettingTypesImgPath =
+    `${import.meta.env.BASE_URL}image/106-51-wetting_types.png`;
   
   const solidGamma = 585; // 固体表面張力 (mN/m)
   const waterGamma = 73; // 水の表面張力 (mN/m)
@@ -173,213 +175,54 @@ const Q106_51 = ({ onBack }) => {
 
             <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
               <p className="text-sm md:text-base font-bold text-gray-900 mb-1">
-                接触角 θ による「ぬれ」の評価
+                ぬれの現象は 3 つに分類される（各種のぬれ）
               </p>
               <p className="text-sm md:text-base text-gray-800">
-                固体表面上の液滴の「ぬれ具合」は、
+                固体表面上の液体の広がり方（ぬれ具合）は、
                 <span className="font-bold mx-1">接触角 θ</span>
-                （固体表面と液滴の接線がなす角）で表すのが一般的です。
-                θ が小さいほどよく濡れ、大きいほど水をはじきます。
+                を使って評価します。θ が
+                <span className="font-bold mx-1">小さいほど液体がよく広がり「ぬれやすい」</span>
+                状態に、θ が
+                <span className="font-bold mx-1">大きいほど液体が球状に近づき「ぬれにくい」</span>
+                状態になります。
               </p>
 
               <div className="bg-blue-50 rounded-lg p-4 text-xs md:text-sm text-gray-800">
                 <p className="font-bold text-blue-800 mb-2">
-                  接触角による 3 つのぬれ
+                  各種のぬれ（教科書の整理）
                 </p>
-                <ul className="list-disc list-inside space-y-1">
+                <ul className="list-disc list-inside space-y-2">
                   <li>
-                    <span className="font-bold">拡張ぬれ</span>：θ = 0°
-                    （液が全面に薄膜となって広がる）
+                    <span className="font-bold">拡張ぬれ</span>（θ = 0°）
+                    ：液体が固体表面を
+                    <span className="font-bold mx-1">薄膜状に広がる</span>
+                    ようなぬれの現象。清浄なガラス面にアルコールがぬらす場合などに観察されます。
+                    このとき固体表面は減少し、固体−液体界面と液体表面が増大します。
                   </li>
                   <li>
-                    <span className="font-bold">浸漬ぬれ</span>：0° &lt; θ ≦ 90°
-                    （よく濡れている状態）
+                    <span className="font-bold">浸漬ぬれ</span>（0 ≦ θ &lt; 90°）
+                    ：毛細管をもつ固体面にそって液体が移動していく現象。固体表面が減少するとき、
+                    <span className="font-bold mx-1">固体−液体界面は増大するが、液体表面は増大しない</span>
+                    特徴があります。
                   </li>
                   <li>
-                    <span className="font-bold">付着ぬれ</span>：90° &lt; θ &lt; 180°
-                    （あまり濡れず、液滴に近い）
+                    <span className="font-bold">付着ぬれ</span>（0 &lt; θ &lt; 180°）
+                    ：固体表面に液体がレンズ状となって付着する現象。ガラス板状に水銀を置いた場合などに観察されます。
                   </li>
                 </ul>
                 <p className="mt-2">
-                  本問の「拡張ぬれ」は、
-                  <span className="font-mono mx-1">θ = 0°</span>
-                  の極限状態を表します。
+                  この 3 つのぬれは、どれも
+                  <span className="font-bold mx-1">接触角 θ の値によって区別できる</span>
+                  ことを、図とセットで押さえておきましょう。
                 </p>
               </div>
 
               <div className="mt-4 flex justify-center">
-                <svg
-                  viewBox="0 0 440 140"
-                  className="w-full max-w-2xl"
-                  aria-label="接触角とぬれやすさの模式図"
-                >
-                  {/* 1：θ = 0°（全面が薄膜状にぬれている） */}
-                  <g>
-                    {/* 固体表面 */}
-                    <rect x="20" y="70" width="60" height="6" fill="#e5e7eb" />
-                    {/* 液体薄膜 */}
-                    <rect x="22" y="68" width="56" height="4" fill="#9ca3af" />
-                    <text x="16" y="95" fontSize="10" fill="#374151">
-                      接触角 θ = 0°
-                    </text>
-                  </g>
-
-                  {/* 2：0 < θ < 90°（よくぬれている） */}
-                  <g>
-                    {/* 固体表面 */}
-                    <rect x="110" y="70" width="60" height="6" fill="#e5e7eb" />
-                    {/* 液滴 */}
-                    <path
-                      d="M115 70 Q 140 45 165 70 Z"
-                      fill="#9ca3af"
-                      stroke="#6b7280"
-                      strokeWidth="1"
-                    />
-                    {/* 接触角を示す縦線と弧 */}
-                    <line
-                      x1="115"
-                      y1="40"
-                      x2="115"
-                      y2="70"
-                      stroke="#111827"
-                      strokeWidth="1"
-                    />
-                    <path
-                      d="M115 63 A 12 12 0 0 1 128 54"
-                      fill="none"
-                      stroke="#111827"
-                      strokeWidth="1"
-                    />
-                    <text x="118" y="52" fontSize="9" fill="#111827">
-                      θ
-                    </text>
-                    <text x="111" y="95" fontSize="10" fill="#374151">
-                      0° &lt; θ &lt; 90°
-                    </text>
-                  </g>
-
-                  {/* 3：θ = 90° */}
-                  <g>
-                    {/* 固体表面 */}
-                    <rect x="200" y="70" width="60" height="6" fill="#e5e7eb" />
-                    {/* 半球状の液滴 */}
-                    <path
-                      d="M230 52
-                         A 18 18 0 0 1 248 70
-                         H 212
-                         A 18 18 0 0 1 230 52
-                         Z"
-                      fill="#9ca3af"
-                      stroke="#6b7280"
-                      strokeWidth="1"
-                    />
-                    {/* 接触角：ちょうど 90° を示す線と弧 */}
-                    <line
-                      x1="212"
-                      y1="40"
-                      x2="212"
-                      y2="70"
-                      stroke="#111827"
-                      strokeWidth="1"
-                    />
-                    <path
-                      d="M212 64 A 10 10 0 0 1 222 54"
-                      fill="none"
-                      stroke="#111827"
-                      strokeWidth="1"
-                    />
-                    <text x="216" y="53" fontSize="9" fill="#111827">
-                      θ
-                    </text>
-                    <text x="214" y="95" fontSize="10" fill="#374151">
-                      θ = 90°
-                    </text>
-                  </g>
-
-                  {/* 4：90° < θ < 180°（ぬれにくい） */}
-                  <g>
-                    {/* 固体表面 */}
-                    <rect x="290" y="70" width="60" height="6" fill="#e5e7eb" />
-                    {/* 液滴（より立った形） */}
-                    <path
-                      d="M295 70 Q 320 40 345 70 Z"
-                      fill="#9ca3af"
-                      stroke="#6b7280"
-                      strokeWidth="1"
-                    />
-                    {/* 接触角：鈍角 */}
-                    <line
-                      x1="345"
-                      y1="40"
-                      x2="345"
-                      y2="70"
-                      stroke="#111827"
-                      strokeWidth="1"
-                    />
-                    <path
-                      d="M332 54 A 12 12 0 0 1 345 63"
-                      fill="none"
-                      stroke="#111827"
-                      strokeWidth="1"
-                    />
-                    <text x="332" y="52" fontSize="9" fill="#111827">
-                      θ
-                    </text>
-                    <text x="292" y="95" fontSize="10" fill="#374151">
-                      90° &lt; θ &lt; 180°
-                    </text>
-                  </g>
-
-                  {/* 5：θ = 180°（まったくぬれない） */}
-                  <g>
-                    {/* 固体表面 */}
-                    <rect x="380" y="70" width="40" height="6" fill="#e5e7eb" />
-                    {/* 球状の液滴 */}
-                    <circle
-                      cx="400"
-                      cy="54"
-                      r="16"
-                      fill="#9ca3af"
-                      stroke="#6b7280"
-                      strokeWidth="1"
-                    />
-                    <text x="382" y="95" fontSize="10" fill="#374151">
-                      θ = 180°
-                    </text>
-                  </g>
-
-                  {/* 下部の「ぬれやすい ⇔ ぬれにくい」矢印 */}
-                  <line
-                    x1="60"
-                    y1="120"
-                    x2="380"
-                    y2="120"
-                    stroke="#111827"
-                    strokeWidth="1"
-                    markerEnd="url(#arrow-end)"
-                  />
-                  <text x="55" y="135" fontSize="11" fill="#111827">
-                    ぬれやすい
-                  </text>
-                  <text x="350" y="135" fontSize="11" fill="#111827">
-                    ぬれにくい
-                  </text>
-
-                  {/* 矢印マーカー定義 */}
-                  <defs>
-                    <marker
-                      id="arrow-end"
-                      markerWidth="6"
-                      markerHeight="6"
-                      refX="5"
-                      refY="3"
-                      orient="auto"
-                      markerUnits="strokeWidth"
-                    >
-                      <path d="M0,0 L6,3 L0,6 z" fill="#111827" />
-                    </marker>
-                  </defs>
-                </svg>
+                <img
+                  src={wettingTypesImgPath}
+                  alt="拡張ぬれ・浸漬ぬれ・付着ぬれの模式図"
+                  className="w-full max-w-3xl"
+                />
               </div>
 
               <p className="text-xs md:text-sm text-gray-700 mt-2">

@@ -65,6 +65,32 @@ const dilatantData = shearRates.map((D) => ({
   tau: D === 0 ? 0 : kDilatant * Math.pow(D, nDilatant),
   D,
 }));
+
+// 各流動様式の「粘度 η vs ずり応力 S」グラフ用データ
+const newtonianViscData = newtonianData.map(({ tau, D }) => ({
+  tau,
+  eta: D === 0 ? null : tau / D,
+}));
+
+const pseudoplasticViscData = pseudoplasticData.map(({ tau, D }) => ({
+  tau,
+  eta: D === 0 ? null : tau / D,
+}));
+
+const binghamViscData = binghamData.map(({ tau, D }) => ({
+  tau,
+  eta: D === 0 ? null : tau / D,
+}));
+
+const quasiPlasticViscData = quasiPlasticData.map(({ tau, D }) => ({
+  tau,
+  eta: D === 0 ? null : tau / D,
+}));
+
+const dilatantViscData = dilatantData.map(({ tau, D }) => ({
+  tau,
+  eta: D === 0 ? null : tau / D,
+}));
 const Q108_50 = ({ onBack }) => {
   const [step, setStep] = useState(0);
 
@@ -164,219 +190,17 @@ const Q108_50 = ({ onBack }) => {
                 レオロジーの教科書に出てくる
                 <span className="font-bold mx-1">レオグラム</span>
                 では，
-                <span className="font-bold mx-1">横軸にずり応力（せん断応力） S = F / A</span>，
-                <span className="font-bold mx-1">縦軸にずり速度（せん断速度） D = dv / dy</span>
+                <span className="font-bold mx-1">横軸にずり応力（せん断応力） S</span>，
+                <span className="font-bold mx-1">縦軸にずり速度（せん断速度） D</span>
                 をとり，その傾き
-                <span className="font-mono mx-1">D / S</span>
-                が「流動率（fluidity）」＝粘度の逆数を表します。
+                <span className="font-mono mx-1">ΔD/ΔS</span>
+                が「流動率（fluidity）」＝粘度（η）の逆数を表します。
                 第108回 問50 では，このレオグラム上で
                 <span className="font-bold">
                   ニュートン流動／準粘性流動／塑性流動／準塑性流動／ダイラタント流動
                 </span>
                 の5つのパターンをイメージできるようにしておきましょう。
               </p>
-              <p className="mt-2 text-xs md:text-sm text-gray-800">
-                ここで，<span className="font-bold">ずり応力（せん断応力）</span>は
-                <span className="font-mono mx-1">S = F / A</span>
-                （接触面積 A に力 F を加えたときの単位面積あたりの力）で
-                <span className="font-bold mx-1">レオグラムの横軸</span>にとり，
-                <span className="font-bold mx-1">ずり速度（せん断速度）</span>は
-                <span className="font-mono mx-1">D = dv / dy</span>
-                （層ごとの速度差 dv を距離 dy で割ったもの）で
-                <span className="font-bold mx-1">縦軸</span>にとります。
-                ニュートン流動では
-                <span className="font-mono mx-1">S = η · D</span>
-                が成り立ち，粘度 η が一定なので，レオグラム上では原点を通る直線になります。
-              </p>
-              <div className="mt-3 bg-white rounded-lg p-3 border border-blue-100">
-                <p className="text-xs md:text-sm text-gray-800 mb-2 font-bold">
-                  ずり応力 τ と ずり速度 dv/dy のイメージ図
-                </p>
-                <div className="flex flex-col md:flex-row items-center gap-4">
-                  {/* 左：二枚の板と速度勾配 */}
-                  <div className="flex-1 flex flex-col items-center">
-                    <svg
-                      viewBox="0 0 260 130"
-                      className="w-full h-auto max-w-xs"
-                      aria-label="ニュートンの粘性法則の模式図"
-                    >
-                      {/* 左：平行板と流体＋力 F のイメージ */}
-                      {/* 外枠 */}
-                      <rect x="10" y="30" width="90" height="70" fill="none" stroke="#9ca3af" strokeWidth="1" />
-                      {/* 上下の板 */}
-                      <rect x="15" y="35" width="80" height="10" fill="#e5e7eb" />
-                      <rect x="15" y="85" width="80" height="10" fill="#e5e7eb" />
-                      {/* 流体領域 */}
-                      <rect x="18" y="45" width="74" height="40" fill="#eff6ff" stroke="#bfdbfe" strokeWidth="1" />
-                      <text x="55" y="70" textAnchor="middle" fontSize="9" fill="#4b5563">
-                        流体
-                      </text>
-
-                      {/* 力 F の矢印（上板を右向きに引く） */}
-                      <line
-                        x1="95"
-                        y1="40"
-                        x2="120"
-                        y2="40"
-                        stroke="#dc2626"
-                        strokeWidth="2"
-                        markerEnd="url(#arrow-red-10850)"
-                      />
-                      <text x="122" y="38" fontSize="10" fill="#dc2626">
-                        F
-                      </text>
-                      <text x="25" y="30" fontSize="9" fill="#4b5563">
-                        面積 A
-                      </text>
-
-                      {/* 中央の説明ラベル：せん断応力 S = F/A */}
-                      <text x="55" y="20" textAnchor="middle" fontSize="10" fill="#dc2626">
-                        せん断応力 S = F / A
-                      </text>
-
-                      {/* 右：速度勾配とニュートンの粘性法則のイメージ */}
-                      {/* 下の固定板 */}
-                      <rect x="150" y="85" width="90" height="10" fill="#e5e7eb" />
-                      <text x="195" y="110" textAnchor="middle" fontSize="9" fill="#4b5563">
-                        固定された板（v = 0）
-                      </text>
-
-                      {/* 上の板（動かす板）を少し右にずらして描画 */}
-                      <polygon
-                        points="150,45 240,35 240,45 150,55"
-                        fill="#dbeafe"
-                        stroke="#93c5fd"
-                        strokeWidth="1"
-                      />
-                      <text x="195" y="32" textAnchor="middle" fontSize="9" fill="#1d4ed8">
-                        動かす板（v）
-                      </text>
-
-                      {/* 流体領域（台形） */}
-                      <polygon
-                        points="155,55 235,45 235,85 155,95"
-                        fill="#eff6ff"
-                        stroke="#93c5fd"
-                        strokeWidth="1"
-                      />
-
-                      {/* 速度プロファイルの線（下小，上大） */}
-                      <line
-                        x1="160"
-                        y1="92"
-                        x2="180"
-                        y2="88"
-                        stroke="#6b7280"
-                        strokeWidth="1"
-                        markerEnd="url(#arrow-gray-10850)"
-                      />
-                      <text x="162" y="100" fontSize="8" fill="#4b5563">
-                        v 小
-                      </text>
-
-                      <line
-                        x1="225"
-                        y1="52"
-                        x2="250"
-                        y2="48"
-                        stroke="#4b5563"
-                        strokeWidth="1.5"
-                        markerEnd="url(#arrow-gray-10850)"
-                      />
-                      <text x="252" y="50" fontSize="8" fill="#4b5563">
-                        v 大
-                      </text>
-
-                      {/* dv, dy とせん断速度 D = dv/dy */}
-                      <line
-                        x1="220"
-                        y1="52"
-                        x2="220"
-                        y2="88"
-                        stroke="#6366f1"
-                        strokeWidth="1"
-                        strokeDasharray="3 2"
-                      />
-                      <text x="224" y="71" fontSize="8" fill="#4f46e5">
-                        dy
-                      </text>
-                      <text x="205" y="70" fontSize="8" fill="#4f46e5">
-                        dv
-                      </text>
-                      <text x="200" y="18" textAnchor="middle" fontSize="10" fill="#111827">
-                        せん断速度 D = dv / dy
-                      </text>
-
-                      {/* 上の板を引く力 F（再掲） */}
-                      <line
-                        x1="240"
-                        y1="40"
-                        x2="260"
-                        y2="40"
-                        stroke="#dc2626"
-                        strokeWidth="2"
-                        markerEnd="url(#arrow-red-10850)"
-                      />
-
-                      {/* S = ηD の式 */}
-                      <text x="200" y="8" textAnchor="middle" fontSize="10" fill="#111827">
-                        S = η · D
-                      </text>
-
-                      {/* 矢印マーカー定義 */}
-                      <defs>
-                        <marker
-                          id="arrow-red-10850"
-                          markerWidth="6"
-                          markerHeight="6"
-                          refX="5"
-                          refY="3"
-                          orient="auto"
-                        >
-                          <path d="M0,0 L6,3 L0,6 Z" fill="#dc2626" />
-                        </marker>
-                        <marker
-                          id="arrow-gray-10850"
-                          markerWidth="6"
-                          markerHeight="6"
-                          refX="5"
-                          refY="3"
-                          orient="auto"
-                        >
-                          <path d="M0,0 L6,3 L0,6 Z" fill="#4b5563" />
-                        </marker>
-                      </defs>
-                    </svg>
-                  </div>
-
-                  {/* 右：説明テキスト */}
-                  <div className="flex-1 text-[11px] md:text-xs text-gray-700 space-y-1">
-                    <p>
-                      上の板に平行な力 <span className="font-mono">F</span> を加えると，
-                      板の間の流体が少しずつ「ずれて」流れます。
-                    </p>
-                    <p>
-                    単位面積あたりの力が
-                    <span className="font-mono mx-1">S = F / A</span>
-                    （ずり応力），
-                      層ごとの速度差が
-                      <span className="font-mono mx-1">dv</span>，
-                      層間距離が
-                      <span className="font-mono mx-1">dy</span>
-                      です。
-                    </p>
-                    <p>
-                      ニュートン流動では，
-                      <span className="font-mono mx-1">
-                        S = η · (dv / dy)
-                      </span>
-                      が成り立ち，
-                      <span className="font-bold">η が「粘度」の定数</span>
-                      になります。
-                    </p>
-                  </div>
-                </div>
-              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -393,11 +217,13 @@ const Q108_50 = ({ onBack }) => {
                   例：水，エタノール，グリセリン，ヒマシ油などの
                   <span className="font-bold">純粋な液体・低分子溶液</span>
                 </p>
-                <div className="mt-2 bg-gray-50 rounded-lg p-3">
-                  <p className="text-xs text-gray-600 mb-1 text-center">
-                    レオグラム（ニュートン流動）：D と τ が比例
-                  </p>
-                  <div className="relative h-20 border-l border-b border-gray-300 mx-4">
+              <div className="mt-2 bg-gray-50 rounded-lg p-3">
+                <p className="text-xs text-gray-600 mb-1 text-center">
+                  左：レオグラム（ずり速度 D vs ずり応力 S）／右：粘度 η vs ずり応力 S
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1">
+                  {/* レオグラム D–S */}
+                  <div className="relative h-20 border-l border-b border-gray-300 mx-2 sm:mx-4">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart
                         data={newtonianData}
@@ -437,12 +263,55 @@ const Q108_50 = ({ onBack }) => {
                       ずり応力 S
                     </span>
                   </div>
-                  <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
-                    <MathJax dynamic>
-                      {'\\(D = \\dfrac{1}{\\eta} S\\)'}
-                    </MathJax>
-                  </p>
+
+                  {/* 粘度 η–S */}
+                  <div className="relative h-20 border-l border-b border-gray-300 mx-2 sm:mx-4">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart
+                        data={newtonianViscData}
+                        margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
+                      >
+                        <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
+                        <XAxis
+                          dataKey="tau"
+                          type="number"
+                          domain={[0, 2.5]}
+                          tick={false}
+                          axisLine
+                          tickLine={false}
+                        />
+                        <YAxis
+                          dataKey="eta"
+                          type="number"
+                          domain={[0, 2]}
+                          tick={false}
+                          axisLine
+                          tickLine={false}
+                        />
+                        <Line
+                          type="monotone"
+                          dataKey="eta"
+                          stroke="#0ea5e9"
+                          strokeWidth={3}
+                          dot={false}
+                          isAnimationActive={false}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                    <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
+                      粘度 η
+                    </span>
+                    <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
+                      ずり応力 S
+                    </span>
+                  </div>
                 </div>
+                <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
+                  <MathJax dynamic>
+                    {'\\(D = \\dfrac{1}{\\eta} S\\)'}
+                  </MathJax>
+                </p>
+              </div>
               </div>
 
               {/* 準粘性流動（擬塑性，shear-thinning，降伏値なし） */}
@@ -462,51 +331,96 @@ const Q108_50 = ({ onBack }) => {
                 </p>
                 <div className="mt-2 bg-gray-50 rounded-lg p-3">
                   <p className="text-xs text-gray-600 mb-1 text-center">
-                    レオグラム（準粘性流動：shear-thinning）
+                    左：レオグラム（準粘性流動）／右：見かけ粘度 ηₐ vs ずり応力 S
                   </p>
-                  <div className="relative h-20 border-l border-b border-gray-300 mx-4">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart
-                        data={pseudoplasticData}
-                        margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
-                      >
-                        <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
-                        <XAxis
-                          dataKey="tau"
-                          type="number"
-                          domain={[0, 2.5]}
-                          tick={false}
-                          axisLine
-                          tickLine={false}
-                        />
-                        <YAxis
-                          dataKey="D"
-                          type="number"
-                          domain={[0, 3.5]}
-                          tick={false}
-                          axisLine
-                          tickLine={false}
-                        />
-                        <Line
-                          type="monotone"
-                          dataKey="D"
-                          stroke="#4f46e5"
-                          strokeWidth={3}
-                          dot={false}
-                          isAnimationActive={false}
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
-                    <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
-                      ずり速度 D
-                    </span>
-                    <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
-                      ずり応力 S
-                    </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1">
+                    {/* レオグラム D–S */}
+                    <div className="relative h-20 border-l border-b border-gray-300 mx-2 sm:mx-4">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart
+                          data={pseudoplasticData}
+                          margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
+                        >
+                          <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
+                          <XAxis
+                            dataKey="tau"
+                            type="number"
+                            domain={[0, 2.5]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <YAxis
+                            dataKey="D"
+                            type="number"
+                            domain={[0, 3.5]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="D"
+                            stroke="#4f46e5"
+                            strokeWidth={3}
+                            dot={false}
+                            isAnimationActive={false}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                      <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
+                        ずり速度 D
+                      </span>
+                      <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
+                        ずり応力 S
+                      </span>
+                    </div>
+
+                    {/* 粘度 ηₐ–S */}
+                    <div className="relative h-20 border-l border-b border-gray-300 mx-2 sm:mx-4">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart
+                          data={pseudoplasticViscData}
+                          margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
+                        >
+                          <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
+                          <XAxis
+                            dataKey="tau"
+                            type="number"
+                            domain={[0, 2.5]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <YAxis
+                            dataKey="eta"
+                            type="number"
+                            domain={[0, 2]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="eta"
+                            stroke="#4f46e5"
+                            strokeWidth={3}
+                            dot={false}
+                            isAnimationActive={false}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                      <span className="absolute -left-6 top-0 text-[10px] text-gray-500">
+                        見かけ粘度 ηₐ
+                      </span>
+                      <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
+                        ずり応力 S
+                      </span>
+                    </div>
                   </div>
                   <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
                     <MathJax dynamic>
-                      {'\\(D = \\dfrac{1}{\\eta_{\\mathrm{a}}} S^{n},\\; (n &gt; 1)\\)'}
+                      {'\\(D = \\dfrac{1}{\\eta_{\\mathrm{a}}} S^{n},\\; (n < 1)\\)'}
                     </MathJax>
                   </p>
                 </div>
@@ -527,50 +441,95 @@ const Q108_50 = ({ onBack }) => {
                 </p>
                 <div className="mt-2 bg-gray-50 rounded-lg p-3">
                   <p className="text-xs text-gray-600 mb-1 text-center">
-                    せん断応力 S と流動曲線（塑性流動）
+                    左：せん断応力 S と流動曲線（塑性流動）／右：粘度 η vs ずり応力 S
                   </p>
-                  <div className="relative h-20 border-l border-b border-gray-300 mx-4">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart
-                        data={binghamData}
-                        margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
-                      >
-                        <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
-                        <XAxis
-                          dataKey="tau"
-                          type="number"
-                          domain={[0, 2.5]}
-                          tick={false}
-                          axisLine
-                          tickLine={false}
-                        />
-                        <YAxis
-                          dataKey="D"
-                          type="number"
-                          domain={[0, 2.5]}
-                          tick={false}
-                          axisLine
-                          tickLine={false}
-                        />
-                        <Line
-                          type="monotone"
-                          dataKey="D"
-                          stroke="#fb7185"
-                          strokeWidth={3}
-                          dot={false}
-                          isAnimationActive={false}
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
-                    <span className="absolute left-4 top-8 text-[9px] text-gray-500">
-                      S₀
-                    </span>
-                    <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
-                      ずり速度 D
-                    </span>
-                    <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
-                      ずり応力 S
-                    </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1">
+                    {/* レオグラム D–S */}
+                    <div className="relative h-20 border-l border-b border-gray-300 mx-2 sm:mx-4">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart
+                          data={binghamData}
+                          margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
+                        >
+                          <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
+                          <XAxis
+                            dataKey="tau"
+                            type="number"
+                            domain={[0, 2.5]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <YAxis
+                            dataKey="D"
+                            type="number"
+                            domain={[0, 2.5]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="D"
+                            stroke="#fb7185"
+                            strokeWidth={3}
+                            dot={false}
+                            isAnimationActive={false}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                      <span className="absolute left-4 top-8 text-[9px] text-gray-500">
+                        S₀
+                      </span>
+                      <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
+                        ずり速度 D
+                      </span>
+                      <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
+                        ずり応力 S
+                      </span>
+                    </div>
+
+                    {/* 粘度 η–S */}
+                    <div className="relative h-20 border-l border-b border-gray-300 mx-2 sm:mx-4">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart
+                          data={binghamViscData}
+                          margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
+                        >
+                          <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
+                          <XAxis
+                            dataKey="tau"
+                            type="number"
+                            domain={[0, 2.5]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <YAxis
+                            dataKey="eta"
+                            type="number"
+                            domain={[0, 2]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="eta"
+                            stroke="#fb7185"
+                            strokeWidth={3}
+                            dot={false}
+                            isAnimationActive={false}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                      <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
+                        粘度 η
+                      </span>
+                      <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
+                        ずり応力 S
+                      </span>
+                    </div>
                   </div>
                   <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
                     <MathJax dynamic>
@@ -642,7 +601,7 @@ const Q108_50 = ({ onBack }) => {
                   </div>
                   <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
                     <MathJax dynamic>
-                      {'\\(D = \\dfrac{1}{\\eta\'_{\\mathrm{a}}} (S - S_{0})^{n},\\; (n &gt; 1)\\)'}
+                      {'\\(D = \\dfrac{1}{\\eta\'_{\\mathrm{a}}} (S - S_{0})^{n},\\; (n > 1)\\)'}
                     </MathJax>
                   </p>
                 </div>
@@ -709,7 +668,7 @@ const Q108_50 = ({ onBack }) => {
                     </div>
                     <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
                       <MathJax dynamic>
-                        {'\\(D = \\dfrac{1}{\\eta_{\\mathrm{a}}} S^{n},\\; (n &lt; 1)\\)'}
+                        {'\\(D = \\dfrac{1}{\\eta_{\\mathrm{a}}} S^{n},\\; (n < 1)\\)'}
                       </MathJax>
                     </p>
                   </div>

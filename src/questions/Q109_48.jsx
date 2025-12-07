@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Slide, SectionTitle, pageVariants } from '../components/Layout';
+import { MathJax } from 'better-react-mathjax';
 
 // ==========================================
 // 第109回 問48：溶出性に影響しない因子
@@ -94,7 +95,9 @@ const Q109_48 = ({ onBack }) => {
                 固体からの溶出速度は Noyes-Whitney式で表されます。
               </p>
               <p className="font-bold text-center mb-2 font-mono text-lg">
-                {String.raw`\dfrac{dC}{dt} = \dfrac{D\,S}{V\,\delta}\bigl(C_{\mathrm{s}} - C\bigr)`}
+                <MathJax dynamic>
+                  {'\\(\\dfrac{dC}{dt} = \\dfrac{D\\,S}{V\\,\\delta}\\bigl(C_{\\mathrm{s}} - C\\bigr)\\)'}
+                  </MathJax>
               </p>
               <ul className="list-disc list-inside text-sm md:text-base text-gray-700 space-y-1">
                 <li>

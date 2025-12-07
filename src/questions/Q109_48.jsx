@@ -94,7 +94,7 @@ const Q109_48 = ({ onBack }) => {
                 固体からの溶出速度は Noyes-Whitney式で表されます。
               </p>
               <p className="font-bold text-center mb-2 font-mono text-lg">
-                dC/dt = (D・S / V・δ)・(C<sub>s</sub> − C)
+                {String.raw`\dfrac{dC}{dt} = \dfrac{D\,S}{V\,\delta}\bigl(C_{\mathrm{s}} - C\bigr)`}
               </p>
               <ul className="list-disc list-inside text-sm md:text-base text-gray-700 space-y-1">
                 <li>

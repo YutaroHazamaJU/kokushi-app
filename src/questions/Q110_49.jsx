@@ -4,7 +4,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Lightbulb,
-  CheckCircle
+  CheckCircle,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Slide, SectionTitle, pageVariants } from '../components/Layout';
@@ -19,7 +19,7 @@ const Q110_49 = ({ onBack }) => {
     '問題の確認：どれが「陽イオン性」？',
     'Step 1：界面活性剤の分類と特徴',
     'Step 2：各選択肢を薬学的にチェック',
-    'Step 3：まとめとポイント整理'
+    'Step 3：まとめとポイント整理',
   ];
 
   const renderStepContent = (currentStep) => {
@@ -62,7 +62,7 @@ const Q110_49 = ({ onBack }) => {
                 <ul className="list-disc list-inside text-gray-700 space-y-1">
                   <li>
                     界面活性剤は「親水基」が
-                    <span className="font-bold">＋か − か、電荷を持たないか</span>
+                    <span className="font-bold"> ＋か − か、電荷を持たないか</span>
                     で分類される。
                   </li>
                   <li>
@@ -124,8 +124,7 @@ const Q110_49 = ({ onBack }) => {
                 </p>
                 <ul className="list-disc list-inside text-sm md:text-base text-gray-700 space-y-1">
                   <li>
-                    例：第4級アンモニウム塩（
-                    ベンザルコニウム塩化物、ベンゼトニウム塩化物 など）
+                    例：第4級アンモニウム塩（ベンザルコニウム塩化物、ベンゼトニウム塩化物 など）
                   </li>
                   <li>主な用途：殺菌消毒薬、防腐剤、帯電防止剤 など</li>
                   <li>陰イオン性界面活性剤と<strong>混合すると失活</strong>しやすい</li>
@@ -192,35 +191,35 @@ const Q110_49 = ({ onBack }) => {
             <div className="space-y-4">
               {/* 1. ステアリン酸ナトリウム */}
               <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-                <h4 className="font-bold text-gray-800 mb-2">1. ステアリン酸ナトリウム</h4>
+                <h4 className="font-bold text-gray-800 mb-2">
+                  1. ステアリン酸ナトリウム
+                </h4>
                 <p className="text-gray-700 mb-1">
                   カルボン酸塩の陰イオン性界面活性剤（石けんの一種）。親水基は負電荷（−）。
                 </p>
-                <p className="text-gray-700">
-                  用途：洗浄剤、乳化剤など。
-                </p>
+                <p className="text-gray-700">用途：洗浄剤、乳化剤など。</p>
               </div>
 
               {/* 2. ポリソルベート80 */}
               <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-                <h4 className="font-bold text-gray-800 mb-2">2. ポリソルベート80</h4>
+                <h4 className="font-bold text-gray-800 mb-2">
+                  2. ポリソルベート80
+                </h4>
                 <p className="text-gray-700 mb-1">
                   非イオン性界面活性剤。親水基に電荷を持たないポリエチレングリコール鎖を持つ。
                 </p>
-                <p className="text-gray-700">
-                  用途：乳化剤、溶解補助剤。
-                </p>
+                <p className="text-gray-700">用途：乳化剤、溶解補助剤。</p>
               </div>
 
               {/* 3. ラウリル硫酸ナトリウム */}
               <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-                <h4 className="font-bold text-gray-800 mb-2">3. ラウリル硫酸ナトリウム</h4>
+                <h4 className="font-bold text-gray-800 mb-2">
+                  3. ラウリル硫酸ナトリウム
+                </h4>
                 <p className="text-gray-700 mb-1">
                   硫酸エステル塩の陰イオン性界面活性剤。親水基は負電荷（−）。
                 </p>
-                <p className="text-gray-700">
-                  用途：洗浄剤、起泡剤。
-                </p>
+                <p className="text-gray-700">用途：洗浄剤、起泡剤。</p>
               </div>
 
               {/* 4. レシチン */}
@@ -229,14 +228,14 @@ const Q110_49 = ({ onBack }) => {
                 <p className="text-gray-700 mb-1">
                   両性界面活性剤。分子内に＋電荷と−電荷を持つリン脂質。
                 </p>
-                <p className="text-gray-700">
-                  用途：生体膜成分、乳化剤。
-                </p>
+                <p className="text-gray-700">用途：生体膜成分、乳化剤。</p>
               </div>
 
               {/* 5. ベンゼトニウム塩化物 */}
               <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-                <h4 className="font-bold text-gray-800 mb-2">5. ベンゼトニウム塩化物</h4>
+                <h4 className="font-bold text-gray-800 mb-2">
+                  5. ベンゼトニウム塩化物
+                </h4>
                 <p className="text-gray-700 mb-1">
                   第4級アンモニウム塩の陽イオン性界面活性剤。親水基は正電荷（＋）。
                 </p>
@@ -244,37 +243,80 @@ const Q110_49 = ({ onBack }) => {
                   用途：殺菌消毒薬、防腐剤、帯電防止剤。
                 </p>
               </div>
+
+              {/* 解離するイオンに注意！ */}
+              <div className="mt-4 bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-xs md:text-sm text-gray-800">
+                <p className="font-bold text-yellow-800 mb-1">解離するイオンに注意！</p>
+                <p className="mb-1">
+                  「ステアリン酸ナトリウム」「ラウリル硫酸ナトリウム」などのナトリウム塩では、
+                  実際に界面活性剤としてはたらくのは
+                  <strong>ナトリウムイオンではなく、有機酸や硫酸エステルの陰イオン</strong>です。
+                </p>
+                <p>
+                  <strong>
+                    カチオン（Na⁺ など）が対イオンとして書かれているときは本体が陰イオン
+                    → 陰イオン性界面活性剤、アニオン（Cl⁻ など）が対イオンなら本体が陽イオン
+                    → 陽イオン性界面活性剤
+                  </strong>
+                  と整理しておくと、陽イオン性との区別がしやすくなります。
+                </p>
+              </div>
             </div>
           </div>
         );
 
       // -----------------------------------
-      // 3. まとめとポイント整理
+      // 3. まとめとポイント整理（解説終了カード）
       // -----------------------------------
       case 3:
         return (
-          <div className="space-y-6">
-            <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
-              まとめとポイント整理
-            </h3>
-            <ul className="list-disc list-inside text-gray-700 space-y-2">
-              <li>
-                陽イオン性界面活性剤は、親水基に<strong>正電荷（＋）</strong>を持つ界面活性剤であり、
-                第4級アンモニウム塩が代表例。
-              </li>
-              <li>
-                陰イオン性界面活性剤は、親水基に<strong>負電荷（−）</strong>を持ち、洗浄力・起泡力が強い。
-              </li>
-              <li>
-                非イオン性界面活性剤は、親水基に電荷を持たず、注射剤などの安定化に有用。
-              </li>
-              <li>
-                両性界面活性剤は、分子内に正負両方の電荷を持ち、生体膜や乳化剤に重要。
-              </li>
-              <li>
-                問題の正解は<strong>5. ベンゼトニウム塩化物</strong>（陽イオン性界面活性剤）。
-              </li>
-            </ul>
+          <div className="space-y-8 text-center h-full flex flex-col justify-center">
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 10 }}
+              className="bg-white p-8 rounded-2xl shadow-xl border-2 border-orange-100 max-w-xl mx-auto"
+            >
+              <CheckCircle className="w-16 h-16 mx-auto text-green-500 mb-4" />
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
+                解説終了：正解は「5 ベンゼトニウム塩化物」
+              </h2>
+
+              <div className="bg-gray-50 p-4 rounded-lg mb-4 text-left text-sm md:text-base text-gray-800">
+                <p className="font-bold mb-2">【この問題で押さえるべきポイント】</p>
+                <ul className="list-disc list-inside space-y-2">
+                  <li>
+                    陽イオン性界面活性剤：親水基に<strong>正電荷（＋）</strong>を持つ界面活性剤。
+                    第4級アンモニウム塩が代表例。
+                  </li>
+                  <li>
+                    陰イオン性界面活性剤：親水基に<strong>負電荷（−）</strong>を持ち、
+                    洗浄力・起泡力が強い（石けん、ラウリル硫酸ナトリウム など）。
+                  </li>
+                  <li>
+                    非イオン性界面活性剤：親水基に電荷を持たず、注射剤などの安定化に有用
+                    （ポリソルベート80 など）。
+                  </li>
+                  <li>
+                    両性界面活性剤：分子内に正負両方の電荷を持ち、生体膜や乳化剤に重要
+                    （レシチン など）。
+                  </li>
+                  <li>
+                    選択肢の中で<strong>陽イオン性</strong>なのは
+                    <strong>「5. ベンゼトニウム塩化物」</strong>（第4級アンモニウム塩）。
+                  </li>
+                </ul>
+              </div>
+
+              <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+                本問のような「どれが陽イオン性か？」という問題は、
+                <span className="font-bold mx-1">
+                  構造から親水基の電荷をイメージできるか
+                </span>
+                が勝負です。
+                普段から「代表的な界面活性剤」と「用途」「イオン性」をセットで覚えておきましょう。
+              </p>
+            </motion.div>
           </div>
         );
 
@@ -284,58 +326,75 @@ const Q110_49 = ({ onBack }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 h-screen overflow-y-auto">
-      <SectionTitle title={titles[step]} />
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={step}
-          variants={pageVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          transition={{ duration: 0.4 }}
-        >
-          {renderStepContent(step)}
-        </motion.div>
-      </AnimatePresence>
-
-      <div className="mt-6 flex justify-between">
-        {step > 0 ? (
-          <button
-            onClick={() => setStep(step - 1)}
-            className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition-colors inline-flex items-center"
-          >
-            <ChevronLeft className="w-5 h-5 mr-1" />
-            戻る
-          </button>
-        ) : (
+    <motion.div
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={pageVariants}
+      className="flex flex-col h-screen bg-white"
+    >
+      {/* 上部バー */}
+      <div className="bg-orange-500 text-white p-4 flex items-center shadow-md justify-between z-10">
+        <div className="flex items-center">
           <button
             onClick={onBack}
-            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors inline-flex items-center"
+            className="mr-4 hover:bg-orange-400 p-2 rounded-full transition"
           >
-            <Home className="w-5 h-5 mr-1" />
-            トップへ戻る
+            <Home className="w-6 h-6" />
           </button>
-        )}
-        {step < titles.length - 1 ? (
-          <button
-            onClick={() => setStep(step + 1)}
-            className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors inline-flex items-center"
-          >
-            次へ
-            <ChevronRight className="w-5 h-5 ml-1" />
-          </button>
-        ) : (
-          <button
-            onClick={onBack}
-            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors inline-flex items-center"
-          >
-            <Home className="w-5 h-5 mr-1" />
-            問題一覧に戻る
-          </button>
-        )}
+          <h1 className="text-xl font-bold">第110回 問49：ステップ解説</h1>
+        </div>
+        <div className="text-sm bg-orange-600 px-3 py-1 rounded-full">
+          Step {step + 1} / {titles.length}
+        </div>
       </div>
-    </div>
+
+      {/* 中央：スライド本体 */}
+      <Slide className="relative">
+        <SectionTitle>{titles[step]}</SectionTitle>
+        <div className="flex-1">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={step}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              {renderStepContent(step)}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </Slide>
+
+      {/* 下部：ナビボタン */}
+      <div className="p-4 border-t bg-gray-50 flex justify-between z-10">
+        <button
+          onClick={() => setStep(Math.max(0, step - 1))}
+          disabled={step === 0}
+          className={`px-6 py-3 rounded-lg font-bold flex items-center ${
+            step === 0
+              ? 'text-gray-300 cursor-not-allowed'
+              : 'bg-white border hover:bg-gray-100 text-gray-700'
+          }`}
+        >
+          <ChevronLeft className="w-5 h-5 mr-2" />
+          前へ
+        </button>
+        <button
+          onClick={() => setStep(Math.min(titles.length - 1, step + 1))}
+          disabled={step === titles.length - 1}
+          className={`px-6 py-3 rounded-lg font-bold flex items-center ${
+            step === titles.length - 1
+              ? 'text-gray-300 cursor-not-allowed'
+              : 'bg-orange-500 text-white hover:bg-orange-600 shadow-md'
+          }`}
+        >
+          {step === 0 ? '解説ステップへ' : '次へ'}
+          <ChevronRight className="w-5 h-5 ml-2" />
+        </button>
+      </div>
+    </motion.div>
   );
 };
 

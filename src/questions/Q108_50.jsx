@@ -110,15 +110,222 @@ const Q108_50 = ({ onBack }) => {
                 「せん断速度」と「見かけ粘度」の関係で分類する
               </h4>
               <p className="text-sm md:text-base text-gray-800">
-                レオロジーでは，流動様式を
-                <span className="font-bold">せん断速度（かき混ぜる速さ）</span>と
-                <span className="font-bold">見かけ粘度 η</span>の関係で分類します。
-                第108回 問50 では，
+                レオロジーの教科書に出てくる
+                <span className="font-bold mx-1">レオグラム</span>
+                では，
+                <span className="font-bold mx-1">横軸にずり応力（せん断応力） τ = F / A</span>，
+                <span className="font-bold mx-1">縦軸にずり速度（せん断速度） D = dv / dy</span>
+                をとり，その傾き
+                <span className="font-mono mx-1">D / τ</span>
+                が「流動率（fluidity）」＝粘度の逆数を表します。
+                第108回 問50 では，このレオグラム上で
                 <span className="font-bold">
                   ニュートン流動／準粘性流動／塑性流動／準塑性流動／ダイラタント流動
                 </span>
-                を整理しておく必要があります。
+                の5つのパターンをイメージできるようにしておきましょう。
               </p>
+              <p className="mt-2 text-xs md:text-sm text-gray-800">
+                ここで，<span className="font-bold">ずり応力（せん断応力）</span>は
+                <span className="font-mono mx-1">τ = F / A</span>
+                （接触面積 A に力 F を加えたときの単位面積あたりの力）で
+                <span className="font-bold mx-1">レオグラムの横軸</span>にとり，
+                <span className="font-bold mx-1">ずり速度（せん断速度）</span>は
+                <span className="font-mono mx-1">D = dv / dy</span>
+                （層ごとの速度差 dv を距離 dy で割ったもの）で
+                <span className="font-bold mx-1">縦軸</span>にとります。
+                ニュートン流動では
+                <span className="font-mono mx-1">τ = η · D</span>
+                が成り立ち，粘度 η が一定なので，レオグラム上では原点を通る直線になります。
+              </p>
+              <div className="mt-3 bg-white rounded-lg p-3 border border-blue-100">
+                <p className="text-xs md:text-sm text-gray-800 mb-2 font-bold">
+                  ずり応力 τ と ずり速度 dv/dy のイメージ図
+                </p>
+                <div className="flex flex-col md:flex-row items-center gap-4">
+                  {/* 左：二枚の板と速度勾配 */}
+                  <div className="flex-1 flex flex-col items-center">
+                    <svg
+                      viewBox="0 0 260 130"
+                      className="w-full h-auto max-w-xs"
+                      aria-label="ニュートンの粘性法則の模式図"
+                    >
+                      {/* 左：平行板と流体＋力 F のイメージ */}
+                      {/* 外枠 */}
+                      <rect x="10" y="30" width="90" height="70" fill="none" stroke="#9ca3af" strokeWidth="1" />
+                      {/* 上下の板 */}
+                      <rect x="15" y="35" width="80" height="10" fill="#e5e7eb" />
+                      <rect x="15" y="85" width="80" height="10" fill="#e5e7eb" />
+                      {/* 流体領域 */}
+                      <rect x="18" y="45" width="74" height="40" fill="#eff6ff" stroke="#bfdbfe" strokeWidth="1" />
+                      <text x="55" y="70" textAnchor="middle" fontSize="9" fill="#4b5563">
+                        流体
+                      </text>
+
+                      {/* 力 F の矢印（上板を右向きに引く） */}
+                      <line
+                        x1="95"
+                        y1="40"
+                        x2="120"
+                        y2="40"
+                        stroke="#dc2626"
+                        strokeWidth="2"
+                        markerEnd="url(#arrow-red-10850)"
+                      />
+                      <text x="122" y="38" fontSize="10" fill="#dc2626">
+                        F
+                      </text>
+                      <text x="25" y="30" fontSize="9" fill="#4b5563">
+                        面積 A
+                      </text>
+
+                      {/* 中央の説明ラベル：せん断応力 S = F/A */}
+                      <text x="55" y="20" textAnchor="middle" fontSize="10" fill="#dc2626">
+                        せん断応力 S = F / A
+                      </text>
+
+                      {/* 右：速度勾配とニュートンの粘性法則のイメージ */}
+                      {/* 下の固定板 */}
+                      <rect x="150" y="85" width="90" height="10" fill="#e5e7eb" />
+                      <text x="195" y="110" textAnchor="middle" fontSize="9" fill="#4b5563">
+                        固定された板（v = 0）
+                      </text>
+
+                      {/* 上の板（動かす板）を少し右にずらして描画 */}
+                      <polygon
+                        points="150,45 240,35 240,45 150,55"
+                        fill="#dbeafe"
+                        stroke="#93c5fd"
+                        strokeWidth="1"
+                      />
+                      <text x="195" y="32" textAnchor="middle" fontSize="9" fill="#1d4ed8">
+                        動かす板（v）
+                      </text>
+
+                      {/* 流体領域（台形） */}
+                      <polygon
+                        points="155,55 235,45 235,85 155,95"
+                        fill="#eff6ff"
+                        stroke="#93c5fd"
+                        strokeWidth="1"
+                      />
+
+                      {/* 速度プロファイルの線（下小，上大） */}
+                      <line
+                        x1="160"
+                        y1="92"
+                        x2="180"
+                        y2="88"
+                        stroke="#6b7280"
+                        strokeWidth="1"
+                        markerEnd="url(#arrow-gray-10850)"
+                      />
+                      <text x="162" y="100" fontSize="8" fill="#4b5563">
+                        v 小
+                      </text>
+
+                      <line
+                        x1="225"
+                        y1="52"
+                        x2="250"
+                        y2="48"
+                        stroke="#4b5563"
+                        strokeWidth="1.5"
+                        markerEnd="url(#arrow-gray-10850)"
+                      />
+                      <text x="252" y="50" fontSize="8" fill="#4b5563">
+                        v 大
+                      </text>
+
+                      {/* dv, dy とせん断速度 D = dv/dy */}
+                      <line
+                        x1="220"
+                        y1="52"
+                        x2="220"
+                        y2="88"
+                        stroke="#6366f1"
+                        strokeWidth="1"
+                        strokeDasharray="3 2"
+                      />
+                      <text x="224" y="71" fontSize="8" fill="#4f46e5">
+                        dy
+                      </text>
+                      <text x="205" y="70" fontSize="8" fill="#4f46e5">
+                        dv
+                      </text>
+                      <text x="200" y="18" textAnchor="middle" fontSize="10" fill="#111827">
+                        せん断速度 D = dv / dy
+                      </text>
+
+                      {/* 上の板を引く力 F（再掲） */}
+                      <line
+                        x1="240"
+                        y1="40"
+                        x2="260"
+                        y2="40"
+                        stroke="#dc2626"
+                        strokeWidth="2"
+                        markerEnd="url(#arrow-red-10850)"
+                      />
+
+                      {/* S = ηD の式 */}
+                      <text x="200" y="8" textAnchor="middle" fontSize="10" fill="#111827">
+                        S = η · D
+                      </text>
+
+                      {/* 矢印マーカー定義 */}
+                      <defs>
+                        <marker
+                          id="arrow-red-10850"
+                          markerWidth="6"
+                          markerHeight="6"
+                          refX="5"
+                          refY="3"
+                          orient="auto"
+                        >
+                          <path d="M0,0 L6,3 L0,6 Z" fill="#dc2626" />
+                        </marker>
+                        <marker
+                          id="arrow-gray-10850"
+                          markerWidth="6"
+                          markerHeight="6"
+                          refX="5"
+                          refY="3"
+                          orient="auto"
+                        >
+                          <path d="M0,0 L6,3 L0,6 Z" fill="#4b5563" />
+                        </marker>
+                      </defs>
+                    </svg>
+                  </div>
+
+                  {/* 右：説明テキスト */}
+                  <div className="flex-1 text-[11px] md:text-xs text-gray-700 space-y-1">
+                    <p>
+                      上の板に平行な力 <span className="font-mono">F</span> を加えると，
+                      板の間の流体が少しずつ「ずれて」流れます。
+                    </p>
+                    <p>
+                      単位面積あたりの力が
+                      <span className="font-mono mx-1">τ = F / A</span>
+                      （ずり応力），
+                      層ごとの速度差が
+                      <span className="font-mono mx-1">dv</span>，
+                      層間距離が
+                      <span className="font-mono mx-1">dy</span>
+                      です。
+                    </p>
+                    <p>
+                      ニュートン流動では，
+                      <span className="font-mono mx-1">
+                        τ = η · (dv / dy)
+                      </span>
+                      が成り立ち，
+                      <span className="font-bold">η が「粘度」の定数</span>
+                      になります。
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -137,15 +344,29 @@ const Q108_50 = ({ onBack }) => {
                 </p>
                 <div className="mt-2 bg-gray-50 rounded-lg p-3">
                   <p className="text-xs text-gray-600 mb-1 text-center">
-                    見かけ粘度 η（一定）
+                    レオグラム（ニュートン流動）：D と τ が比例
                   </p>
                   <div className="relative h-20 border-l border-b border-gray-300 mx-4">
-                    <div className="absolute left-0 right-0 top-6 border-t-2 border-sky-500" />
-                    <span className="absolute -left-3 top-0 text-[10px] text-gray-500">
-                      η
+                    <svg
+                      viewBox="0 0 100 60"
+                      className="absolute inset-0"
+                      preserveAspectRatio="none"
+                    >
+                      {/* 原点を通る直線：横軸 τ，縦軸 D */}
+                      <line
+                        x1="5"
+                        y1="55"
+                        x2="95"
+                        y2="5"
+                        stroke="#0ea5e9"
+                        strokeWidth="2"
+                      />
+                    </svg>
+                    <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
+                      ずり速度 D
                     </span>
                     <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
-                      せん断速度
+                      ずり応力 τ
                     </span>
                   </div>
                 </div>
@@ -168,27 +389,27 @@ const Q108_50 = ({ onBack }) => {
                 </p>
                 <div className="mt-2 bg-gray-50 rounded-lg p-3">
                   <p className="text-xs text-gray-600 mb-1 text-center">
-                    見かけ粘度 η（準粘性流動）
+                    レオグラム（準粘性流動：shear-thinning）
                   </p>
                   <div className="relative h-20 border-l border-b border-gray-300 mx-4">
-                    {/* 右下がりの曲線 */}
                     <svg
                       viewBox="0 0 100 60"
-                      className="absolute inset-2"
+                      className="absolute inset-0"
                       preserveAspectRatio="none"
                     >
+                      {/* 原点を通り，τ が増えるほど D の増え方が大きくなる（上に凸） */}
                       <path
-                        d="M5 10 Q 40 5 95 50"
+                        d="M5 55 Q 35 35 95 15"
                         fill="none"
                         stroke="#4f46e5"
                         strokeWidth="2"
                       />
                     </svg>
-                    <span className="absolute -left-3 top-0 text-[10px] text-gray-500">
-                      η
+                    <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
+                      ずり速度 D
                     </span>
                     <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
-                      せん断速度
+                      ずり応力 τ
                     </span>
                   </div>
                 </div>
@@ -214,30 +435,33 @@ const Q108_50 = ({ onBack }) => {
                   <div className="relative h-20 border-l border-b border-gray-300 mx-4">
                     <svg
                       viewBox="0 0 100 60"
-                      className="absolute inset-2"
+                      className="absolute inset-0"
                       preserveAspectRatio="none"
                     >
-                      {/* 降伏値 S0 を持つ直線イメージ */}
+                      {/* 降伏値 S0 を持つ直線イメージ（横軸 S，縦軸 D） */}
                       <line
-                        x1="22"
-                        y1="48"
-                        x2="22"
-                        y2="20"
+                        x1="25"
+                        y1="55"
+                        x2="25"
+                        y2="30"
                         stroke="#fb7185"
                         strokeWidth="2"
                       />
                       <path
-                        d="M22 35 L95 8"
+                        d="M25 40 L95 10"
                         fill="none"
                         stroke="#fb7185"
                         strokeWidth="2"
                       />
                     </svg>
-                    <span className="absolute left-3 top-6 text-[9px] text-gray-500">
+                    <span className="absolute left-4 top-8 text-[9px] text-gray-500">
                       S₀
                     </span>
+                    <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
+                      ずり速度 D
+                    </span>
                     <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
-                      せん断速度
+                      ずり応力 S
                     </span>
                   </div>
                 </div>
@@ -266,7 +490,7 @@ const Q108_50 = ({ onBack }) => {
                   <div className="relative h-20 border-l border-b border-gray-300 mx-4">
                     <svg
                       viewBox="0 0 100 60"
-                      className="absolute inset-2"
+                      className="absolute inset-0"
                       preserveAspectRatio="none"
                     >
                       {/* 降伏値付きで最初は急勾配→徐々に緩やか（shear-thinning） */}
@@ -277,8 +501,11 @@ const Q108_50 = ({ onBack }) => {
                         strokeWidth="2"
                       />
                     </svg>
+                    <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
+                      ずり速度 D
+                    </span>
                     <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
-                      せん断速度
+                      ずり応力 S
                     </span>
                   </div>
                 </div>
@@ -301,27 +528,27 @@ const Q108_50 = ({ onBack }) => {
                   {/* グラフイメージ */}
                   <div className="bg-amber-50 rounded-lg p-3">
                     <p className="text-xs text-gray-600 mb-1 text-center">
-                      見かけ粘度 η（ダイラタント）
+                      レオグラム（ダイラタント流動：shear-thickening）
                     </p>
                     <div className="relative h-20 border-l border-b border-gray-300 mx-4">
-                      {/* 右上がりの曲線イメージ */}
                       <svg
                         viewBox="0 0 100 60"
-                        className="absolute inset-2"
+                        className="absolute inset-0"
                         preserveAspectRatio="none"
                       >
+                        {/* 原点付近ではあまり流れず，τ が増えると急に D が増えるイメージ（下に凸） */}
                         <path
-                          d="M5 45 Q 40 55 95 10"
+                          d="M5 50 Q 40 55 95 5"
                           fill="none"
                           stroke="#d97706"
                           strokeWidth="2"
                         />
                       </svg>
-                      <span className="absolute -left-3 top-0 text-[10px] text-gray-500">
-                        η
+                      <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
+                        ずり速度 D
                       </span>
                       <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
-                        せん断速度
+                        ずり応力 τ
                       </span>
                     </div>
                   </div>

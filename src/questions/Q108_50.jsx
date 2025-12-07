@@ -155,10 +155,6 @@ const Q108_50 = ({ onBack }) => {
                 <p className="text-sm md:text-base text-gray-800 mb-2">
                   せん断速度を変えても粘度が一定の理想的な流れ。
                 </p>
-                <p className="text-xs text-gray-600 mb-2">
-                  例：水，エタノール，グリセリン，ヒマシ油などの
-                  <span className="font-bold">純粋な液体・低分子溶液</span>
-                </p>
                 <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
                   <MathJax dynamic>{'\\(D = \\dfrac{1}{\\eta} S\\)'}</MathJax>
                 </p>
@@ -184,10 +180,6 @@ const Q108_50 = ({ onBack }) => {
                   </span>
                   流れ。
                 </p>
-                <p className="text-xs text-gray-600 mb-2">
-                  例：鎖状高分子 1% 水溶液
-                  （メチルセルロース，アルギン酸Na，カルメロースNa など）
-                </p>
                 <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
                   <MathJax dynamic>
                     {'\\(D = \\dfrac{1}{\\eta_{\\mathrm{a}}} S^{n},\\; (n < 1)\\)'}
@@ -211,9 +203,6 @@ const Q108_50 = ({ onBack }) => {
                   一定以上の応力
                   <span className="font-bold">（降伏値 S₀）を超えると流れ始める</span>
                   タイプ。流れ出した後はほぼ一定粘度。
-                </p>
-                <p className="text-xs text-gray-600 mb-2">
-                  例：チンク油，カオリン懸濁液などの高濃度懸濁製剤
                 </p>
                 <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
                   <MathJax dynamic>
@@ -241,10 +230,6 @@ const Q108_50 = ({ onBack }) => {
                   </span>
                   タイプ。
                 </p>
-                <p className="text-xs text-gray-600 mb-2">
-                  例：鎖状高分子 2〜3% 水溶液
-                  （メチルセルロース，アルギン酸Na，カルメロースNa など）
-                </p>
                 <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
                   <MathJax dynamic>
                     {
@@ -271,9 +256,6 @@ const Q108_50 = ({ onBack }) => {
                   ゆっくり動かすと流れるが，強く・速くかき混ぜると
                   <span className="font-bold">急に固くなる（粘度↑）</span>
                   流れ。
-                </p>
-                <p className="text-xs text-gray-600 mb-2">
-                  例：高濃度デンプン懸濁液（50%以上）など
                 </p>
                 <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
                   <MathJax dynamic>

@@ -96,10 +96,6 @@ const Q106_51 = ({ onBack }) => {
       case 1:
         return (
           <div className="space-y-6">
-            <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
-              Step 1：『ぬれ』とは何か？
-            </h3>
-
             <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
               <p className="text-sm md:text-base text-gray-800">
                 ぬれ（wetting）とは、
@@ -172,10 +168,6 @@ const Q106_51 = ({ onBack }) => {
       case 2:
         return (
           <div className="space-y-6">
-            <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
-              Step 2：ぬれの3種類と接触角 θ
-            </h3>
-
             <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
               <p className="text-sm md:text-base font-bold text-gray-900 mb-1">
                 ぬれの現象は 3 つに分類される（各種のぬれ）
@@ -244,7 +236,6 @@ const Q106_51 = ({ onBack }) => {
       // -----------------------------
       // 3：ヤングの式と力のつり合い
       // -----------------------------
-      case 3: {
         // 幾何学的に「接線に沿った」接触角を表現するために、
         // 円弧で液滴を描き、その接点で接線方向に γ_L を描画する
         const baseY = 120; // 固体表面（水平）の y 座標
@@ -266,10 +257,6 @@ const Q106_51 = ({ onBack }) => {
 
         return (
           <div className="space-y-6">
-            <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
-              Step 3：ヤングの式と力のつり合い
-            </h3>
-
             <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
               <p className="text-sm md:text-base text-gray-800 mb-2">
                 固体表面上の液滴を考えると、接触線まわりで
@@ -431,10 +418,6 @@ const Q106_51 = ({ onBack }) => {
       case 4:
         return (
           <div className="space-y-6">
-            <h3 className="text-lg md:text-xl font-bold text-gray-800 border-b pb-2">
-              Step 4：接触角 θ と cosθ のイメージ（補足）
-            </h3>
-
             <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
               <p className="text-sm md:text-base text-gray-800 mb-2">
                 前のステップで見たヤングの式には

@@ -19,6 +19,11 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { MathJax } from 'better-react-mathjax';
+import newtonRheoImg from '../assets/108−50-rheology_newtonian.png';
+import binghamRheoImg from '../assets/108−50-rheology_bingham.png';
+import pseudoplasticRheoImg from '../assets/108−50-rheology_pseudoplastic.png';
+import quasiPlasticRheoImg from '../assets/108−50-rheology_quasiplastic.png';
+import dilatantRheoImg from '../assets/108−50-rheology_dilatant.png';
 
 // ==========================================
 // 第108回 問50：ダイラタント流動
@@ -312,6 +317,16 @@ const Q108_50 = ({ onBack }) => {
                   </MathJax>
                 </p>
               </div>
+              <div className="mt-3">
+                <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
+                  教科書風レオグラムのイメージ
+                </p>
+                <img
+                  src={newtonRheoImg}
+                  alt="ニュートン流動のレオグラムと粘度-せん断応力グラフ"
+                  className="w-full rounded-lg border border-gray-200"
+                />
+              </div>
               </div>
 
               {/* 準粘性流動（擬塑性，shear-thinning，降伏値なし） */}
@@ -424,6 +439,16 @@ const Q108_50 = ({ onBack }) => {
                     </MathJax>
                   </p>
                 </div>
+              <div className="mt-3">
+                <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
+                  教科書風レオグラムのイメージ
+                </p>
+                <img
+                  src={pseudoplasticRheoImg}
+                  alt="準粘性流動（擬塑性流動）のレオグラムと粘度-せん断応力グラフ"
+                  className="w-full rounded-lg border border-gray-200"
+                />
+              </div>
               </div>
 
               {/* 塑性流動（ビンガム流動） */}
@@ -537,6 +562,15 @@ const Q108_50 = ({ onBack }) => {
                     </MathJax>
                   </p>
                 </div>
+              <div className="mt-3">
+                <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
+                  教科書風レオグラムのイメージ
+                </p>
+                <img
+                  src={binghamRheoImg}
+                  alt="塑性流動（ビンガム流動）のレオグラムと粘度-せん断応力グラフ"
+                  className="w-full rounded-lg border border-gray-200"
+                />
               </div>
 
               {/* 準塑性流動（降伏値＋shear-thinning） */}
@@ -557,47 +591,95 @@ const Q108_50 = ({ onBack }) => {
                 </p>
                 <div className="mt-2 bg-gray-50 rounded-lg p-3">
                   <p className="text-xs text-gray-600 mb-1 text-center">
-                    せん断応力 S と流動曲線（準塑性流動）
+                    左：レオグラム（準塑性流動）／右：見かけ粘度 ηₐ′ vs ずり応力 S
                   </p>
-                  <div className="relative h-20 border-l border-b border-gray-300 mx-4">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart
-                        data={quasiPlasticData}
-                        margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
-                      >
-                        <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
-                        <XAxis
-                          dataKey="tau"
-                          type="number"
-                          domain={[0, 2.5]}
-                          tick={false}
-                          axisLine
-                          tickLine={false}
-                        />
-                        <YAxis
-                          dataKey="D"
-                          type="number"
-                          domain={[0, 3.5]}
-                          tick={false}
-                          axisLine
-                          tickLine={false}
-                        />
-                        <Line
-                          type="monotone"
-                          dataKey="D"
-                          stroke="#a855f7"
-                          strokeWidth={3}
-                          dot={false}
-                          isAnimationActive={false}
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
-                    <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
-                      ずり速度 D
-                    </span>
-                    <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
-                      ずり応力 S
-                    </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1">
+                    {/* レオグラム D–S */}
+                    <div className="relative h-20 border-l border-b border-gray-300 mx-2 sm:mx-4">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart
+                          data={quasiPlasticData}
+                          margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
+                        >
+                          <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
+                          <XAxis
+                            dataKey="tau"
+                            type="number"
+                            domain={[0, 2.5]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <YAxis
+                            dataKey="D"
+                            type="number"
+                            domain={[0, 3.5]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="D"
+                            stroke="#a855f7"
+                            strokeWidth={3}
+                            dot={false}
+                            isAnimationActive={false}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                      <span className="absolute left-4 top-8 text-[9px] text-gray-500">
+                        S₀
+                      </span>
+                      <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
+                        ずり速度 D
+                      </span>
+                      <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
+                        ずり応力 S
+                      </span>
+                    </div>
+
+                    {/* 粘度 ηₐ′–S */}
+                    <div className="relative h-20 border-l border-b border-gray-300 mx-2 sm:mx-4">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart
+                          data={quasiPlasticViscData}
+                          margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
+                        >
+                          <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
+                          <XAxis
+                            dataKey="tau"
+                            type="number"
+                            domain={[0, 2.5]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <YAxis
+                            dataKey="eta"
+                            type="number"
+                            domain={[0, 2]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="eta"
+                            stroke="#a855f7"
+                            strokeWidth={3}
+                            dot={false}
+                            isAnimationActive={false}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                      <span className="absolute -left-7 top-0 text-[10px] text-gray-500">
+                        見かけ粘度 ηₐ′
+                      </span>
+                      <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
+                        ずり応力 S
+                      </span>
+                    </div>
                   </div>
                   <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
                     <MathJax dynamic>
@@ -605,6 +687,16 @@ const Q108_50 = ({ onBack }) => {
                     </MathJax>
                   </p>
                 </div>
+              <div className="mt-3">
+                <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
+                  教科書風レオグラムのイメージ
+                </p>
+                <img
+                  src={quasiPlasticRheoImg}
+                  alt="準塑性流動のレオグラムと粘度-せん断応力グラフ"
+                  className="w-full rounded-lg border border-gray-200"
+                />
+              </div>
               </div>
 
               {/* ダイラタント流動 */}
@@ -622,54 +714,108 @@ const Q108_50 = ({ onBack }) => {
                 </p>
                 <div className="mt-2 bg-amber-50 rounded-lg p-3">
                   <p className="text-xs text-gray-600 mb-1 text-center">
-                    レオグラム（ダイラタント流動：shear-thickening）
+                    左：レオグラム（ダイラタント流動）／右：見かけ粘度 ηₐ vs ずり応力 S
                   </p>
-                  <div className="relative h-20 border-l border-b border-gray-300 mx-4">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart
-                        data={dilatantData}
-                        margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
-                      >
-                        <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
-                        <XAxis
-                          dataKey="tau"
-                          type="number"
-                          domain={[0, 2.5]}
-                          tick={false}
-                          axisLine
-                          tickLine={false}
-                        />
-                        <YAxis
-                          dataKey="D"
-                          type="number"
-                          domain={[0, 2.5]}
-                          tick={false}
-                          axisLine
-                          tickLine={false}
-                        />
-                        <Line
-                          type="monotone"
-                          dataKey="D"
-                          stroke="#d97706"
-                          strokeWidth={3}
-                          dot={false}
-                          isAnimationActive={false}
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
-                    <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
-                      ずり速度 D
-                    </span>
-                    <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
-                      ずり応力 S
-                    </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1">
+                    {/* レオグラム D–S */}
+                    <div className="relative h-20 border-l border-b border-gray-300 mx-2 sm:mx-4">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart
+                          data={dilatantData}
+                          margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
+                        >
+                          <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
+                          <XAxis
+                            dataKey="tau"
+                            type="number"
+                            domain={[0, 2.5]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <YAxis
+                            dataKey="D"
+                            type="number"
+                            domain={[0, 2.5]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="D"
+                            stroke="#d97706"
+                            strokeWidth={3}
+                            dot={false}
+                            isAnimationActive={false}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                      <span className="absolute -left-5 top-0 text-[10px] text-gray-500">
+                        ずり速度 D
+                      </span>
+                      <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
+                        ずり応力 S
+                      </span>
+                    </div>
+
+                    {/* 粘度 ηₐ–S */}
+                    <div className="relative h-20 border-l border-b border-gray-300 mx-2 sm:mx-4">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart
+                          data={dilatantViscData}
+                          margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
+                        >
+                          <CartesianGrid stroke="#e5e7eb" strokeDasharray="3 3" />
+                          <XAxis
+                            dataKey="tau"
+                            type="number"
+                            domain={[0, 2.5]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <YAxis
+                            dataKey="eta"
+                            type="number"
+                            domain={[0, 2]}
+                            tick={false}
+                            axisLine
+                            tickLine={false}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="eta"
+                            stroke="#d97706"
+                            strokeWidth={3}
+                            dot={false}
+                            isAnimationActive={false}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                      <span className="absolute -left-7 top-0 text-[10px] text-gray-500">
+                        見かけ粘度 ηₐ
+                      </span>
+                      <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
+                        ずり応力 S
+                      </span>
+                    </div>
                   </div>
                   <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
                     <MathJax dynamic>
-                      {'\\(D = \\dfrac{1}{\\eta_{\\mathrm{a}}} S^{n},\\; (n &gt; 1)\\)'}
+                      {'\\(D = \\dfrac{1}{\\eta_{\\mathrm{a}}} S^{n},\\; (n > 1)\\)'}
                     </MathJax>
                   </p>
                 </div>
+              <div className="mt-3">
+                <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
+                  教科書風レオグラムのイメージ
+                </p>
+                <img
+                  src={dilatantRheoImg}
+                  alt="ダイラタント流動のレオグラムと粘度-せん断応力グラフ"
+                  className="w-full rounded-lg border border-gray-200"
+                />
               </div>
             </div>
           </div>

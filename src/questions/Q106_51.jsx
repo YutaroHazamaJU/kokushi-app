@@ -296,6 +296,52 @@ const Q106_51 = ({ onBack }) => {
                     className="w-full max-w-xs"
                     aria-label="ヤングの式の模式図"
                   >
+                    <defs>
+                      <marker
+                        id="arrow-blue"
+                        markerWidth="6"
+                        markerHeight="6"
+                        refX="5"
+                        refY="3"
+                        orient="auto"
+                        markerUnits="strokeWidth"
+                      >
+                        <path d="M0 0 L6 3 L0 6 Z" fill="#2563eb" />
+                      </marker>
+                      <marker
+                        id="arrow-green"
+                        markerWidth="6"
+                        markerHeight="6"
+                        refX="5"
+                        refY="3"
+                        orient="auto"
+                        markerUnits="strokeWidth"
+                      >
+                        <path d="M0 0 L6 3 L0 6 Z" fill="#16a34a" />
+                      </marker>
+                      <marker
+                        id="arrow-orange"
+                        markerWidth="6"
+                        markerHeight="6"
+                        refX="5"
+                        refY="3"
+                        orient="auto"
+                        markerUnits="strokeWidth"
+                      >
+                        <path d="M0 0 L6 3 L0 6 Z" fill="#f97316" />
+                      </marker>
+                      <marker
+                        id="arrow-lightblue"
+                        markerWidth="6"
+                        markerHeight="6"
+                        refX="5"
+                        refY="3"
+                        orient="auto"
+                        markerUnits="strokeWidth"
+                      >
+                        <path d="M0 0 L6 3 L0 6 Z" fill="#93c5fd" />
+                      </marker>
+                    </defs>
                     {/* 固体表面 */}
                     <rect x="20" y={baseY} width="280" height="18" fill="#e5e7eb" />
 
@@ -331,24 +377,37 @@ const Q106_51 = ({ onBack }) => {
                       y2={gammaLY}
                       stroke="#2563eb"
                       strokeWidth="2.5"
+                      markerEnd="url(#arrow-blue)"
                     />
                     <text x={gammaLX + 4} y={gammaLY} fontSize="11" fill="#2563eb">
                       γL
                     </text>
 
-                    {/* γL cosθ の水平方向成分（見やすいように固体表面から少し下にオフセット）*/}
+                    {/* γL の先端から水平成分に下ろした垂線（幾何学的な射影）*/}
+                    <line
+                      x1={gammaLX}
+                      y1={gammaLY}
+                      x2={gammaLX}
+                      y2={baseY + 8}
+                      stroke="#bfdbfe"
+                      strokeDasharray="4 3"
+                      strokeWidth="2"
+                    />
+
+                    {/* γL cosθ の水平方向成分（固体表面に平行なベクトルとして描画）*/}
                     <line
                       x1={leftX}
                       y1={baseY + 8}
-                      x2={leftX + gammaVecLen * Math.cos(theta)}
+                      x2={gammaLX}
                       y2={baseY + 8}
                       stroke="#93c5fd"
                       strokeDasharray="4 3"
                       strokeWidth="2"
+                      markerEnd="url(#arrow-lightblue)"
                     />
                     <text
-                      x={leftX + gammaVecLen * Math.cos(theta) + 4}
-                      y={baseY + 20}
+                      x={(leftX + gammaLX) / 2 - 10}
+                      y={baseY + 22}
                       fontSize="10"
                       fill="#60a5fa"
                     >
@@ -363,9 +422,10 @@ const Q106_51 = ({ onBack }) => {
                       y2={baseY}
                       stroke="#16a34a"
                       strokeWidth="2.5"
+                      markerEnd="url(#arrow-green)"
                     />
                     <text
-                      x={leftX - 92}
+                      x={leftX - 60}
                       y={baseY + 12}
                       fontSize="11"
                       fill="#16a34a"
@@ -381,6 +441,7 @@ const Q106_51 = ({ onBack }) => {
                       y2={baseY}
                       stroke="#f97316"
                       strokeWidth="2.5"
+                      markerEnd="url(#arrow-orange)"
                     />
                     <text
                       x={leftX + 64}
@@ -672,96 +733,135 @@ const Q106_51 = ({ onBack }) => {
       // -----------------------------
       case 5:
         return (
-          <div className="space-y-8 text-center h-full flex flex-col justify-center">
+          <div className="space-y-6">
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: 'spring', stiffness: 200, damping: 10 }}
-              className="bg-white p-8 rounded-2xl shadow-xl border-2 border-purple-100 max-w-xl mx-auto"
+              className="bg-white p-6 rounded-xl shadow-xl border border-purple-100"
             >
-              <CheckCircle className="w-16 h-16 mx-auto text-green-500 mb-4" />
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                解説終了：正解は「3　512 mN/m」
-              </h2>
-
-              <div className="bg-gray-50 p-4 rounded-lg mb-4 text-sm md:text-base text-gray-800 text-left">
-                <p className="font-bold mb-2">
-                  1）ヤングの式に θ = 0°（拡張ぬれ）を代入
-                </p>
-                <p className="font-mono mb-2 text-center">
-                  γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ
-                </p>
-                <p className="text-center mb-2">
-                  拡張ぬれでは <span className="font-mono">θ = 0°</span> なので
-                  <span className="font-mono mx-1">cos θ = 1</span>
-                </p>
-                <p className="text-center mb-2 font-mono">
-                  γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub>
-                </p>
-                <p className="text-center mb-2 font-mono">
-                  ⇒ γ<sub>SL</sub> = γ<sub>S</sub> − γ<sub>L</sub>
-                </p>
-
-                <p className="font-bold mb-2 mt-4">
-                  2）与えられた値を代入
-                </p>
-                <p className="font-mono text-center leading-relaxed">
-                  γ<sub>S</sub>（固体の表面張力） = {solidGamma} mN/m
-                  <br />
-                  γ<sub>L</sub>（水の表面張力） = {waterGamma} mN/m
-                  <br />
-                  γ<sub>SL</sub> = {solidGamma} − {waterGamma} ={' '}
-                  <span className="text-2xl font-bold text-indigo-700 ml-1">
-                    {solidLiquidGamma}
-                  </span>{' '}
-                  mN/m
-                </p>
+              <div className="flex items-center mb-4">
+                <CheckCircle className="w-10 h-10 text-green-500 mr-3" />
+                <div className="text-left">
+                  <p className="text-xs md:text-sm text-gray-500">
+                    ここまでの準備を使って、実際に国試の数値を代入してみましょう。
+                  </p>
+                  <p className="text-base md:text-lg font-bold text-gray-800">
+                    ヤングの式に θ = 0°（拡張ぬれ）を入れて、固液界面張力 γ
+                    <sub>SL</sub> を求める。
+                  </p>
+                </div>
               </div>
 
-              <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                したがって、固液界面張力は
-                <span className="font-bold mx-1">
-                  {solidLiquidGamma} mN/m
-                </span>
-                となり、選択肢「3」が正解です。
-              </p>
+              {/* 3 ステップで計算手順を整理 */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 text-sm md:text-base text-gray-800">
+                {/* STEP 1 */}
+                <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                  <p className="font-bold text-purple-700 mb-1">Step 1：式を確認</p>
+                  <p className="font-mono text-center mb-1">
+                    γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ
+                  </p>
+                  <p className="text-xs md:text-sm text-gray-600">
+                    固体表面に平行な方向での力のつり合いから導かれた
+                    <span className="font-bold mx-1">ヤングの式</span>
+                    をそのまま使います。
+                  </p>
+                  <p className="mt-2 text-xs md:text-sm text-gray-600">
+                    求めたいのは
+                    <span className="font-bold mx-1">固液界面張力 γ<sub>SL</sub></span>
+                    なので、式を
+                    <span className="font-mono mx-1">
+                      γ<sub>SL</sub> = γ<sub>S</sub> − γ<sub>L</sub> cos θ
+                    </span>
+                    の形に変形しておきます。
+                  </p>
+                </div>
 
-              <div className="bg-gray-50 p-4 rounded-lg text-left text-sm text-gray-700">
-                <p className="font-bold mb-2">【重要ポイントのまとめ】</p>
-                <ul className="list-disc list-inside space-y-2">
-                  <li>
-                    拡張ぬれ：液が薄膜として広がる状態で、接触角
-                    <span className="font-mono mx-1">θ = 0°</span> とみなせる。
-                  </li>
-                  <li>
-                    接触角 θ による 3 種類の「ぬれ」
-                    （拡張・浸漬・付着）を区別しておく。
-                  </li>
-                  <li>
-                    ヤングの式
-                    <span className="font-mono mx-1">
-                      γ<sub>S</sub> = γ<sub>SL</sub> + γ<sub>L</sub> cos θ
+                {/* STEP 2 */}
+                <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                  <p className="font-bold text-purple-700 mb-1">
+                    Step 2：拡張ぬれ（θ = 0°）を代入
+                  </p>
+                  <p className="mb-1">
+                    拡張ぬれでは液体が薄膜状に広がり、
+                    <span className="font-mono mx-1">θ = 0°</span>
+                    とみなせます。
+                  </p>
+                  <p className="font-mono text-center mb-1">
+                    cos 0° = 1
+                  </p>
+                  <p className="text-xs md:text-sm text-gray-600 mb-1">
+                    したがって、式は
+                  </p>
+                  <p className="font-mono text-center">
+                    γ<sub>SL</sub> = γ<sub>S</sub> − γ<sub>L</sub>
+                  </p>
+                  <p className="mt-2 text-xs md:text-sm text-gray-600">
+                    ここまで来れば、あとは「与えられた数値を代入するだけ」になります。
+                  </p>
+                </div>
+
+                {/* STEP 3 */}
+                <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                  <p className="font-bold text-purple-700 mb-1">
+                    Step 3：数値を代入して計算
+                  </p>
+                  <p className="mb-1">
+                    問題文より、
+                  </p>
+                  <p className="font-mono text-center mb-1">
+                    γ<sub>S</sub> = {solidGamma} mN/m
+                    <br />
+                    γ<sub>L</sub> = {waterGamma} mN/m
+                  </p>
+                  <p className="font-mono text-center mb-2">
+                    γ<sub>SL</sub> = {solidGamma} − {waterGamma}
+                  </p>
+                  <p className="text-center text-2xl font-bold text-indigo-700 mb-1">
+                    γ<sub>SL</sub> = {solidLiquidGamma} mN/m
+                  </p>
+                  <p className="text-xs md:text-sm text-gray-600 text-center">
+                    よって、固液界面張力は
+                    <span className="font-bold mx-1">
+                      {solidLiquidGamma} mN/m
                     </span>
-                    は、固体表面に平行な方向の力のつり合いから導かれる。
-                  </li>
-                  <li>
-                    θ = 0° では
-                    <span className="font-mono mx-1">
-                      γ<sub>SL</sub> = γ<sub>S</sub> − γ<sub>L</sub>
-                    </span>
-                    と単純な差し算になる。
-                  </li>
-                  <li>単位（mN/m）をそろえて計算することも確認ポイント。</li>
-                </ul>
+                    となります。
+                  </p>
+                </div>
+              </div>
+
+              {/* 最終的な選択肢の確認 */}
+              <div className="mt-6 bg-purple-50 border border-purple-100 rounded-lg p-4 text-sm md:text-base text-gray-800">
+                <p className="font-bold mb-2 text-purple-800">
+                  最後に：どの選択肢が正解か？
+                </p>
+                <p className="mb-1">
+                  求めた値
+                  <span className="font-bold mx-1">
+                    γ<sub>SL</sub> = {solidLiquidGamma} mN/m
+                  </span>
+                  に対応するのは、選択肢
+                  <span className="font-bold mx-1">「3　{solidLiquidGamma} mN/m」</span>
+                  です。
+                </p>
+                <p className="text-xs md:text-sm text-gray-700">
+                  「拡張ぬれ → θ = 0° → cosθ = 1 →
+                  <span className="font-mono mx-1">
+                    γ<sub>SL</sub> = γ<sub>S</sub> − γ<sub>L</sub>
+                  </span>
+                  」という流れがつかめていれば、同タイプの問題にも自信をもって対応できます。
+                </p>
               </div>
             </motion.div>
 
-            <button
-              onClick={onBack}
-              className="px-8 py-4 bg-gray-800 text-white rounded-xl font-bold text-lg hover:bg-gray-900 transition shadow-lg mx-auto"
-            >
-              問題一覧に戻る
-            </button>
+            <div className="text-center">
+              <button
+                onClick={onBack}
+                className="px-8 py-4 bg-gray-800 text-white rounded-xl font-bold text-lg hover:bg-gray-900 transition shadow-lg"
+              >
+                問題一覧に戻る
+              </button>
+            </div>
           </div>
         );
 

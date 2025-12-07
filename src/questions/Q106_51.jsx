@@ -24,7 +24,9 @@ const Q106_51 = ({ onBack }) => {
     'Step 4：ヤングの式と力のつり合い',
     'Step 5：ヤングの式で国試問題を解く',
   ];
-
+  const contactAngleImgPath =
+  `${import.meta.env.BASE_URL}image/106-51-contact_angle.png`;
+  
   const solidGamma = 585; // 固体表面張力 (mN/m)
   const waterGamma = 73; // 水の表面張力 (mN/m)
   const solidLiquidGamma = solidGamma - waterGamma; // S = 0 とおいたときの γ_SL
@@ -137,7 +139,7 @@ const Q106_51 = ({ onBack }) => {
               </p>
               <div className="mt-4 flex justify-center">
                 <img
-                  src="/image/106-51-contact_angle.png"
+                  src={contactAngleImgPath}
                   alt="接触角とぬれやすさの関係の模式図"
                   className="w-full max-w-3xl"
                 />

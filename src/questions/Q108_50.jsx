@@ -572,6 +572,7 @@ const Q108_50 = ({ onBack }) => {
                   className="w-full rounded-lg border border-gray-200"
                 />
               </div>
+            </div>
 
               {/* 準塑性流動（降伏値＋shear-thinning） */}
               <div className="bg-white p-4 rounded-xl border border-purple-200 shadow-sm">
@@ -683,7 +684,7 @@ const Q108_50 = ({ onBack }) => {
                   </div>
                   <p className="mt-2 text-[11px] md:text-xs text-gray-700 text-center">
                     <MathJax dynamic>
-                      {'\\(D = \\dfrac{1}{\\eta\'_{\\mathrm{a}}} (S - S_{0})^{n},\\; (n > 1)\\)'}
+                      {'\\(D = \\dfrac{1}{\\eta\'_{\\mathrm{a}}} (S - S_{0})^{n},\\; (n < 1)\\)'}
                     </MathJax>
                   </p>
                 </div>

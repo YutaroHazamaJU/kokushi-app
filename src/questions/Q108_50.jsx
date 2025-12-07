@@ -1002,11 +1002,7 @@ const Q108_50 = ({ onBack }) => {
   };
 
   return (
-    <motion.div
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      variants={pageVariants}
+    <div
       className="flex flex-col h-screen bg-white"
     >
       {/* ヘッダー */}
@@ -1069,7 +1065,7 @@ const Q108_50 = ({ onBack }) => {
           <ChevronRight className="w-5 h-5 ml-2" />
         </button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

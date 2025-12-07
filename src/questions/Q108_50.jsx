@@ -163,9 +163,6 @@ const Q108_50 = ({ onBack }) => {
                   <MathJax dynamic>{'\\(D = \\dfrac{1}{\\eta} S\\)'}</MathJax>
                 </p>
                 <div className="mt-3">
-                  <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
-                    教科書風レオグラムのイメージ
-                  </p>
                   <img
                     src={newtonRheoImg}
                     alt="ニュートン流動のレオグラムと粘度-せん断応力グラフ"
@@ -197,9 +194,6 @@ const Q108_50 = ({ onBack }) => {
                   </MathJax>
                 </p>
                 <div className="mt-3">
-                  <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
-                    教科書風レオグラムのイメージ
-                  </p>
                   <img
                     src={pseudoplasticRheoImg}
                     alt="準粘性流動（擬塑性流動）のレオグラムと粘度-せん断応力グラフ"
@@ -227,9 +221,6 @@ const Q108_50 = ({ onBack }) => {
                   </MathJax>
                 </p>
                 <div className="mt-3">
-                  <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
-                    教科書風レオグラムのイメージ
-                  </p>
                   <img
                     src={binghamRheoImg}
                     alt="塑性流動（ビンガム流動）のレオグラムと粘度-せん断応力グラフ"
@@ -262,9 +253,6 @@ const Q108_50 = ({ onBack }) => {
                   </MathJax>
                 </p>
                 <div className="mt-3">
-                  <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
-                    教科書風レオグラムのイメージ
-                  </p>
                   <img
                     src={quasiPlasticRheoImg}
                     alt="準塑性流動のレオグラムと粘度-せん断応力グラフ"
@@ -293,9 +281,6 @@ const Q108_50 = ({ onBack }) => {
                   </MathJax>
                 </p>
                 <div className="mt-3">
-                  <p className="text-[11px] md:text-xs text-gray-500 mb-1 text-center">
-                    教科書風レオグラムのイメージ
-                  </p>
                   <img
                     src={dilatantRheoImg}
                     alt="ダイラタント流動のレオグラムと粘度-せん断応力グラフ"

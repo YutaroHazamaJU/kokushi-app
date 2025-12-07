@@ -80,7 +80,7 @@ const Q108_50 = ({ onBack }) => {
                   </li>
                   <li>
                     逆に「かき混ぜるほどサラサラになる」のは
-                    <span className="font-bold text-indigo-700">擬塑性流動</span>。
+                    <span className="font-bold text-indigo-700">準粘性流動（擬塑性流動）</span>。
                   </li>
                 </ul>
               </div>
@@ -99,7 +99,7 @@ const Q108_50 = ({ onBack }) => {
         );
 
       // -----------------------------------
-      // 1. 流動様式の基本
+      // 1. 流動様式の基本（5種類）
       // -----------------------------------
       case 1:
         return (
@@ -110,13 +110,17 @@ const Q108_50 = ({ onBack }) => {
                 「せん断速度」と「見かけ粘度」の関係で分類する
               </h4>
               <p className="text-sm md:text-base text-gray-800">
-                粉体懸濁液や軟膏・クリームなどの流れ方は，
+                レオロジーでは，流動様式を
                 <span className="font-bold">せん断速度（かき混ぜる速さ）</span>と
-                <span className="font-bold">見かけ粘度</span>の関係で分類されます。
+                <span className="font-bold">見かけ粘度 η</span>の関係で分類します。
+                第108回 問50 では，
+                <span className="font-bold">
+                  ニュートン流動／準粘性流動／塑性流動／準塑性流動／ダイラタント流動
+                </span>
+                を整理しておく必要があります。
               </p>
             </div>
 
-            {/* 流動様式のイメージ図（3×2 グリッド） */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* ニュートン流動 */}
               <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
@@ -125,15 +129,15 @@ const Q108_50 = ({ onBack }) => {
                   ニュートン流動（Newtonian）
                 </h5>
                 <p className="text-sm md:text-base text-gray-800 mb-2">
-                  せん断速度を変えても粘度が一定の流れ。
+                  せん断速度を変えても粘度が一定の理想的な流れ。
                 </p>
                 <p className="text-xs text-gray-600 mb-2">
-                  例：水、グリセリン、ヒマシ油などの
-                  <span className="font-bold">単純な液体</span>
+                  例：水，エタノール，グリセリン，ヒマシ油などの
+                  <span className="font-bold">純粋な液体・低分子溶液</span>
                 </p>
                 <div className="mt-2 bg-gray-50 rounded-lg p-3">
                   <p className="text-xs text-gray-600 mb-1 text-center">
-                    見かけ粘度 η
+                    見かけ粘度 η（一定）
                   </p>
                   <div className="relative h-20 border-l border-b border-gray-300 mx-4">
                     <div className="absolute left-0 right-0 top-6 border-t-2 border-sky-500" />
@@ -147,32 +151,34 @@ const Q108_50 = ({ onBack }) => {
                 </div>
               </div>
 
-              {/* 擬塑性流動 */}
+              {/* 準粘性流動（擬塑性，shear-thinning，降伏値なし） */}
               <div className="bg-white p-4 rounded-xl border border-indigo-200 shadow-sm">
                 <h5 className="font-bold text-indigo-700 mb-2 flex items-center">
                   <Activity className="w-5 h-5 mr-2" />
-                  擬塑性流動（Pseudoplastic）
+                  準粘性流動（擬塑性流動）
                 </h5>
                 <p className="text-sm md:text-base text-gray-800 mb-2">
-                  かき混ぜるほどサラサラになる（粘度↓）流れ。
+                  降伏値はなく，
+                  <span className="font-bold">かき混ぜるほどサラサラになる（粘度↓）</span>
+                  流れ。
                 </p>
                 <p className="text-xs text-gray-600 mb-2">
-                  例：高分子溶液（カルメロースナトリウム溶液など），
-                  多くの懸濁性点眼液
+                  例：鎖状高分子 1% 水溶液
+                  （メチルセルロース，アルギン酸Na，カルメロースNa など）
                 </p>
                 <div className="mt-2 bg-gray-50 rounded-lg p-3">
                   <p className="text-xs text-gray-600 mb-1 text-center">
-                    見かけ粘度 η
+                    見かけ粘度 η（準粘性流動）
                   </p>
                   <div className="relative h-20 border-l border-b border-gray-300 mx-4">
-                    {/* 右下がりの曲線イメージ */}
+                    {/* 右下がりの曲線 */}
                     <svg
                       viewBox="0 0 100 60"
                       className="absolute inset-2"
                       preserveAspectRatio="none"
                     >
                       <path
-                        d="M5 15 Q 40 5 95 50"
+                        d="M5 10 Q 40 5 95 50"
                         fill="none"
                         stroke="#4f46e5"
                         strokeWidth="2"
@@ -188,6 +194,96 @@ const Q108_50 = ({ onBack }) => {
                 </div>
               </div>
 
+              {/* 塑性流動（ビンガム流動） */}
+              <div className="bg-white p-4 rounded-xl border border-rose-200 shadow-sm">
+                <h5 className="font-bold text-rose-700 mb-2">
+                  塑性流動（Bingham 流動）
+                </h5>
+                <p className="text-sm md:text-base text-gray-800 mb-2">
+                  一定以上の応力
+                  <span className="font-bold">（降伏値 S₀）を超えると流れ始める</span>
+                  タイプ。流れ出した後はほぼ一定粘度。
+                </p>
+                <p className="text-xs text-gray-600 mb-2">
+                  例：チンク油，カオリン懸濁液などの高濃度懸濁製剤
+                </p>
+                <div className="mt-2 bg-gray-50 rounded-lg p-3">
+                  <p className="text-xs text-gray-600 mb-1 text-center">
+                    せん断応力 S と流動曲線（塑性流動）
+                  </p>
+                  <div className="relative h-20 border-l border-b border-gray-300 mx-4">
+                    <svg
+                      viewBox="0 0 100 60"
+                      className="absolute inset-2"
+                      preserveAspectRatio="none"
+                    >
+                      {/* 降伏値 S0 を持つ直線イメージ */}
+                      <line
+                        x1="22"
+                        y1="48"
+                        x2="22"
+                        y2="20"
+                        stroke="#fb7185"
+                        strokeWidth="2"
+                      />
+                      <path
+                        d="M22 35 L95 8"
+                        fill="none"
+                        stroke="#fb7185"
+                        strokeWidth="2"
+                      />
+                    </svg>
+                    <span className="absolute left-3 top-6 text-[9px] text-gray-500">
+                      S₀
+                    </span>
+                    <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
+                      せん断速度
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 準塑性流動（降伏値＋shear-thinning） */}
+              <div className="bg-white p-4 rounded-xl border border-purple-200 shadow-sm">
+                <h5 className="font-bold text-purple-700 mb-2">
+                  準塑性流動（降伏値＋準粘性）
+                </h5>
+                <p className="text-sm md:text-base text-gray-800 mb-2">
+                  <span className="font-bold">
+                    降伏値 S₀ を超えると流れ始め，流れ始めてからも
+                    かき混ぜるほど粘度が下がる
+                  </span>
+                  タイプ。
+                </p>
+                <p className="text-xs text-gray-600 mb-2">
+                  例：鎖状高分子 2〜3% 水溶液
+                  （メチルセルロース，アルギン酸Na，カルメロースNa など）
+                </p>
+                <div className="mt-2 bg-gray-50 rounded-lg p-3">
+                  <p className="text-xs text-gray-600 mb-1 text-center">
+                    せん断応力 S と流動曲線（準塑性流動）
+                  </p>
+                  <div className="relative h-20 border-l border-b border-gray-300 mx-4">
+                    <svg
+                      viewBox="0 0 100 60"
+                      className="absolute inset-2"
+                      preserveAspectRatio="none"
+                    >
+                      {/* 降伏値付きで最初は急勾配→徐々に緩やか（shear-thinning） */}
+                      <path
+                        d="M20 50 Q 30 40 45 30 T 95 12"
+                        fill="none"
+                        stroke="#a855f7"
+                        strokeWidth="2"
+                      />
+                    </svg>
+                    <span className="absolute right-0 -bottom-3 text-[10px] text-gray-500">
+                      せん断速度
+                    </span>
+                  </div>
+                </div>
+              </div>
+
               {/* ダイラタント流動 */}
               <div className="bg-white p-4 rounded-xl border border-amber-200 shadow-sm md:col-span-2">
                 <h5 className="font-bold text-amber-700 mb-2 flex items-center">
@@ -196,10 +292,10 @@ const Q108_50 = ({ onBack }) => {
                 </h5>
                 <p className="text-sm md:text-base text-gray-800 mb-2">
                   ゆっくり動かすと流れるが，強く・速くかき混ぜると
-                  <span className="font-bold">急に固くなる</span>流れ。
+                  <span className="font-bold">急に固くなる（粘度↑）</span>流れ。
                 </p>
                 <p className="text-xs text-gray-600 mb-2">
-                  例：デンプン濃厚水性懸濁液，極めて高濃度の粉体懸濁系
+                  例：高濃度デンプン懸濁液（50%以上）など
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {/* グラフイメージ */}
@@ -233,7 +329,7 @@ const Q108_50 = ({ onBack }) => {
                   {/* イメージ図：ビーカー内のデンプン懸濁液 */}
                   <div className="bg-amber-50 rounded-lg p-3 flex flex-col items-center justify-center">
                     <p className="text-xs text-gray-700 mb-1 text-center">
-                      片栗粉＋水（デンプン濃厚懸濁液）のイメージ
+                      高濃度デンプン懸濁液（ウーブレック）のイメージ
                     </p>
                     <div className="relative w-28 h-24">
                       {/* ビーカー外枠 */}
@@ -245,27 +341,13 @@ const Q108_50 = ({ onBack }) => {
                       {/* 上から押す矢印 */}
                       <div className="absolute left-1/2 -translate-x-1/2 -top-1 flex flex-col items-center">
                         <span className="text-[9px] text-gray-600 mb-0.5">
-                          強くかき混ぜる
+                          強くかき混ぜると固くなる
                         </span>
                         <span className="text-amber-700 text-xs">↓</span>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* 塑性流動（参考） */}
-              <div className="bg-white p-4 rounded-xl border border-rose-200 shadow-sm md:col-span-2">
-                <h5 className="font-bold text-rose-700 mb-2">
-                  （参考）塑性流動（Bingham 流動）
-                </h5>
-                <p className="text-sm md:text-base text-gray-800 mb-2">
-                  一定以上の応力（降伏値）を加えないと流れ出さないが，流れ始めると
-                  ほぼ一定粘度で流れるタイプ。
-                </p>
-                <p className="text-xs text-gray-600">
-                  例：チンク油，カオリン懸濁液などの高濃度懸濁製剤
-                </p>
               </div>
             </div>
           </div>
@@ -288,7 +370,9 @@ const Q108_50 = ({ onBack }) => {
                 </h4>
                 <p className="text-sm md:text-base text-gray-800 mb-1">
                   高分子電解質の水溶液で，
-                  <span className="font-bold text-indigo-700">擬塑性流動</span>
+                  <span className="font-bold text-indigo-700">
+                    準粘性流動（擬塑性流動：shear-thinning）
+                  </span>
                   を示す代表例。
                 </p>
                 <p className="text-xs text-gray-600">
@@ -394,21 +478,25 @@ const Q108_50 = ({ onBack }) => {
                 <ul className="list-disc list-inside space-y-1">
                   <li>
                     <span className="font-bold">ニュートン流動</span>：
-                    粘度一定（例：グリセリン，ヒマシ油）。
+                    粘度一定（例：水，グリセリン，ヒマシ油）。
                   </li>
                   <li>
-                    <span className="font-bold">擬塑性流動</span>：
-                    かき混ぜるほどサラサラ（高分子溶液，CMC-Na 溶液など）。
+                    <span className="font-bold">準粘性流動（擬塑性）</span>：
+                    降伏値なしで，かき混ぜるほどサラサラ（高分子 1% 水溶液など）。
                   </li>
                   <li>
                     <span className="font-bold">塑性流動</span>：
-                    降伏値を超えると流れ出す（チンク油など高濃度懸濁製剤）。
+                    降伏値 S₀ を超えると流れ始める（チンク油など高濃度懸濁製剤）。
+                  </li>
+                  <li>
+                    <span className="font-bold">準塑性流動</span>：
+                    降伏値＋準粘性（降伏値を超えると流れ，さらに shear-thinning）。
                   </li>
                   <li>
                     <span className="font-bold text-amber-700">
                       ダイラタント流動
                     </span>
-                    ：かき混ぜるほど固くなる（デンプン濃厚水性懸濁液）。
+                    ：かき混ぜるほど固くなる（高濃度デンプン濃厚水性懸濁液）。
                   </li>
                 </ul>
               </div>
